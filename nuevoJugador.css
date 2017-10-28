@@ -1,0 +1,26 @@
+body {
+    font-family: helvetica;
+}
+
+a {
+}
+
+a:hover {
+}
+
+a:active {
+}
+
+a:visited {
+}
+
+.error{
+    box-shadow: 0px 0px 5px red;
+    border-color: #F13;
+}
+.textoError{
+    color: red;
+    font-size: 10;
+    font-weight: bold;
+    
+}
