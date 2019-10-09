@@ -1,5 +1,12 @@
 <?php
     include_once "conexionbd.php";
+if(empty($_POST["celda_x"])){
+    $celda_x = "";
+}
+else{
+    $celda_x = $_POST["celda_x"];
+}
+
 
 
 ?>
@@ -12,23 +19,40 @@
     </head>
     <body>
         <?php
-            // Generación dinámica de la grilla
-            echo "<table class='tablero'>\n";
-            for($c=1;$c<8;$c++){
-              echo "\t\t\t<tr>\n";
-              for($i=1;$i<11;$i++){
-                  echo "\t\t\t\t<td id='".$c."-".$i."' class='fila'></td>\n";
-              }
-              echo "\t\t\t</tr>\n";
-            }
-            echo "</table>";
-            echo "<span id='bala'>".$casilla."</span>";
+        echo "$celda_x";
         ?>
-        
+        <div class='tablero'>
+        <?php
+            // Generación dinámica de la grilla
+            
+            for($c=1;$c<9;$c++){
+                echo "<div class='fila'>";
+                
+              for($i=1;$i<12;$i++){
+                  if($c!=8 && $i==11){
+                      echo "<div id='$c-$i' class='celda_enc celda_enc_fila'>$c</div>";
+                  }
+                  if($c==8 && $i!=11){
+                      echo "<div id='$c-$i' class='celda_enc celda_enc_columna'>$i</div>";
+                  }
+                  if($c!=8 && $i!=11){
+                      echo "<div id='$c-$i' class='celda'></div>"; 
+                  }
+                  if($c==8 && $i==11){
+                      echo "<div id='tablero_punta'></div>"; 
+                  }
+                                    
+              }
+                echo "</div>";
+            }
+            
+            //echo "<span id='bala'>".$casilla."</span>";
+        ?>
+        </div>
         <br>
         Realizar disparo en <b><span id="casilla"></span></b>
         <form action="juego.php" method="post">
-            <input type="text" name= "datoC" id="datoC"><input type="submit" value="Disparar">
+            <input type="text" name= "celda_x" id="datoC"><input type="submit" value="Disparar">
         </form>
         
  

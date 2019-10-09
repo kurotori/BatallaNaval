@@ -16,16 +16,23 @@ function marcarDisparos(){
     }
 }
 
+function resetCeldas(){
+     $(".celda").html("");
+}
+
 $(document).ready(
     function(){
 	
-    $("td").click(
+    $(".celda").click(
         function () {
             //console.log($(this).attr('id'));
+            resetCeldas();
             $("#datoC").val($(this).attr('id'));
             $("#casilla").text($(this).attr('id'));
+            $(this).html("<div class='apunta'></div>");
         }
     );
+        
     }
 );
 
