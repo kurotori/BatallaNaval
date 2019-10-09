@@ -2,7 +2,7 @@
 /* jshint browser: true */
 
 var disparos=["1"];
-
+var celda=[];
 function agregarDisparo(dato){
    // var tope = disparos.length;
     //console.log("datos:");
@@ -17,18 +17,19 @@ function marcarDisparos(){
 }
 
 function resetCeldas(){
-     $(".celda").html("");
+     $(".vacia").html("");
 }
 
 function probarDisparo(x_celda, y_celda ){
     var nombre_celda = "#"+x_celda+"-"+y_celda;
     $(nombre_celda).html("<div class='blanco'></div>");
+    $(nombre_celda).removeClass("vacia");
 }
 
 $(document).ready(
     function(){
 	
-    $(".celda").click(
+    $(".vacia").click(
         function () {
             //console.log($(this).attr('id'));
             resetCeldas();

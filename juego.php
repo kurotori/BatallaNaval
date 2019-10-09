@@ -21,11 +21,7 @@ else{
 		<script type='text/javascript' src='juego.js'></script>
     </head>
     <body>
-        <?php
-        echo "<script> var celda_x=$celda_x; var celda_y=$celda_y;</script>";
-        echo "x:$celda_x - y:$celda_y";
-        ?>
-        <div class='tablero' onload="probarDisparo(celda_x,celda_y)">
+        <div class='tablero'>
         <?php
             // Generación dinámica de la grilla
             
@@ -40,7 +36,7 @@ else{
                       echo "<div id='$c-$i' class='celda_enc celda_enc_columna'>$i</div>";
                   }
                   if($c!=8 && $i!=11){
-                      echo "<div id='$c-$i' class='celda'></div>"; 
+                      echo "<div id='$c-$i' class='celda vacia'></div>"; 
                   }
                   if($c==8 && $i==11){
                       echo "<div id='tablero_punta'></div>"; 
@@ -58,7 +54,12 @@ else{
         <form action="juego.php" method="post">
             <input type="text" name= "celda_x" id="datoC"><input type="submit" value="Disparar">
         </form>
-        
+        <?php
+        echo "<script> var celda_x=$celda_x; var celda_y=$celda_y;";
+        echo "probarDisparo(celda_x,celda_y);";
+        echo "</script>";
+        echo "x:$celda_x - y:$celda_y";
+        ?>
  
 <script>
     marcarDisparos();
