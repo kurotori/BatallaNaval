@@ -20,6 +20,11 @@ function resetCeldas(){
      $(".celda").html("");
 }
 
+function probarDisparo(x_celda, y_celda ){
+    var nombre_celda = "#"+x_celda+"-"+y_celda;
+    $(nombre_celda).html("<div class='blanco'></div>");
+}
+
 $(document).ready(
     function(){
 	

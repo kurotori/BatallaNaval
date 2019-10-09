@@ -41,6 +41,9 @@ td{
     
 }
 
+#0-0{
+    display: none;
+}
 .celda{
     background-image: url(imagen/mar.png);
     background-size: contain;
@@ -74,12 +77,15 @@ td{
 .celda_enc_fila{
     width: 34px;
     height: 40px;
-    padding: 20px 0px 20px 0px;
+    padding: 25px 0px 15px 0px;
+    border-bottom: 3px dotted white;
 }
 .celda_enc_columna{
     width: 80px;
     height: 20px;
     padding: 6px 0px 6px 0px;
+    border-right: 3px white;
+    border-right-style: dotted;
 }
 
 .apunta{
@@ -89,6 +95,16 @@ td{
     left: 18px;
     top: 18px;
     background-image: url(imagen/target.png);
+    background-size: contain;
+}
+
+.blanco{
+    position: relative;
+    width: 70px;
+    height: 70px;
+    left: 5px;
+    top: 5px;
+    background-image: url(imagen/fire.png);
     background-size: contain;
 }
 

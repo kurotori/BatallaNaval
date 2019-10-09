@@ -1,10 +1,13 @@
 <?php
     include_once "conexionbd.php";
 if(empty($_POST["celda_x"])){
-    $celda_x = "";
+    $celda_x = 0;
+    $celda_y = 0;
 }
 else{
-    $celda_x = $_POST["celda_x"];
+    $celda = explode("-",$_POST["celda_x"]);
+    $celda_x = $celda[0];
+    $celda_y = $celda[1];
 }
 
 
@@ -19,9 +22,10 @@ else{
     </head>
     <body>
         <?php
-        echo "$celda_x";
+        echo "<script> var celda_x=$celda_x; var celda_y=$celda_y;</script>";
+        echo "x:$celda_x - y:$celda_y";
         ?>
-        <div class='tablero'>
+        <div class='tablero' onload="probarDisparo(celda_x,celda_y)">
         <?php
             // Generación dinámica de la grilla
             
