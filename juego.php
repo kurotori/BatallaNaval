@@ -49,14 +49,17 @@ else{
             //echo "<span id='bala'>".$casilla."</span>";
         ?>
         </div>
-        <br>
-        Realizar disparo en <b><span id="casilla"></span></b>
-        <form action="juego.php" method="post">
-            <input type="text" name= "celda_x" id="datoC"><input type="submit" value="Disparar">
-        </form>
+        
+        <div id="gatillo">
+            Fuego en <b><span id="casilla"></span></b>
+            <form action="juego.php" method="post">
+                <input type="text" name= "celda_x" id="datoC"><input type="submit" value="Disparar">
+            </form>
+        </div>
+        
         <?php
-        echo "<script> var celda_x=$celda_x; var celda_y=$celda_y;";
-        echo "probarDisparo(celda_x,celda_y);";
+        echo "<script>";
+        echo "probarDisparo($celda_x,$celda_y);";
         echo "</script>";
         echo "x:$celda_x - y:$celda_y";
         ?>

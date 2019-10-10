@@ -22,20 +22,29 @@ function resetCeldas(){
 
 function probarDisparo(x_celda, y_celda ){
     var nombre_celda = "#"+x_celda+"-"+y_celda;
-    $(nombre_celda).html("<div class='blanco'></div>");
+    $(nombre_celda).html("<div class='agua'></div>");
     $(nombre_celda).removeClass("vacia");
 }
 
 $(document).ready(
     function(){
 	
+
     $(".vacia").click(
-        function () {
+        function (e) {
             //console.log($(this).attr('id'));
             resetCeldas();
             $("#datoC").val($(this).attr('id'));
             $("#casilla").text($(this).attr('id'));
             $(this).html("<div class='apunta'></div>");
+            $("#gatillo").css({
+                "top":(e.pageY + 10),
+                "left":(e.pageX + 10)
+                              });
+            
+            var pos_x = window.pageX;
+            console.log(e.pageX+","+ e.pageY);
+            //$("#gatillo")
         }
     );
         
