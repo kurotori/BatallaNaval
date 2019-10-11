@@ -19,22 +19,32 @@ a:visited {
     position: fixed;
     width: 130px;
     height: 100px;
-    border: 1px solid black;
 }
 
 #gatillo{
     display: inherit;
     position: absolute;
-    top: 0px;
+    top: 5px;
     left:0px;
     width: 115px;
     height: 80px;
     padding-top: 10px;
     border-radius: 20px;
-    border: 1px solid black;
+    border: 3px solid red;
     text-align: center;
     background-color: white;
     z-index: 100;
+}
+
+.disparar{
+    position: relative;
+    top: 10px;
+    width: 40px;
+    height: 40px;
+    background-color: white;
+    background-image: url(imagen/explosion.png);
+    background-size: contain;
+    border-radius: 10px;
 }
 
 .tablero{
@@ -42,8 +52,9 @@ a:visited {
     width: 900px;
     height:640px;
     border-style:solid;
-    border-color: white;
-    border-width:1px;
+    border-color: grey;
+    border-width:5px;
+    border-radius: 15px;
     overflow:hidden;
     word-break:normal;
     background-color: dodgerblue;

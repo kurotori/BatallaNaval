@@ -59,7 +59,7 @@ else{
                 Fuego en <b><span id="casilla"></span></b>
                 <form action="juego.php" method="post">
                     <input type="hidden" name= "celda_x" id="datoC">
-                    <input type="submit" value="Disparar">
+                    <input type="submit" value="" class="disparar">
                 </form>
             </div>
         </div>
