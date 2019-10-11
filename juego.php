@@ -17,8 +17,10 @@ else{
     <head>
         <meta http-equiv='Content-type' content='text/html;charset=UTF-8'>
 		<link rel="stylesheet" href="estiloBase.css">
-		<script type='text/javascript' src='jquery-3.2.1.js'></script>
+        <link rel="stylesheet" href="jquery-ui/jquery-ui.css">
+		<script type='text/javascript' src='jquery.js'></script>
 		<script type='text/javascript' src='juego.js'></script>
+        <script type="text/javascript" src="jquery-ui/jquery-ui.js"></script>
     </head>
     <body>
         <div class='tablero'>
@@ -50,11 +52,16 @@ else{
         ?>
         </div>
         
-        <div id="gatillo">
-            Fuego en <b><span id="casilla"></span></b>
-            <form action="juego.php" method="post">
-                <input type="text" name= "celda_x" id="datoC"><input type="submit" value="Disparar">
-            </form>
+        <div id="caja_gatillo">
+            
+            <div class="cerrar">x</div>
+            <div id="gatillo">
+                Fuego en <b><span id="casilla"></span></b>
+                <form action="juego.php" method="post">
+                    <input type="hidden" name= "celda_x" id="datoC">
+                    <input type="submit" value="Disparar">
+                </form>
+            </div>
         </div>
         
         <?php

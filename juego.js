@@ -37,16 +37,21 @@ $(document).ready(
             $("#datoC").val($(this).attr('id'));
             $("#casilla").text($(this).attr('id'));
             $(this).html("<div class='apunta'></div>");
-            $("#gatillo").css({
-                "top":(e.pageY + 10),
-                "left":(e.pageX + 10)
+            var pos_x = $(this).offset();
+            $("#caja_gatillo").show();
+            $("#caja_gatillo").css({
+              "top":(pos_x.top+40),
+              "left":(pos_x.left + 80)
                               });
-            
-            var pos_x = window.pageX;
-            console.log(e.pageX+","+ e.pageY);
             //$("#gatillo")
         }
     );
+    
+    $(".cerrar").click(
+        function(){
+            $(this).parent().css({"display":"none"});
+        }
+    );    
         
     }
 );
