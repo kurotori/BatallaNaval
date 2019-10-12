@@ -54,7 +54,7 @@ else{
         
         <div id="caja_gatillo">
             
-            <div class="cerrar">x</div>
+            <div class="cerrar"></div>
             <div id="gatillo">
                 Fuego en <b><span id="casilla"></span></b>
                 <form action="juego.php" method="post">

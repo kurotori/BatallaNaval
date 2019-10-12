@@ -32,7 +32,8 @@ a:visited {
     border-radius: 20px;
     border: 3px solid red;
     text-align: center;
-    background-color: white;
+    background-color: darkred;
+    color: white;
     z-index: 100;
 }
 
@@ -52,8 +53,8 @@ a:visited {
     width: 900px;
     height:640px;
     border-style:solid;
-    border-color: grey;
-    border-width:5px;
+    border-color: darkblue;
+    border-width:3px;
     border-radius: 15px;
     overflow:hidden;
     word-break:normal;
@@ -74,6 +75,10 @@ td{
 
 .fila{
     
+}
+
+.fila:hover{
+
 }
 
 #0-0{
@@ -125,11 +130,11 @@ td{
 
 .apunta{
     position: relative;
-    width: 40px;
-    height: 40px;
-    left: 18px;
-    top: 18px;
-    background-image: url(imagen/target.png);
+    width: 60px;
+    height: 60px;
+    left: 8px;
+    top: 8px;
+    background-image: url(imagen/target2.png);
     background-size: contain;
 }
 
@@ -170,12 +175,17 @@ td{
     width: 20px;
     height: 20px;
     background-color: red;
+    background-image: url(imagen/cerrar.png);
+    background-size: contain;
     color: white;
     text-align: center;
     z-index: 105;
 }
 .cerrar:hover{
-    font-weight: bold;
     width: 22px;
     height: 22px;
+}
+.cerrar:active{
+    width: 18px;
+    height: 18px;
 }
