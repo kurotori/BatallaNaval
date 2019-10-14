@@ -1,5 +1,6 @@
 <?php
     include_once "conexionbd.php";
+//Obtención de datos de disparos
 if(empty($_POST["celda_x"])){
     $celda_x = 0;
     $celda_y = 0;
@@ -9,6 +10,7 @@ else{
     $celda_x = $celda[0];
     $celda_y = $celda[1];
 }
+//--------------------------------
 
 
 
@@ -71,10 +73,5 @@ else{
         echo "x:$celda_x - y:$celda_y";
         ?>
  
-<script>
-    marcarDisparos();
-    //
-    //$($h).addClass("CasillaSel");
-</script>
     </body>
 </html>

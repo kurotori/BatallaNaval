@@ -26,20 +26,24 @@ a:visited {
     position: absolute;
     top: 5px;
     left:0px;
-    width: 115px;
-    height: 80px;
+    width: 111px;
+    height: 68px;
     padding-top: 10px;
-    border-radius: 20px;
-    border: 3px solid red;
+    /*border-radius: 20px;
+    border: 3px solid black;
+    box-shadow: 0px 2px 2px black;
+    */
+    background-image: url(imagen/fondo_gatillo.png);
+    background-size: contain;
     text-align: center;
-    background-color: darkred;
-    color: white;
+    color: black;
     z-index: 100;
+    
 }
 
 .disparar{
     position: relative;
-    top: 10px;
+    top: 5px;
     width: 40px;
     height: 40px;
     background-color: white;
@@ -58,7 +62,9 @@ a:visited {
     border-radius: 15px;
     overflow:hidden;
     word-break:normal;
+    background-image: url(imagen/mar3.png);
     background-color: dodgerblue;
+    box-shadow: 5px 5px 5px black;
 }
 
 #tablero_punta{
@@ -85,17 +91,17 @@ td{
     display: none;
 }
 .celda{
-    background-image: url(imagen/mar.png);
+    /*background-image: url(imagen/mar.png);*/
     background-size: contain;
     float: left;
-    width: 80px;
-    height: 80px;
+    width: 86px;
+    height: 86px;
     border-spacing:0;
-    border-style: solid;
-    border-color: dodgerblue;
-    border-width:3px;
+    /*border: solid 3px dodgerblue;*/
 }
 .celda:hover{
+    width: 80px;
+    height: 80px;
     border-style: solid;
     border-width:3px;
     border-color: white;
@@ -154,7 +160,7 @@ td{
     height: 70px;
     left: 5px;
     top: 5px;
-    background-image: url(imagen/splash.png);
+    background-image: url(imagen/splash2.png);
     background-size: contain;
 }
 
@@ -171,7 +177,7 @@ td{
     top: -10px;
     border: 3px solid white;
     border-radius: 20px;
-    box-shadow: 0px 2px 2px grey;
+    box-shadow: 0px 2px 2px black;
     width: 20px;
     height: 20px;
     background-color: red;
@@ -186,6 +192,6 @@ td{
     height: 22px;
 }
 .cerrar:active{
-    width: 18px;
-    height: 18px;
+    width: 20px;
+    height: 20px;
 }
