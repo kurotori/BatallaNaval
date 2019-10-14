@@ -54,8 +54,10 @@ a:visited {
 
 .tablero{
     margin-left: 20%;
-    width: 900px;
-    height:640px;
+    width: auto;
+    height: auto;
+    /*width: 900px;
+    height:640px;*/
     border-style:solid;
     border-color: darkblue;
     border-width:3px;
@@ -74,22 +76,15 @@ a:visited {
     height: 40px;
 }
 
-td{
-    width: 6%;
-    
-}
 
 .fila{
-    
+    height: 86px;
 }
 
 .fila:hover{
 
 }
 
-#0-0{
-    display: none;
-}
 .celda{
     /*background-image: url(imagen/mar.png);*/
     background-size: contain;
