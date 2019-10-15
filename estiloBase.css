@@ -53,11 +53,10 @@ a:visited {
 }
 
 .tablero{
+    position: absolute;
+    top:2.5%;
     margin-left: 20%;
-    width: auto;
-    height: auto;
-    /*width: 900px;
-    height:640px;*/
+    height:95%;
     border-style:solid;
     border-color: darkblue;
     border-width:3px;
@@ -76,13 +75,23 @@ a:visited {
     height: 40px;
 }
 
+/*
+.tablero.med{
+    width:900px;
+    height:726px;
+}
+*/
 
-.fila{
+.celda.min{
+    height:20%;
+    padding-top: 20%;
+}
+.celda.med{
     height: 86px;
 }
 
-.fila:hover{
-
+.celda.max{
+    
 }
 
 .celda{
@@ -90,13 +99,11 @@ a:visited {
     background-size: contain;
     float: left;
     width: 86px;
-    height: 86px;
+    /*height: 86px;*/
     border-spacing:0;
     /*border: solid 3px dodgerblue;*/
 }
 .celda:hover{
-    width: 80px;
-    height: 80px;
     border-style: solid;
     border-width:3px;
     border-color: white;

@@ -1,24 +1,46 @@
 <?php
     
     function crearTablero($tamanio){
+        $letras = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
         $tablero="";
         switch($tamanio){
-                case:"min"
-                    $
+            case "med":
+                    $dim_x=11; //10 + 1
+                    $dim_y=9;  //9 + 1
+                    break;
+            case "min":
+                    $dim_x=9; //8 + 1
+                    $dim_y=6;  //5 + 1
+                    $altura_celda="18%";
+                    break;
+            case "max":
+                    $dim_x=17; //16 + 1
+                    $dim_y=11;  //10 + 1
+                    break;
+            default:
+                    $dim_x=9; //8 + 1
+                    $dim_y=6;  //5 + 1
+                    break;
         }
         
         
         // Generación dinámica de la grilla
+            /*  tamaño  celdas  tamaño de celda  
+            min 8x5     40      86 px
+            med 10x8    80      56 px
+            max 16x10   160     46 px
             
             
             $dim_x=10 + 1; //largo - cantidad de columnas - dimension horizontal
             $dim_y=8 + 1;  //altura - cantidad de filas - dimension vertical
             $tam_x = (86 * ($dim_x-1))+40;
             $tam_y = (86 * ($dim_y-1))+38;
+            */
+            echo "<style>";
+            echo ".celda{height:".$altura_celda."px; width:".$altura_celda."px;}";
+            echo "</style>";
         
-        
-        
-            echo "<div class='tablero' style='width:".$tam_x."px;height:".$tam_y."px'>";
+            echo "<div class='tablero'>";
             //Creación de FILAS
             for($y=0; $y < $dim_y; $y++){
                 $etiq_f = $y + 1; //etiquetas para las filas
@@ -29,7 +51,7 @@
                     $etiq_c = $letras[($x)]; //etiquetas para las columnas
                     //Celdas comunes
                     if( $x != ($dim_x - 1) && $y != ($dim_y - 1) ){
-                        echo "<div id='$etiq_c-$etiq_f' class='celda vacia'>";
+                        echo "<div id='$etiq_c-$etiq_f' class='celda vacia $tamanio'>";
                         echo "</div>"; 
                     }
                     //Celdas con encabezados de columna
