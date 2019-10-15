@@ -9,14 +9,14 @@ var disparos = [];
 
 //datos de prueba
 //------------------------------------------------------------
-var barcos_1 = [{posicion:"5-3"},
-                {posicion:"4-3"},
-                {posicion:"3-3"}
+var barcos_1 = [{posicion:"B-3"},
+                {posicion:"C-3"},
+                {posicion:"D-3"}
                ];
 
-var celdas_1 = [{nombre:"4-5",alcanzada:true,barco:true},
-                {nombre:"7-4",alcanzada:true,barco:false},
-                {nombre:"2-9",alcanzada:false,barco:true}
+var celdas_1 = [{nombre:"A-3",alcanzada:true,barco:true},
+                {nombre:"C-3",alcanzada:true,barco:false},
+                {nombre:"D-4",alcanzada:false,barco:true}
                ];
 //------------------------------------------------------------
 
@@ -28,6 +28,8 @@ function inicializarCeldas(){
                                      alcanzada:false,
                                      barco:false
                                     };
+            var altura = $(this).css('height');
+            $(this).css({'width':altura});
         }
     );
 }
@@ -44,7 +46,7 @@ function barcosACeldas(lista_barcos=[]){
 }
 
 //Agrega un disparo nuevo a la lista
-function agregarDisparo()
+function agregarDisparo(){}
 
 
 //Agregan la imagen correspondiente a una celda alcanzada por un disparo

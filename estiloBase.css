@@ -55,7 +55,7 @@ a:visited {
 .tablero{
     position: absolute;
     top:2.5%;
-    margin-left: 20%;
+    /*margin-left: 20%;*/
     height:95%;
     border-style:solid;
     border-color: darkblue;
@@ -84,7 +84,6 @@ a:visited {
 
 .celda.min{
     height:20%;
-    padding-top: 20%;
 }
 .celda.med{
     height: 86px;
@@ -124,7 +123,7 @@ a:visited {
 
 .celda_enc_fila{
     width: 34px;
-    height: 40px;
+    /*height: 40px;*/
     padding: 25px 0px 15px 0px;
     border-bottom: 3px dotted white;
 }
