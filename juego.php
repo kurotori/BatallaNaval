@@ -1,6 +1,6 @@
 <?php
     include_once "conexionbd.php";
-    include_once "funcionesVarias.php";
+    include_once "Tablero.php";
 //Obtención de datos de disparos
 if(empty($_POST["celda_x"])){
     $celda_x = 0;
@@ -26,10 +26,11 @@ else{
         <script type="text/javascript" src="jquery-ui/jquery-ui.js"></script>
     </head>
     <body>
-        
+        <div id="contenedor_tablero">
         <?php
-            crearTablero("min");
+            crearTablero("max");
         ?>
+        </div>
         
         <div id="caja_gatillo">
             
@@ -45,7 +46,7 @@ else{
         
         <?php
         echo "<script>";
-        echo "probarDisparo($celda_x,$celda_y);";
+        echo "probarDisparo('$celda_x','$celda_y');";
         echo "</script>";
         echo "x:$celda_x - y:$celda_y";
         ?>

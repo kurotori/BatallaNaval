@@ -1,17 +1,11 @@
 <?php
-    
-    class Tablero{
         
-        private $letras = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-        
-        
-        public function __construct($tamanio){
-            $this->tamanio = $tamanio;
-        }
-        
-        public function crearTablero(){
-        
+        $letras = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
         $tablero="";
+        
+        
+    function crearTablero($tamanio){
+        $letras = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
         switch($tamanio){
             case "med":
                     $dim_x=11; //10 + 1
@@ -20,7 +14,6 @@
             case "min":
                     $dim_x=9; //8 + 1
                     $dim_y=6;  //5 + 1
-                    $altura_celda="18%";
                     break;
             case "max":
                     $dim_x=17; //16 + 1
@@ -45,12 +38,6 @@
             $tam_x = (86 * ($dim_x-1))+40;
             $tam_y = (86 * ($dim_y-1))+38;
             */
-            echo "<style>";
-            echo ".tablero{width:".$ancho_tablero."px;}";
-            echo ".celda{height:".$altura_celda."; width:".$altura_celda."px;}";
-            echo ".fila{height:".$altura_celda.";}";
-            echo ".celda_enc_fila{height:".$altura_celda.";}";
-            echo "</style>";
         
             echo "<div class='tablero'>";
             //Creación de FILAS
@@ -64,6 +51,7 @@
                     //Celdas comunes
                     if( $x != ($dim_x - 1) && $y != ($dim_y - 1) ){
                         echo "<div id='$etiq_c-$etiq_f' class='celda vacia $tamanio'>";
+                        echo "<div class='celda_interna'></div>";
                         echo "</div>"; 
                     }
                     //Celdas con encabezados de columna
@@ -75,7 +63,7 @@
                     //Celdas con encabezado de fila
                     if( $x == ($dim_x - 1) && $y != ($dim_y - 1) ){
                         echo "<div id='$etiq_c-$etiq_f' class='celda_enc celda_enc_fila'>";
-                        echo $etiq_f;
+                        echo "<span>".$etiq_f."</span>";
                         echo "</div>";
                     }
                     //Celda final, no usada
@@ -86,10 +74,9 @@
                 
                 echo "</div>";
             }
+        echo "<script>prepararTablero('$tamanio');</script>";
         
     }
         
-        
-    }
     
 ?>

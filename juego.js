@@ -20,6 +20,51 @@ var celdas_1 = [{nombre:"A-3",alcanzada:true,barco:true},
                ];
 //------------------------------------------------------------
 
+//Analiza la ventana y obtiene la dimension adecuada para las celdas
+
+function prepararTablero(tamanio){
+    switch(tamanio){
+        case "min":
+            num_col=8;
+            num_fil=5;
+            break;
+        case "med":
+            num_col=10;
+            num_fil=8;
+            break;
+        case "max":
+            num_col=16;
+            num_fil=10;
+            break;
+    }
+    
+    
+    var alt_ventana=$('#contenedor_tablero').height();
+    var ancho_ventana = $('#contenedor_tablero').width();
+    console.log(alt_ventana+","+ancho_ventana);
+    var alt_tablero_max=alt_ventana;
+    var ancho_tablero_max=ancho_ventana;
+    
+    var dim_celda = (alt_ventana)/num_fil;
+    var dim_celda_interna = dim_celda - 6;
+    $('.celda').css({'height':dim_celda, 'width':dim_celda});
+    $('.celda_interna').css({'height':dim_celda_interna, 'width':dim_celda_interna});
+    
+    $('.celda_enc_columna').css({'width':dim_celda - 3});
+    
+    $('.celda_enc_fila').css({'height':dim_celda - 3});
+    $('.celda_enc_fila > span').css({'top':(dim_celda - 23)/2});
+    
+    var alt_tablero_final = (dim_celda * num_fil)+38;
+    var ancho_tablero_final = (dim_celda * num_col)+38;
+    
+    $('.tablero').css({'height':alt_tablero_final});
+    $('.tablero').css({'width':ancho_tablero_final});
+    $('.tablero').css({'top':(alt_ventana - alt_tablero_final)/2});
+    $('.tablero').css({'left':(ancho_ventana - ancho_tablero_final)/2});
+}
+
+
 //Inicializa las celdas en una colección para que JS reconozca el tablero
 function inicializarCeldas(){
     $(".celda").each(
@@ -28,8 +73,6 @@ function inicializarCeldas(){
                                      alcanzada:false,
                                      barco:false
                                     };
-            var altura = $(this).css('height');
-            $(this).css({'width':altura});
         }
     );
 }
@@ -80,13 +123,13 @@ function revisarCeldas(lista_celdas=[]){
 
 
 function resetCeldas(){
-     $(".vacia").html("");
+     $(".vacia").removeClass('apunta');
 }
 
 //Funcion de prueba, debe reemplazarse por otra
 function probarDisparo(x_celda, y_celda ){
     var nombre_celda = "#"+x_celda+"-"+y_celda;
-    $(nombre_celda).html("<div class='agua'></div>");
+    $(nombre_celda).addClass('blanco');
     $(nombre_celda).removeClass("vacia");
 }
 
@@ -97,6 +140,7 @@ function probarDisparo(x_celda, y_celda ){
 $(document).ready(
     function(){
 	
+    
     inicializarCeldas();
     barcosACeldas(barcos_1);
         //revisarCeldas(celdas_1);
@@ -107,12 +151,13 @@ $(document).ready(
             resetCeldas();
             $("#datoC").val($(this).attr('id'));
             $("#casilla").text($(this).attr('id'));
-            $(this).html("<div class='apunta'></div>");
+            $(this).addClass('apunta');
+            
             var pos_x = $(this).offset();
             $("#caja_gatillo").show();
             $("#caja_gatillo").css({
-              "top":(pos_x.top+40),
-              "left":(pos_x.left + 80)
+              "top":(pos_x.top + 10),
+              "left":(pos_x.left + $(this).width() + 10)
                               });
             //$("#gatillo")
         }
