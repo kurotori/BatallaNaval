@@ -28,7 +28,7 @@ else{
     <body>
         <div id="contenedor_tablero">
         <?php
-            crearTablero("max");
+            crearTablero("med");
         ?>
         </div>
         

@@ -88,51 +88,10 @@ function barcosACeldas(lista_barcos=[]){
     }
 }
 
-//Agrega un disparo nuevo a la lista
-function agregarDisparo(){}
-
-
-//Agregan la imagen correspondiente a una celda alcanzada por un disparo
-function agregarBlanco(una_celda){
-            var nombre = "#"+una_celda.nombre;
-            $(nombre).html("<div class='blanco'></div>");
-            $(nombre).removeClass("vacia");
-}
-
-function agregarAgua(una_celda){
-            var nombre = "#"+una_celda.nombre;
-            $(nombre).html("<div class='agua'></div>");
-            $(nombre).removeClass("vacia");
-}
-
-//Actualiza el estado de cada celda de acuerdo a su estado
-function revisarCeldas(lista_celdas=[]){
-    for(celda of lista_celdas){
-        if(celda.alcanzada){
-            switch(celda.barco){
-                case true:
-                    agregarBlanco(celda);
-                    break;
-                case false:
-                    agregarAgua(celda);
-                    break;
-            }   
-        }
-    }
-}
-
 
 function resetCeldas(){
      $(".vacia").removeClass('apunta');
 }
-
-//Funcion de prueba, debe reemplazarse por otra
-function probarDisparo(x_celda, y_celda ){
-    var nombre_celda = "#"+x_celda+"-"+y_celda;
-    $(nombre_celda).addClass('blanco');
-    $(nombre_celda).removeClass("vacia");
-}
-
 
 
 //Ejecución en la página

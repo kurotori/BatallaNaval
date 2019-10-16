@@ -1,8 +1,7 @@
 <?php
         
-        $letras = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
         $tablero="";
-        
+    
         
     function crearTablero($tamanio){
         $letras = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -77,6 +76,7 @@
         echo "<script>prepararTablero('$tamanio');</script>";
         
     }
-        
+     
+    
     
 ?>
