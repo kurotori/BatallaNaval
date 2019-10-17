@@ -77,6 +77,13 @@ function inicializarCeldas(){
     );
 }
 
+//Define las celdas que un barco ocupa a partir de la celda inicial
+function ubicarBarco(celda,tamanioBarco){
+    var letras = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    console.log(letras[celda]);
+}
+
+
 //Analiza el listado de barcos y actualiza el listado de  celdas con esa información
 function barcosACeldas(lista_barcos=[]){
     for(barco of lista_barcos){
