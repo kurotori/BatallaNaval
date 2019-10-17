@@ -41,7 +41,6 @@ function prepararTablero(tamanio){
     
     var alt_ventana=$('#contenedor_tablero').height();
     var ancho_ventana = $('#contenedor_tablero').width();
-    console.log(alt_ventana+","+ancho_ventana);
     var alt_tablero_max=alt_ventana;
     var ancho_tablero_max=ancho_ventana;
     
@@ -76,13 +75,58 @@ function inicializarCeldas(){
         }
     );
 }
+//------------------------------------------------------------
 
-//Define las celdas que un barco ocupa a partir de la celda inicial
-function ubicarBarco(celda,tamanioBarco){
-    var letras = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    console.log(letras[celda]);
+
+//Obtiene la celda a partir de la id del elemento clickeado
+function obtenerCeldaDeID(objClickeado){
+    var idCelda = objClickeado.attr('id');
+    return indexCelda = celdas.findIndex(ele => ele.nombre === idCelda);
 }
 
+//------------------------------------------------------------
+function asignarCeldasABarco(celdaInicio,orientacion,cantidad){
+    for(c=0;c<tamanioBarco;c++){
+            
+        }
+}
+
+//-------------------------------------------------------------------
+
+//Define las celdas que un barco ocupa a partir de la celda inicial
+function ubicarBarco(objCelda,tamanioBarco,orientacion){
+    //Los barcos se definen desde un extremo, o sea, la celda seleccionada
+    // es uno de los extremos del barco
+    var letras = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    var indexCelda = obtenerCeldaDeID(objCelda);
+    var celda = celdas[indexCelda];
+    
+    var celdasBarco = [];
+    //Orientación Horizontal
+    if(orientacion == "H"){
+        //La primer celda del barco
+        if(celda.nombre[0] == "A"){
+            for(c=0;c<tamanioBarco;c++){
+                celdasBarco[c]="A-"+(parseInt(celda.nombre[2])+c);
+                //console.log(celdasBarco[c]);
+            }
+        }
+    
+    }
+    
+    
+    celdasBarco.forEach(
+        function(ele){
+            console.log(ele);
+            var nombre_celda = "#"+ele+" .celda_interna";
+            $(nombre_celda).addClass('seleccionada');
+        }
+    );
+    
+    //console.log(celda.nombre[0]);
+}
+
+//-------------------------------------------------------------------
 
 //Analiza el listado de barcos y actualiza el listado de  celdas con esa información
 function barcosACeldas(lista_barcos=[]){
@@ -111,7 +155,9 @@ $(document).ready(
         
     $(".vacia").click(
         function (e) {
-            //console.log($(this).attr('id'));
+            
+            ubicarBarco($(this),3,"H");
+            
             resetCeldas();
             $("#datoC").val($(this).attr('id'));
             $("#casilla").text($(this).attr('id'));

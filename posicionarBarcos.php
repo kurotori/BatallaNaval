@@ -8,7 +8,7 @@
 <html>
     <head>
         <meta http-equiv='Content-type' content='text/html;charset=UTF-8'>
-		<link rel="stylesheet" href="estiloBase.css">
+		<link rel="stylesheet" href="juego.css">
         <link rel="stylesheet" href="jquery-ui/jquery-ui.css">
 		<script type='text/javascript' src='jquery.js'></script>
 		<script type='text/javascript' src='posicionarBarcos.js'></script>

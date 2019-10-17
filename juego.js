@@ -129,7 +129,7 @@ function resetCeldas(){
 //Funcion de prueba, debe reemplazarse por otra
 function probarDisparo(x_celda, y_celda ){
     var nombre_celda = "#"+x_celda+"-"+y_celda;
-    $(nombre_celda).addClass('blanco');
+    $(nombre_celda).addClass('agua');
     $(nombre_celda).removeClass("vacia");
 }
 
