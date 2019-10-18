@@ -95,21 +95,29 @@ function asignarCeldasABarco(celdaInicio,orientacion,cantidad){
 
 //Define las celdas que un barco ocupa a partir de la celda inicial
 function ubicarBarco(objCelda,tamanioBarco,orientacion){
+    var celdasBarco = [];
     //Los barcos se definen desde un extremo, o sea, la celda seleccionada
     // es uno de los extremos del barco
-    var letras = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    var indexCelda = obtenerCeldaDeID(objCelda);
-    var celda = celdas[indexCelda];
+    var letras = {'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
     
-    var celdasBarco = [];
+    var indexCelda = obtenerCeldaDeID(objCelda);
+    var celda_columna = celdas[indexCelda].nombre[0];
+    var celda_columna_num = letras.findIndex(celda_columna);
+    var celda_fila = parseInt(celdas[indexCelda].nombre.split("-")[1]);
+    
+    console.log("num_columna:"+celda_columna_num);
+    
+    
+    
+    
     //Orientación Horizontal
     if(orientacion == "H"){
-        //La primer celda del barco
-        if(celda.nombre[0] == "A"){
+        //La primer celda del barco esta en la columna A
+        if(celda_columna == "A"){
+            
+            
             for(c=0;c<tamanioBarco;c++){
-                console.log("--->"+celda.nombre[2]);
-                celdasBarco[c]="A-"+(parseInt(celda.nombre[2])+c);
-                //console.log(celdasBarco[c]);
+                celdasBarco[c]=celda_columna+"-"+(parseInt(celda_fila)+c);
             }
         }
     
