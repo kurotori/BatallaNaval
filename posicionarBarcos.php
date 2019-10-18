@@ -18,7 +18,7 @@
         <div id="contenedor_tablero">
             
             <?php
-            crearTablero("med");
+            crearTablero("max");
             ?>
             
         </div>

@@ -164,6 +164,7 @@ a:visited {
     border-style: solid;
     border-width:3px;
     border-color: red;
+    border-radius: 20px;
 }
 .cerrar{
     cursor: pointer;

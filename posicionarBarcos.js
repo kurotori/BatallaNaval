@@ -107,6 +107,7 @@ function ubicarBarco(objCelda,tamanioBarco,orientacion){
         //La primer celda del barco
         if(celda.nombre[0] == "A"){
             for(c=0;c<tamanioBarco;c++){
+                console.log("--->"+celda.nombre[2]);
                 celdasBarco[c]="A-"+(parseInt(celda.nombre[2])+c);
                 //console.log(celdasBarco[c]);
             }
@@ -139,9 +140,10 @@ function barcosACeldas(lista_barcos=[]){
     }
 }
 
-
+//Reiniciar la apariencia de las celdas no ocupadas para que se muestren vacías
 function resetCeldas(){
-     $(".vacia").removeClass('apunta');
+    $(".vacia").removeClass('apunta');
+    $(".celda_interna").removeClass('seleccionada');
 }
 
 
@@ -151,17 +153,17 @@ $(document).ready(
     function(){
 	
     
-    inicializarCeldas();
+    
         
     $(".vacia").click(
         function (e) {
             
-            ubicarBarco($(this),3,"H");
             
             resetCeldas();
+            ubicarBarco($(this),3,"H");
+            
             $("#datoC").val($(this).attr('id'));
             $("#casilla").text($(this).attr('id'));
-            $(this).addClass('apunta');
             
             var pos_x = $(this).offset();
             $("#caja_gatillo").show();
@@ -169,7 +171,6 @@ $(document).ready(
               "top":(pos_x.top + 10),
               "left":(pos_x.left + $(this).width() + 10)
                               });
-            //$("#gatillo")
         }
     );
     

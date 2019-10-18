@@ -73,7 +73,10 @@
                 
                 echo "</div>";
             }
-        echo "<script>prepararTablero('$tamanio');</script>";
+        echo "<script>";
+        echo "prepararTablero('$tamanio');";
+        echo "inicializarCeldas();";
+        echo "</script>";
         
     }
      
