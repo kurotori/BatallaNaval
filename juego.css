@@ -21,11 +21,35 @@ a:active {
 a:visited {
 }
 
+#caja_ubicar_barco{
+    display: none;
+    position: fixed;
+    width: 130px;
+    height: 100px;
+}
+
+#ubicar_barco{
+    display: inherit;
+    position: absolute;
+    top: 5px;
+    left:0px;
+    width: 111px;
+    height: 68px;
+    padding-top: 10px;
+    background-image: url(imagen/fondo_gatillo.png);
+    background-size: contain;
+    text-align: center;
+    color: black;
+    z-index: 100;
+}
+
+
 #caja_gatillo{
     display: none;
     position: fixed;
     width: 130px;
     height: 100px;
+    
 }
 
 #gatillo{

@@ -7,6 +7,48 @@ var barcos = [];
 
 var disparos = [];
 
+var columnas = 0;
+var filas = 0;
+
+//Barcos según tablero
+function crearFlota(tamanio){
+    switch(tamanio){
+        case "min":
+            barcos=[
+                {tipo:"destructor", tamanio:3, asignado:"no"},
+                {tipo:"destructor", tamanio:3, asignado:"no"},
+                {tipo:"escolta", tamanio:2, asignado:"no"},
+                {tipo:"escolta", tamanio:2, asignado:"no"},
+                {tipo:"escolta", tamanio:2, asignado:"no"}
+            ];
+            break;
+        case "med":
+            barcos=[
+                {tipo:"porta-aviones", tamanio:4, asignado:"no"},
+                {tipo:"destructor", tamanio:3, asignado:"no"},
+                {tipo:"destructor", tamanio:3, asignado:"no"},
+                {tipo:"escolta", tamanio:2, asignado:"no"},
+                {tipo:"escolta", tamanio:2, asignado:"no"},
+                {tipo:"escolta", tamanio:2, asignado:"no"},
+                {tipo:"escolta", tamanio:2, asignado:"no"}
+            ];
+            break;
+        case "max":
+            barcos=[
+                {tipo:"acorazado", tamanio:5, asignado:"no"},
+                {tipo:"porta-aviones", tamanio:4, asignado:"no"},
+                {tipo:"destructor", tamanio:3, asignado:"no"},
+                {tipo:"destructor", tamanio:3, asignado:"no"},
+                {tipo:"destructor", tamanio:3, asignado:"no"},
+                {tipo:"escolta", tamanio:2, asignado:"no"},
+                {tipo:"escolta", tamanio:2, asignado:"no"},
+                {tipo:"escolta", tamanio:2, asignado:"no"},
+                {tipo:"escolta", tamanio:2, asignado:"no"}
+            ];
+            break;
+    }
+}
+
 //datos de prueba
 //------------------------------------------------------------
 var barcos_1 = [{posicion:"B-3"},
@@ -61,6 +103,10 @@ function prepararTablero(tamanio){
     $('.tablero').css({'width':ancho_tablero_final});
     $('.tablero').css({'top':(alt_ventana - alt_tablero_final)/2});
     $('.tablero').css({'left':(ancho_ventana - ancho_tablero_final)/2});
+    
+    columnas = num_col;
+    filas = num_fil;
+    crearFlota(tamanio);
 }
 
 
@@ -94,41 +140,43 @@ function asignarCeldasABarco(celdaInicio,orientacion,cantidad){
 //-------------------------------------------------------------------
 
 //Define las celdas que un barco ocupa a partir de la celda inicial
-function ubicarBarco(objCelda,tamanioBarco,orientacion){
+function ubicarBarco(objCelda,tamanioBarco,orientacion,filas,columnas){
     var celdasBarco = [];
     //Los barcos se definen desde un extremo, o sea, la celda seleccionada
     // es uno de los extremos del barco
-    var letras = {'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    var letras = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
     
     var indexCelda = obtenerCeldaDeID(objCelda);
     var celda_columna = celdas[indexCelda].nombre[0];
-    var celda_columna_num = letras.findIndex(celda_columna);
+    var celda_columna_num = letras.findIndex(ele => ele == celda_columna);
     var celda_fila = parseInt(celdas[indexCelda].nombre.split("-")[1]);
     
     console.log("num_columna:"+celda_columna_num);
     
-    
-    
-    
     //Orientación Horizontal
     if(orientacion == "H"){
         //La primer celda del barco esta en la columna A
-        if(celda_columna == "A"){
-            
-            
+        if(celda_columna_num >= 0){
             for(c=0;c<tamanioBarco;c++){
-                celdasBarco[c]=celda_columna+"-"+(parseInt(celda_fila)+c);
+                celdasBarco[c]=letras[celda_columna_num + c] + "-" + (celda_fila);
             }
         }
-    
+        
+        //La celda esta cerca al extremo final de la tabla
+        if( celda_columna_num >= (columnas - tamanioBarco)){
+            for(c=0;c<tamanioBarco;c++){
+                celdasBarco[c]=letras[(columnas - tamanioBarco) + c] + "-" + (celda_fila);
+            }
+        }
     }
-    
+    //if(orientacion=="V")
     
     celdasBarco.forEach(
         function(ele){
             console.log(ele);
-            var nombre_celda = "#"+ele+" .celda_interna";
-            $(nombre_celda).addClass('seleccionada');
+            var nombre_celda = "#"+ele;
+            var nombre_celda_interna = "#"+ele+" .celda_interna";
+            $(nombre_celda_interna).addClass('seleccionada');
         }
     );
     
@@ -155,6 +203,8 @@ function resetCeldas(){
 }
 
 
+
+
 //Ejecución en la página
 
 $(document).ready(
@@ -168,15 +218,15 @@ $(document).ready(
             
             
             resetCeldas();
-            ubicarBarco($(this),3,"H");
+            ubicarBarco($(this),4,"H",filas,columnas);
             
             $("#datoC").val($(this).attr('id'));
             $("#casilla").text($(this).attr('id'));
             
             var pos_x = $(this).offset();
-            $("#caja_gatillo").show();
-            $("#caja_gatillo").css({
-              "top":(pos_x.top + 10),
+            $("#caja_ubicar_barco").show();
+            $("#caja_ubicar_barco").css({
+              "top":(pos_x.top + $(this).height() + 10),
               "left":(pos_x.left + $(this).width() + 10)
                               });
         }

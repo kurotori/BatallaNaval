@@ -18,9 +18,13 @@
         <div id="contenedor_tablero">
             
             <?php
-            crearTablero("max");
+            crearTablero("min");
             ?>
             
+        </div>
+        <div id="caja_ubicar_barco">
+            <div class="cerrar"></div>  
+            <div id="ubicar_barco"></div>
         </div>
     </body>
 </html>
