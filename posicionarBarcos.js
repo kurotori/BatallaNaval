@@ -11,6 +11,7 @@ var columnas = 0;
 var filas = 0;
 var orientacion = "H";
 var barco;
+var celda_actual;
 //Barcos según tablero
 function crearFlota(tamanio){
     switch(tamanio){
@@ -129,7 +130,7 @@ function asignarCeldasABarco(celdaInicio,orientacion,cantidad){
 //-------------------------------------------------------------------
 
 //Define las celdas que un barco ocupa a partir de la celda inicial
-function ubicarBarco(objCelda,tamanioBarco,orientacion,filas,columnas){
+function ubicarBarco(objCelda, tamanioBarco, orientacion, filas, columnas){
     var celdasBarco = [];
     //Los barcos se definen desde un extremo, o sea, la celda seleccionada
     // es uno de los extremos del barco
@@ -140,7 +141,7 @@ function ubicarBarco(objCelda,tamanioBarco,orientacion,filas,columnas){
     var celda_columna_num = letras.findIndex(ele => ele == celda_columna);
     var celda_fila = parseInt(celdas[indexCelda].nombre.split("-")[1]);
     
-    console.log("num_columna:"+celda_columna_num);
+    console.log("num_columna:"+celda_columna_num+" num_fila:"+celda_fila);
     
     //Orientación Horizontal
     if(orientacion == "H"){
@@ -158,7 +159,23 @@ function ubicarBarco(objCelda,tamanioBarco,orientacion,filas,columnas){
             }
         }
     }
-    //if(orientacion=="V")
+    
+    if(orientacion=="V"){
+        if(celda_fila <= (filas - tamanioBarco +1 )){
+            for(c=0;c<tamanioBarco;c++){
+                celdasBarco[c]=letras[celda_columna_num] + "-" + (celda_fila + c);
+            }
+        }
+        
+        if(celda_fila > (filas - tamanioBarco +1 )){
+            for(c=0;c<tamanioBarco;c++){
+                celdasBarco[c]=letras[celda_columna_num] + "-" + ((filas-tamanioBarco+1) + c);
+            }
+        }
+        
+    }
+    
+    
     
     celdasBarco.forEach(
         function(ele){
@@ -205,9 +222,9 @@ $(document).ready(
     $(".vacia").click(
         function (e) {
             
-            
+            celda_actual = $(this);
             resetCeldas();
-            ubicarBarco($(this),4,"H",filas,columnas);
+            ubicarBarco($(this),3,orientacion,filas,columnas);
             
             $("#datoC").val($(this).attr('id'));
             $("#casilla").text($(this).attr('id'));
@@ -229,7 +246,8 @@ $(document).ready(
             else{
                 orientacion = "H";
             }
-            
+            resetCeldas();
+            ubicarBarco(celda_actual,3,orientacion,filas,columnas);
         }
     );
     
