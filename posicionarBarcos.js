@@ -9,7 +9,8 @@ var disparos = [];
 
 var columnas = 0;
 var filas = 0;
-
+var orientacion = "H";
+var barco;
 //Barcos según tablero
 function crearFlota(tamanio){
     switch(tamanio){
@@ -49,18 +50,6 @@ function crearFlota(tamanio){
     }
 }
 
-//datos de prueba
-//------------------------------------------------------------
-var barcos_1 = [{posicion:"B-3"},
-                {posicion:"C-3"},
-                {posicion:"D-3"}
-               ];
-
-var celdas_1 = [{nombre:"A-3",alcanzada:true,barco:true},
-                {nombre:"C-3",alcanzada:true,barco:false},
-                {nombre:"D-4",alcanzada:false,barco:true}
-               ];
-//------------------------------------------------------------
 
 //Analiza la ventana y obtiene la dimension adecuada para las celdas
 
@@ -229,6 +218,18 @@ $(document).ready(
               "top":(pos_x.top + $(this).height() + 10),
               "left":(pos_x.left + $(this).width() + 10)
                               });
+        }
+    );
+    
+    $("#btn_rotar_barco").click(
+        function(){
+            if(orientacion == "H"){
+                orientacion = "V";
+            }
+            else{
+                orientacion = "H";
+            }
+            
         }
     );
     
