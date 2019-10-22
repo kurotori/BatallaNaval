@@ -1,5 +1,7 @@
+
 body {
-    font-family: Helvetica;
+    font-family: 'Permanent Marker', cursive;
+    /*font-family: Helvetica;*/
     position: fixed;
     width: 100%;
     height: 100%;
@@ -19,6 +21,129 @@ a:active {
 }
 
 a:visited {
+}
+
+#panel_lat{
+    position: fixed;
+    width: 24%;
+    height: 93%;
+    left: 0px;
+    top: 10px;
+    background-color: #99F;
+    border-radius: 0px 20px 20px 0px;
+    
+}
+
+#panel_lat_titulo{
+    position: relative;
+    float: left;
+    width: calc(100% - 41px);
+    height: 30px;
+    z-index: 10;
+    text-align: center;
+    font-size: 25px;
+    color: darkblue;
+}
+
+#panel_lat_btn{
+    position: relative;
+    float: left;
+    width: 40px;
+    height: 100%;
+    top: -30px;
+    left: calc(100% - 40px);
+    background-color: #33A;
+    border-style:solid;
+    border-width: 1px;
+    border-radius: 20px;
+    border-color: white white dimgray dimgray;
+    z-index: 11;
+    
+}
+
+#contenedor_tablero{
+    position: relative;
+    width: 75%;
+    height: 75%;
+    left: 20%;
+    top: 15%;
+}
+.tablero{
+    position: absolute;
+    top:5px;
+    /*margin-left: 20%;
+    height:95%;*/
+    border-style:solid;
+    border-color: darkblue;
+    border-width:3px;
+    border-radius: 15px;
+    overflow:hidden;
+    word-break:normal;
+    background-image: url(imagen/mar3.png);
+    background-color: dodgerblue;
+    box-shadow: 5px 5px 5px black;
+}
+
+#tablero_punta{
+    float: left;
+}
+
+.celda{
+    background-size: contain;
+    float: left;
+    border-spacing:0;
+}
+
+.celda_interna{
+    position: relative;
+    left: 3px;
+    top: 3px;
+}
+
+.celda.vacia .celda_interna:hover{
+    border-style: solid;
+    border-width:3px;
+    border-color: white;
+    top: 0px;
+    left: 0px;
+}
+.celda_enc{
+    font-size: 20px;
+    color: white;
+    vertical-align: middle;
+    /*font-family: Helvetica;*/
+    text-align: center;
+    float: left;
+    background-color: blue;
+    /*
+    border-spacing:0;
+    border-style: solid;
+    border-color: blue;
+    
+    border-width:3px;
+    */
+}
+
+.celda_enc_fila{
+    width: 34px;
+    border-bottom: 3px dotted white;
+    border-collapse: collapse;
+    border-left: 2px solid blue;
+    border-right: 2px solid blue;
+}
+
+.celda_enc_fila span{
+    position: relative;
+}
+
+.celda_enc_columna{
+    /*width: 80px;*/
+    height: 20px;
+    padding: 6px 0px 6px 0px;
+    border-right: 3px white;
+    border-right-style: dotted;
+    border-bottom: 3px solid blue;
+    border-top: 3px solid blue;
 }
 
 #caja_ubicar_barco{
@@ -83,90 +208,6 @@ a:visited {
     border-radius: 10px;
 }
 
-#contenedor_tablero{
-    position: relative;
-    width: 75%;
-    height: 85%;
-    left: 12.5%;
-    top: 7.5%;
-}
-.tablero{
-    position: absolute;
-    top:5px;
-    /*margin-left: 20%;
-    height:95%;*/
-    border-style:solid;
-    border-color: darkblue;
-    border-width:3px;
-    border-radius: 15px;
-    overflow:hidden;
-    word-break:normal;
-    background-image: url(imagen/mar3.png);
-    background-color: dodgerblue;
-    box-shadow: 5px 5px 5px black;
-}
-
-#tablero_punta{
-    float: left;
-}
-
-.celda{
-    background-size: contain;
-    float: left;
-    border-spacing:0;
-}
-
-.celda_interna{
-    position: relative;
-    left: 3px;
-    top: 3px;
-}
-
-.celda.vacia .celda_interna:hover{
-    border-style: solid;
-    border-width:3px;
-    border-color: white;
-    top: 0px;
-    left: 0px;
-}
-.celda_enc{
-    font-size: 20px;
-    color: white;
-    vertical-align: middle;
-    font-family: Helvetica;
-    text-align: center;
-    float: left;
-    background-color: blue;
-    /*
-    border-spacing:0;
-    border-style: solid;
-    border-color: blue;
-    
-    border-width:3px;
-    */
-}
-
-.celda_enc_fila{
-    width: 34px;
-    border-bottom: 3px dotted white;
-    border-collapse: collapse;
-    border-left: 2px solid blue;
-    border-right: 2px solid blue;
-}
-
-.celda_enc_fila span{
-    position: relative;
-}
-
-.celda_enc_columna{
-    /*width: 80px;*/
-    height: 20px;
-    padding: 6px 0px 6px 0px;
-    border-right: 3px white;
-    border-right-style: dotted;
-    border-bottom: 3px solid blue;
-    border-top: 3px solid blue;
-}
 
 
 .apunta{

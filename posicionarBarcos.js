@@ -9,8 +9,9 @@ var disparos = [];
 
 var columnas = 0;
 var filas = 0;
+
 var orientacion = "H";
-var barco;
+var barco_actual;
 var celda_actual;
 //Barcos según tablero
 function crearFlota(tamanio){
@@ -146,7 +147,7 @@ function ubicarBarco(objCelda, tamanioBarco, orientacion, filas, columnas){
     //Orientación Horizontal
     if(orientacion == "H"){
         //La primer celda del barco esta en la columna A
-        if(celda_columna_num >= 0){
+        if( celda_columna_num < (columnas - tamanioBarco)){
             for(c=0;c<tamanioBarco;c++){
                 celdasBarco[c]=letras[celda_columna_num + c] + "-" + (celda_fila);
             }
@@ -208,7 +209,15 @@ function resetCeldas(){
     $(".celda_interna").removeClass('seleccionada');
 }
 
-
+//Cambiar orientación aplicada a los barcos
+function cambiarOrientacion(){
+    if(orientacion == "H"){
+                orientacion = "V";
+            }
+            else{
+                orientacion = "H";
+            }
+}
 
 
 //Ejecución en la página
@@ -240,12 +249,7 @@ $(document).ready(
     
     $("#btn_rotar_barco").click(
         function(){
-            if(orientacion == "H"){
-                orientacion = "V";
-            }
-            else{
-                orientacion = "H";
-            }
+            cambiarOrientacion();
             resetCeldas();
             ubicarBarco(celda_actual,3,orientacion,filas,columnas);
         }

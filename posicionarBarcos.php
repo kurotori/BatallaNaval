@@ -10,6 +10,7 @@
         <meta http-equiv='Content-type' content='text/html;charset=UTF-8'>
 		<link rel="stylesheet" href="juego.css">
         <link rel="stylesheet" href="jquery-ui/jquery-ui.css">
+        <link href="https://fonts.googleapis.com/css?family=Permanent+Marker&display=swap" rel="stylesheet">
 		<script type='text/javascript' src='jquery.js'></script>
 		<script type='text/javascript' src='posicionarBarcos.js'></script>
         <script type="text/javascript" src="jquery-ui/jquery-ui.js"></script>
@@ -18,10 +19,16 @@
         <div id="contenedor_tablero">
             
             <?php
-            crearTablero("min");
+            crearTablero("max");
             ?>
             
         </div>
+        
+        <div id="panel_lat">
+            <div id="panel_lat_titulo">Barcos Disponibles:</div>
+            <div id="panel_lat_btn"></div>
+        </div>
+        
         <div id='caja_ubicar_barco'>
             <div class='cerrar'></div>  
             <div id='ubicar_barco'>
