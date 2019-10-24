@@ -1,9 +1,16 @@
 /*globals $:false */
 /* jshint browser: true */
 
-var celdas = [];
 
-var barcos = [];
+//Contiene la colección de celdas del tablero
+var celdas = [];
+//Estructura de una celda:
+//{nombre:String, barco:Object, esPrimera:bool }
+
+//Contiene la colección de barcos del tablero
+var barcos = []; 
+//Estructura de un barco: 
+//{tipo: String, tamanio: int, asignado: bool, orientacion:String}
 
 var disparos = [];
 
@@ -11,51 +18,55 @@ var columnas = 0;
 var filas = 0;
 
 var orientacion = "H";
+
 var barco_actual;
 var celda_actual;
-//Barcos según tablero
+
+//Establece la cantidad y tipos de barcos según el tamaño del tablero
 function crearFlota(tamanio){
     switch(tamanio){
         case "min":
             barcos=[
-                {tipo:"destructor", tamanio:3, asignado:"no"},
-                {tipo:"destructor", tamanio:3, asignado:"no"},
-                {tipo:"escolta", tamanio:2, asignado:"no"},
-                {tipo:"escolta", tamanio:2, asignado:"no"},
-                {tipo:"escolta", tamanio:2, asignado:"no"}
+                {tipo:"destructor", tamanio:3, asignado:false},
+                {tipo:"destructor", tamanio:3, asignado:false},
+                {tipo:"escolta", tamanio:2, asignado:false},
+                {tipo:"escolta", tamanio:2, asignado:false},
+                {tipo:"escolta", tamanio:2, asignado:false}
             ];
             break;
         case "med":
             barcos=[
-                {tipo:"porta-aviones", tamanio:4, asignado:"no"},
-                {tipo:"destructor", tamanio:3, asignado:"no"},
-                {tipo:"destructor", tamanio:3, asignado:"no"},
-                {tipo:"escolta", tamanio:2, asignado:"no"},
-                {tipo:"escolta", tamanio:2, asignado:"no"},
-                {tipo:"escolta", tamanio:2, asignado:"no"},
-                {tipo:"escolta", tamanio:2, asignado:"no"}
+                {tipo:"porta-aviones", tamanio:4, asignado:false},
+                {tipo:"destructor", tamanio:3, asignado:false},
+                {tipo:"destructor", tamanio:3, asignado:false},
+                {tipo:"escolta", tamanio:2, asignado:false},
+                {tipo:"escolta", tamanio:2, asignado:false},
+                {tipo:"escolta", tamanio:2, asignado:false},
+                {tipo:"escolta", tamanio:2, asignado:false}
             ];
             break;
         case "max":
             barcos=[
-                {tipo:"acorazado", tamanio:5, asignado:"no"},
-                {tipo:"porta-aviones", tamanio:4, asignado:"no"},
-                {tipo:"destructor", tamanio:3, asignado:"no"},
-                {tipo:"destructor", tamanio:3, asignado:"no"},
-                {tipo:"destructor", tamanio:3, asignado:"no"},
-                {tipo:"escolta", tamanio:2, asignado:"no"},
-                {tipo:"escolta", tamanio:2, asignado:"no"},
-                {tipo:"escolta", tamanio:2, asignado:"no"},
-                {tipo:"escolta", tamanio:2, asignado:"no"}
+                {tipo:"acorazado", tamanio:5, asignado:false},
+                {tipo:"porta-aviones", tamanio:4, asignado:false},
+                {tipo:"destructor", tamanio:3, asignado:false},
+                {tipo:"destructor", tamanio:3, asignado:false},
+                {tipo:"destructor", tamanio:3, asignado:false},
+                {tipo:"escolta", tamanio:2, asignado:false},
+                {tipo:"escolta", tamanio:2, asignado:false},
+                {tipo:"escolta", tamanio:2, asignado:false},
+                {tipo:"escolta", tamanio:2, asignado:false}
             ];
             break;
     }
 }
 
 
-//Analiza la ventana y obtiene la dimension adecuada para las celdas
+//Analiza la ventana y obtiene la dimension adecuada para las celdas, 
+// luego crea la colección de barcos para el tablero
 
 function prepararTablero(tamanio){
+    //Se establece la cantidad de filas y columnas de acuerdo al tamaño de tablero
     switch(tamanio){
         case "min":
             num_col=8;
@@ -71,7 +82,8 @@ function prepararTablero(tamanio){
             break;
     }
     
-    
+    //REDUCIR ESTE CÓDIGO
+    //Se obtiene el tamaño en pixeles del objeto contenedor
     var alt_ventana=$('#contenedor_tablero').height();
     var ancho_ventana = $('#contenedor_tablero').width();
     var alt_tablero_max=alt_ventana;
