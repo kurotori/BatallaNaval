@@ -19,8 +19,8 @@ var filas = 0;
 
 var orientacion = "H";
 
-var barco_actual;
-var celda_actual;
+var barco_actual = null;
+var celda_actual = null;
 
 //Establece la cantidad y tipos de barcos según el tamaño del tablero
 function crearFlota(tamanio){
@@ -167,7 +167,7 @@ function ubicarBarco(objCelda, tamanioBarco, orientacion, filas, columnas){
     var celda_columna_num = letras.findIndex(ele => ele == celda_columna);
     var celda_fila = parseInt(celdas[indexCelda].nombre.split("-")[1]);
     
-    console.log("num_columna:"+celda_columna_num+" num_fila:"+celda_fila);
+    //console.log("num_columna:"+celda_columna_num+" num_fila:"+celda_fila);
     
     //Orientación Horizontal
     if(orientacion == "H"){
@@ -202,10 +202,9 @@ function ubicarBarco(objCelda, tamanioBarco, orientacion, filas, columnas){
     }
     
     
-    
     celdasBarco.forEach(
         function(ele){
-            console.log(ele);
+            //console.log(ele);
             var nombre_celda = "#"+ele;
             var nombre_celda_interna = "#"+ele+" .celda_interna";
             $(nombre_celda_interna).addClass('seleccionada');
@@ -247,8 +246,8 @@ function cambiarOrientacion(){
 //...........................................................
 
 //Cerrar el cuadro de ubicación de barcos
-function cerrarCuadroUbicarCuadros(){
-    
+function cerrarCuadroUbicarBarcos(){
+    $("#caja_ubicar_barco").hide();
 }
 
 
@@ -265,6 +264,7 @@ $(document).ready(
             var numero = $(this).attr('id');
             barco_actual = barcos[numero];
             $(this).addClass("barco_seleccionado");
+            cerrarCuadroUbicarBarcos();
             resetCeldas();
         }
     );    
@@ -289,6 +289,7 @@ $(document).ready(
         }
     );
     
+    //Rotar barco
     $("#btn_rotar_barco").click(
         function(){
             cambiarOrientacion();
@@ -298,8 +299,10 @@ $(document).ready(
     );
     
     $(".cerrar").click(
+        
         function(){
-            $(this).parent().css({"display":"none"});
+            cerrarCuadroUbicarBarcos();
+          //  $(this).parent().css({"display":"none"});
         }
     );    
         

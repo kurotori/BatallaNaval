@@ -35,7 +35,9 @@
         <div id='caja_ubicar_barco'>
             <div class='cerrar'></div>  
             <div id='ubicar_barco'>
-                <button id="btn_rotar_barco">Rotar Barco</button>
+                <div id="btn_rotar_barco">
+                    <div id="bt_rotar" class="boton"></div>
+                </div>
             </div>
         </div>
     </body>

@@ -23,6 +23,17 @@ a:active {
 a:visited {
 }
 
+.boton{
+    border-radius: 10%;
+}
+.boton:hover{
+    box-shadow: 2px 2px 2px grey;
+}
+
+.boton:hover{
+    box-shadow: 2px 2px 2px black;
+}
+
 #panel_lat{
     position: fixed;
     width: 22%;
@@ -80,7 +91,12 @@ a:visited {
     color: white;
 }
 
-.barco_seleccionado{
+#lista_barcos{
+    width: 60%;
+    list-style-position: inside;
+}
+
+li.barco_seleccionado{
     background-color: white;
 }
 
@@ -191,6 +207,15 @@ a:visited {
     z-index: 100;
 }
 
+#bt_rotar{
+    position: relative;
+    left: 20px;
+    width: 29px;
+    height: 28px;
+    background-image: url(imagen/rotar2.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+}
 
 #caja_gatillo{
     display: none;
