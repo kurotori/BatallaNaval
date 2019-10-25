@@ -28,34 +28,30 @@ function crearFlota(tamanio){
         case "min":
             barcos=[
                 {tipo:"destructor", tamanio:3, asignado:false},
-                {tipo:"destructor", tamanio:3, asignado:false},
                 {tipo:"escolta", tamanio:2, asignado:false},
                 {tipo:"escolta", tamanio:2, asignado:false},
-                {tipo:"escolta", tamanio:2, asignado:false}
+                {tipo:"submarino", tamanio:1, asignado:false}
             ];
             break;
         case "med":
             barcos=[
-                {tipo:"porta-aviones", tamanio:4, asignado:false},
+                {tipo:"acorazado", tamanio:4, asignado:false},
                 {tipo:"destructor", tamanio:3, asignado:false},
-                {tipo:"destructor", tamanio:3, asignado:false},
                 {tipo:"escolta", tamanio:2, asignado:false},
                 {tipo:"escolta", tamanio:2, asignado:false},
-                {tipo:"escolta", tamanio:2, asignado:false},
-                {tipo:"escolta", tamanio:2, asignado:false}
+                {tipo:"submarino", tamanio:1, asignado:false},
+                {tipo:"submarino", tamanio:1, asignado:false}
             ];
             break;
         case "max":
             barcos=[
-                {tipo:"acorazado", tamanio:5, asignado:false},
-                {tipo:"porta-aviones", tamanio:4, asignado:false},
-                {tipo:"destructor", tamanio:3, asignado:false},
+                {tipo:"acorazado", tamanio:4, asignado:false},
                 {tipo:"destructor", tamanio:3, asignado:false},
                 {tipo:"destructor", tamanio:3, asignado:false},
                 {tipo:"escolta", tamanio:2, asignado:false},
                 {tipo:"escolta", tamanio:2, asignado:false},
-                {tipo:"escolta", tamanio:2, asignado:false},
-                {tipo:"escolta", tamanio:2, asignado:false}
+                {tipo:"submarino", tamanio:1, asignado:false},
+                {tipo:"submarino", tamanio:1, asignado:false}
             ];
             break;
     }
@@ -73,7 +69,7 @@ function prepararTablero(tamanio){
             num_fil=5;
             break;
         case "med":
-            num_col=10;
+            num_col=12;
             num_fil=8;
             break;
         case "max":
@@ -86,8 +82,6 @@ function prepararTablero(tamanio){
     //Se obtiene el tamaño en pixeles del objeto contenedor
     var alt_ventana=$('#contenedor_tablero').height();
     var ancho_ventana = $('#contenedor_tablero').width();
-    var alt_tablero_max=alt_ventana;
-    var ancho_tablero_max=ancho_ventana;
     
     var dim_celda = (alt_ventana)/num_fil;
     var dim_celda_interna = dim_celda - 6;
@@ -126,6 +120,25 @@ function inicializarCeldas(){
 }
 //------------------------------------------------------------
 
+// Listar los barcos generados en el panel lateral
+function listarBarcos(){
+    $("#panel_lat_contenido>#lista_barcos").html("");
+    barcos.forEach(
+        function(ele){            
+            var cont=$("#panel_lat_contenido>#lista_barcos").html();
+            var tipo = "<li id='"+(barcos.indexOf(ele))+"'";
+            
+            if(ele.asignado){
+                tipo = tipo + " class='asignado'>";
+            }
+            else{
+                tipo = tipo + " class='no_asignado'>";
+            }
+            
+            $("#panel_lat_contenido>#lista_barcos").html(cont + tipo +ele.tipo+"</li>");
+        }
+    );
+}
 
 //Obtiene la celda a partir de la id del elemento clickeado
 function obtenerCeldaDeID(objClickeado){
@@ -231,21 +244,38 @@ function cambiarOrientacion(){
             }
 }
 
+//...........................................................
+
+//Cerrar el cuadro de ubicación de barcos
+function cerrarCuadroUbicarCuadros(){
+    
+}
+
 
 //Ejecución en la página
 
 $(document).ready(
     function(){
-	
     
+    listarBarcos();
     
+    $(".no_asignado").click(
+        function(){
+            $(".no_asignado").removeClass("barco_seleccionado");
+            var numero = $(this).attr('id');
+            barco_actual = barcos[numero];
+            $(this).addClass("barco_seleccionado");
+            resetCeldas();
+        }
+    );    
         
+    // Procedimiento al dar click en una celda no ocupada
     $(".vacia").click(
         function (e) {
             
             celda_actual = $(this);
             resetCeldas();
-            ubicarBarco($(this),3,orientacion,filas,columnas);
+            ubicarBarco($(this),barco_actual.tamanio,orientacion,filas,columnas);
             
             $("#datoC").val($(this).attr('id'));
             $("#casilla").text($(this).attr('id'));
@@ -263,7 +293,7 @@ $(document).ready(
         function(){
             cambiarOrientacion();
             resetCeldas();
-            ubicarBarco(celda_actual,3,orientacion,filas,columnas);
+            ubicarBarco(celda_actual,barco_actual.tamanio,orientacion,filas,columnas);
         }
     );
     

@@ -25,7 +25,7 @@ a:visited {
 
 #panel_lat{
     position: fixed;
-    width: 24%;
+    width: 22%;
     height: 93%;
     left: 0px;
     top: 10px;
@@ -37,12 +37,22 @@ a:visited {
 #panel_lat_titulo{
     position: relative;
     float: left;
-    width: calc(100% - 41px);
-    height: 30px;
+    width: calc(100% - 24px);
+    height: 40px;
     z-index: 10;
     text-align: center;
     font-size: 25px;
-    color: darkblue;
+    color: white;
+    background-color: #33A;
+}
+
+#panel_lat_contenido{
+    position: absolute;
+    width: calc(100% - 34px);
+    z-index: 10;
+    top:45px;
+    left: 15px;
+    font-size: 25px;
 }
 
 #panel_lat_btn{
@@ -50,15 +60,28 @@ a:visited {
     float: left;
     width: 40px;
     height: 100%;
-    top: -30px;
+    top: -40px;
     left: calc(100% - 40px);
     background-color: #33A;
-    border-style:solid;
-    border-width: 1px;
     border-radius: 20px;
-    border-color: white white dimgray dimgray;
+   /*  border-style:solid;
+    border-width: 1px;
+    border-color: white white dimgray dimgray;*/
     z-index: 11;
     
+}
+
+#panel_lat_contenido .no_asignado:hover{
+    text-decoration: underline;
+}
+
+#panel_lat_contenido .asignado{
+    font-style: italic;
+    color: white;
+}
+
+.barco_seleccionado{
+    background-color: white;
 }
 
 #contenedor_tablero{

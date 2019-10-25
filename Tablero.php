@@ -7,8 +7,8 @@
         $letras = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
         switch($tamanio){
             case "med":
-                    $dim_x=11; //10 + 1
-                    $dim_y=9;  //9 + 1
+                    $dim_x=13; //12 + 1
+                    $dim_y=9;  //8 + 1
                     break;
             case "min":
                     $dim_x=9; //8 + 1
