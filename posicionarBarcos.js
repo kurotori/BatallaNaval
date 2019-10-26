@@ -290,7 +290,7 @@ $(document).ready(
     );
     
     //Rotar barco
-    $("#btn_rotar_barco").click(
+    $("#bt_rotar").click(
         function(){
             cambiarOrientacion();
             resetCeldas();

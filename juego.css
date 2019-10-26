@@ -198,17 +198,32 @@ li.barco_seleccionado{
     top: 5px;
     left:0px;
     width: 111px;
-    height: 68px;
+    height: 48px;
     padding-top: 10px;
-    background-image: url(imagen/fondo_gatillo.png);
-    background-size: contain;
+    /*background-image: url(imagen/fondo_gatillo.png);
+    background-size: contain;*/
+    border-radius: 10px;
+    border: solid black 3px;
+    background-color: white;
     text-align: center;
     color: black;
     z-index: 100;
 }
 
+#bt_ubicar{
+    position: relative;
+    float: left;
+    left: 30px;
+    width: 29px;
+    height: 28px;
+    background-image: url(imagen/ubicar.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
 #bt_rotar{
     position: relative;
+    float: left;
     left: 20px;
     width: 29px;
     height: 28px;
@@ -304,6 +319,50 @@ li.barco_seleccionado{
 .cerrar:active{
     width: 20px;
     height: 20px;
+}
+
+/* Tooltip container */
+.tooltip {
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted black; /* If you want dots under the hoverable text */
+}
+
+/* Tooltip text */
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 70px;
+  background-color: #faf143;
+  color: #000;
+    font-family: Helvetica;
+    font-size: 12px;
+  text-align: center;
+  padding: 5px 0;
+  border-radius: 6px;
+    box-shadow: 2px 2px 2px black;
+ 
+  /* Position the tooltip text - see examples below! */
+    top: 130%;
+  left: 50%;
+  margin-left: -35px;
+  position: absolute;
+  z-index: 1;
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}
+
+.tooltip .tooltiptext::after {
+  content: " ";
+  position: absolute;
+  bottom: 100%; /* At the bottom of the tooltip */
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent transparent #faf143 transparent;
 }
 
 .barco_normal_frente{

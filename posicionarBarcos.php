@@ -35,9 +35,10 @@
         <div id='caja_ubicar_barco'>
             <div class='cerrar'></div>  
             <div id='ubicar_barco'>
-                <div id="btn_rotar_barco">
-                    <div id="bt_rotar" class="boton"></div>
+                <div id="bt_rotar" class="boton tooltip">
+                    <span class="tooltiptext">Rotar Barco</span>
                 </div>
+                <div id="bt_ubicar" class="boton"></div>
             </div>
         </div>
     </body>
