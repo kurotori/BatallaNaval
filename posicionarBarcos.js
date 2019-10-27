@@ -45,7 +45,7 @@ function crearFlota(tamanio){
             break;
         case "max":
             barcos=[
-                {tipo:"acorazado", tamanio:4, asignado:false},
+                {tipo:"acorazado", tamanio:4, asignado:true},
                 {tipo:"destructor", tamanio:3, asignado:false},
                 {tipo:"destructor", tamanio:3, asignado:false},
                 {tipo:"escolta", tamanio:2, asignado:false},

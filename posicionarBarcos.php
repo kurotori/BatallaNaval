@@ -38,7 +38,9 @@
                 <div id="bt_rotar" class="boton tooltip">
                     <span class="tooltiptext">Rotar Barco</span>
                 </div>
-                <div id="bt_ubicar" class="boton"></div>
+                <div id="bt_ubicar" class="boton tooltip">
+                    <span class="tooltiptext">Colocar Barco</span>
+                </div>
             </div>
         </div>
     </body>
