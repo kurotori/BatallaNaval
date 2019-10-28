@@ -5,12 +5,12 @@
 //Contiene la colección de celdas del tablero
 var celdas = [];
 //Estructura de una celda:
-//{nombre:String, barco:Object, esPrimera:bool }
+//{nombre:String, barco:Object, inicial:bool }
 
 //Contiene la colección de barcos del tablero
 var barcos = []; 
 //Estructura de un barco: 
-//{tipo: String, tamanio: int, asignado: bool, orientacion:String}
+//{tipo: String, tamanio: int, asignado: bool, orientacion:String, celdas:Object}
 
 var disparos = [];
 
@@ -45,7 +45,7 @@ function crearFlota(tamanio){
             break;
         case "max":
             barcos=[
-                {tipo:"acorazado", tamanio:4, asignado:true},
+                {tipo:"acorazado", tamanio:4, asignado:false},
                 {tipo:"destructor", tamanio:3, asignado:false},
                 {tipo:"destructor", tamanio:3, asignado:false},
                 {tipo:"escolta", tamanio:2, asignado:false},
@@ -111,9 +111,11 @@ function prepararTablero(tamanio){
 function inicializarCeldas(){
     $(".celda").each(
         function(){
+            //{nombre:String, asignada:bool, barco:Object, inicial:bool }
             celdas[celdas.length] = {nombre:$(this).attr('id'),
-                                     alcanzada:false,
-                                     barco:false
+                                     asignada:false,
+                                     barco:null,
+                                     inicial:false
                                     };
         }
     );
@@ -141,8 +143,8 @@ function listarBarcos(){
 }
 
 //Obtiene la celda a partir de la id del elemento clickeado
-function obtenerCeldaDeID(objClickeado){
-    var idCelda = objClickeado.attr('id');
+function obtenerCeldaDeID(obj){
+    var idCelda = obj.attr('id');
     return indexCelda = celdas.findIndex(ele => ele.nombre === idCelda);
 }
 
@@ -156,13 +158,13 @@ function asignarCeldasABarco(celdaInicio,orientacion,cantidad){
 //-------------------------------------------------------------------
 
 //Define las celdas que un barco ocupa a partir de la celda inicial
-function ubicarBarco(objCelda, tamanioBarco, orientacion, filas, columnas){
+function marcarBarco(objCelda, tamanioBarco, orientacion, filas, columnas){
     var celdasBarco = [];
     //Los barcos se definen desde un extremo, o sea, la celda seleccionada
     // es uno de los extremos del barco
     var letras = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
     
-    var indexCelda = obtenerCeldaDeID(objCelda);
+    var indexCelda = celda_actual;//obtenerCeldaDeID(objCelda);
     var celda_columna = celdas[indexCelda].nombre[0];
     var celda_columna_num = letras.findIndex(ele => ele == celda_columna);
     var celda_fila = parseInt(celdas[indexCelda].nombre.split("-")[1]);
@@ -211,20 +213,24 @@ function ubicarBarco(objCelda, tamanioBarco, orientacion, filas, columnas){
         }
     );
     
+    return celdasBarco;
     //console.log(celda.nombre[0]);
 }
 
 //-------------------------------------------------------------------
 
-//Analiza el listado de barcos y actualiza el listado de  celdas con esa información
-function barcosACeldas(lista_barcos=[]){
-    for(barco of lista_barcos){
-        celdas.find(
-            function(element){
-                return element.nombre == barco.posicion;
-            }
-        ).barco = true;
-    }
+function colocarBarco(celda_ini, barco){
+    var celdas_barco = marcarBarco(celda_ini,barco.tamanio,orientacion,filas,columnas);
+    celda_ini.inicial = true;
+    celdas_barco.forEach(
+        function(ele){
+            //Se ubica la ID de la celda en el array
+            var idCelda = celdas.findIndex( e => e.nombre === ele);
+            console.log(idCelda);
+            celdas[idCelda].asignada=true;
+            celdas[idCelda].barco = barco;
+        }
+    );
 }
 
 //Reiniciar la apariencia de las celdas no ocupadas para que se muestren vacías
@@ -258,6 +264,17 @@ $(document).ready(
     
     listarBarcos();
     
+    $(".celda").click(
+        function(){
+            var ID = $(this).attr('id');
+            var indexCelda = celdas.findIndex(ele => ele.nombre === ID);
+            celda_actual = indexCelda;
+        }
+    );
+        
+        
+    
+    //Procedimiento al dar click sobre un barco no asignado en la lista de barcos
     $(".no_asignado").click(
         function(){
             $(".no_asignado").removeClass("barco_seleccionado");
@@ -272,13 +289,12 @@ $(document).ready(
     // Procedimiento al dar click en una celda no ocupada
     $(".vacia").click(
         function (e) {
+            //Se actualiza la celda actual con la celda clickeada
             
-            celda_actual = $(this);
+            //Se resetean las celdas
             resetCeldas();
-            ubicarBarco($(this),barco_actual.tamanio,orientacion,filas,columnas);
-            
-            $("#datoC").val($(this).attr('id'));
-            $("#casilla").text($(this).attr('id'));
+            //Se marca la ubicación donde estaría el barco
+            marcarBarco($(this),barco_actual.tamanio,orientacion,filas,columnas);
             
             var pos_x = $(this).offset();
             $("#caja_ubicar_barco").show();
@@ -294,10 +310,19 @@ $(document).ready(
         function(){
             cambiarOrientacion();
             resetCeldas();
-            ubicarBarco(celda_actual,barco_actual.tamanio,orientacion,filas,columnas);
+            marcarBarco(celda_actual,barco_actual.tamanio,orientacion,filas,columnas);
         }
     );
+        
+    //Colocar barco
+    $("#bt_colocar").click(
+        function(){
+            colocarBarco(celdas[celda_actual],barco_actual);
+        }
+    );
+        
     
+    //Cerrar ventana de ubiación de barcos
     $(".cerrar").click(
         
         function(){

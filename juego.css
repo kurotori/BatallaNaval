@@ -204,7 +204,7 @@ li.barco_seleccionado{
     position: absolute;
     top: 5px;
     left:0px;
-    width: 111px;
+    width: 105px;
     height: 40px;
     padding-top: 10px;
     /*background-image: url(imagen/fondo_gatillo.png);
@@ -217,7 +217,7 @@ li.barco_seleccionado{
     z-index: 100;
 }
 
-#bt_ubicar{
+#bt_colocar{
     position: relative;
     float: left;
     left: 30px;
@@ -298,7 +298,7 @@ li.barco_seleccionado{
 .seleccionada{
     border-style: solid;
     border-width:3px;
-    border-color: red;
+    border-color: black;
     border-radius: 20px;
 }
 .cerrar{
