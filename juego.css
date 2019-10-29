@@ -146,6 +146,11 @@ li.barco_seleccionado{
     top: 3px;
 }
 
+/* clase temporal para pruebas de asignación*/
+.celda_asignada{
+    /*border: solid red 1px;*/
+}
+
 .celda.vacia .celda_interna:hover{
     border-style: solid;
     border-width:3px;
@@ -371,14 +376,26 @@ li.barco_seleccionado{
   border-color: transparent transparent #87dbfa transparent;
 }
 
-.barco_normal_frente{
-    background-image: url(imagen/barcos/destructor_frente.png);
+.barco_normal_frente.H{
+    background-image: url(imagen/barcos/destructor_frente_h.png);
 }
 
-.barco_normal_medio{
-    background-image: url(imagen/barcos/destructor_medio.png);
+.barco_normal_medio.H{
+    background-image: url(imagen/barcos/destructor_medio_h.png);
 }
 
-.barco_normal_cola{
-    background-image: url(imagen/barcos/destructor_cola.png);
+.barco_normal_cola.H{
+    background-image: url(imagen/barcos/destructor_cola_h.png);
+}
+
+.barco_normal_frente.V{
+    background-image: url(imagen/barcos/destructor_frente_v.png);
+}
+
+.barco_normal_medio.V{
+    background-image: url(imagen/barcos/destructor_medio_v.png);
+}
+
+.barco_normal_cola.V{
+    background-image: url(imagen/barcos/destructor_cola_v.png);
 }

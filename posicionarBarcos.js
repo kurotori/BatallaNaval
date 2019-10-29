@@ -22,6 +22,7 @@ var orientacion = "H";
 var barco_actual = null;
 var celda_actual = null;
 
+
 //Establece la cantidad y tipos de barcos según el tamaño del tablero
 function crearFlota(tamanio){
     switch(tamanio){
@@ -158,61 +159,66 @@ function asignarCeldasABarco(celdaInicio,orientacion,cantidad){
 //-------------------------------------------------------------------
 
 //Define las celdas que un barco ocupa a partir de la celda inicial
-function marcarBarco(objCelda, tamanioBarco, orientacion, filas, columnas){
+function marcarBarco(tamanioBarco, orientacion, filas, columnas){
     var celdasBarco = [];
     //Los barcos se definen desde un extremo, o sea, la celda seleccionada
     // es uno de los extremos del barco
     var letras = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
     
-    var indexCelda = celda_actual;//obtenerCeldaDeID(objCelda);
-    var celda_columna = celdas[indexCelda].nombre[0];
-    var celda_columna_num = letras.findIndex(ele => ele == celda_columna);
-    var celda_fila = parseInt(celdas[indexCelda].nombre.split("-")[1]);
+    var idCelda = "#"+celdas[celda_actual].nombre;
     
-    //console.log("num_columna:"+celda_columna_num+" num_fila:"+celda_fila);
-    
-    //Orientación Horizontal
-    if(orientacion == "H"){
-        //La primer celda del barco esta en la columna A
-        if( celda_columna_num < (columnas - tamanioBarco)){
-            for(c=0;c<tamanioBarco;c++){
-                celdasBarco[c]=letras[celda_columna_num + c] + "-" + (celda_fila);
+    if($(idCelda).hasClass("vacia")){
+        var indexCelda = celda_actual;//obtenerCeldaDeID(objCelda);
+        var celda_columna = celdas[indexCelda].nombre[0];
+        var celda_columna_num = letras.findIndex(ele => ele == celda_columna);
+        var celda_fila = parseInt(celdas[indexCelda].nombre.split("-")[1]);
+
+        //console.log("num_columna:"+celda_columna_num+" num_fila:"+celda_fila);
+
+        //Orientación Horizontal
+        if(orientacion == "H"){
+            //La primer celda del barco esta en la columna A
+            if( celda_columna_num < (columnas - tamanioBarco)){
+                for(c=0;c<tamanioBarco;c++){
+                    celdasBarco[c]=letras[celda_columna_num + c] + "-" + (celda_fila);
+                }
+            }
+
+            //La celda esta cerca al extremo final de la tabla
+            if( celda_columna_num >= (columnas - tamanioBarco)){
+                for(c=0;c<tamanioBarco;c++){
+                    celdasBarco[c]=letras[(columnas - tamanioBarco) + c] + "-" + (celda_fila);
+                }
             }
         }
+
+        if(orientacion=="V"){
+            if(celda_fila <= (filas - tamanioBarco +1 )){
+                for(c=0;c<tamanioBarco;c++){
+                    celdasBarco[c]=letras[celda_columna_num] + "-" + (celda_fila + c);
+                }
+            }
+
+            if(celda_fila > (filas - tamanioBarco +1 )){
+                for(c=0;c<tamanioBarco;c++){
+                    celdasBarco[c]=letras[celda_columna_num] + "-" + ((filas-tamanioBarco+1) + c);
+                }
+            }
+
+        }
+
+        var c = celdasBarco.findIndex(ele => $("#"+ele).hasClass("celda_asignada"));
+        console.log("----"+c);
         
-        //La celda esta cerca al extremo final de la tabla
-        if( celda_columna_num >= (columnas - tamanioBarco)){
-            for(c=0;c<tamanioBarco;c++){
-                celdasBarco[c]=letras[(columnas - tamanioBarco) + c] + "-" + (celda_fila);
+        celdasBarco.forEach(
+            function(ele){
+                //console.log(ele);
+                var nombre_celda = "#"+ele;
+                var nombre_celda_interna = "#"+ele+" .celda_interna";
+                $(nombre_celda_interna).addClass('seleccionada');
             }
-        }
+        );
     }
-    
-    if(orientacion=="V"){
-        if(celda_fila <= (filas - tamanioBarco +1 )){
-            for(c=0;c<tamanioBarco;c++){
-                celdasBarco[c]=letras[celda_columna_num] + "-" + (celda_fila + c);
-            }
-        }
-        
-        if(celda_fila > (filas - tamanioBarco +1 )){
-            for(c=0;c<tamanioBarco;c++){
-                celdasBarco[c]=letras[celda_columna_num] + "-" + ((filas-tamanioBarco+1) + c);
-            }
-        }
-        
-    }
-    
-    
-    celdasBarco.forEach(
-        function(ele){
-            //console.log(ele);
-            var nombre_celda = "#"+ele;
-            var nombre_celda_interna = "#"+ele+" .celda_interna";
-            $(nombre_celda_interna).addClass('seleccionada');
-        }
-    );
-    
     return celdasBarco;
     //console.log(celda.nombre[0]);
 }
@@ -220,17 +226,40 @@ function marcarBarco(objCelda, tamanioBarco, orientacion, filas, columnas){
 //-------------------------------------------------------------------
 
 function colocarBarco(celda_ini, barco){
-    var celdas_barco = marcarBarco(celda_ini,barco.tamanio,orientacion,filas,columnas);
-    celda_ini.inicial = true;
+    var celdas_barco = marcarBarco(barco.tamanio,orientacion,filas,columnas);
+        
+    
+    //Procesar primera celda
+    var indiceCelda = celdas.findIndex( e => e.nombre === celdas_barco[0]);
+    celdas[indiceCelda].inicial = true;
+    
+    var idCelda = "#"+celdas[indiceCelda].nombre;
+    $(idCelda).addClass(orientacion + " barco_normal_frente celda_asignada");
+    
     celdas_barco.forEach(
         function(ele){
             //Se ubica la ID de la celda en el array
-            var idCelda = celdas.findIndex( e => e.nombre === ele);
-            console.log(idCelda);
-            celdas[idCelda].asignada=true;
-            celdas[idCelda].barco = barco;
-        }
+            indiceCelda = celdas.findIndex( e => e.nombre === ele);
+            console.log(indiceCelda);
+            
+            celdas[indiceCelda].asignada=true;
+            celdas[indiceCelda].barco = barco;
+            
+            idCelda = "#"+celdas[indiceCelda].nombre;
+            $(idCelda).removeClass("vacia");
+            var nombre_celda_interna = idCelda+" .celda_interna";
+            $(nombre_celda_interna).removeClass('seleccionada');
+            
+            if(!celdas[indiceCelda].inicial){
+                $(idCelda).addClass(orientacion + " barco_normal_medio celda_asignada"); 
+            }   
+        }  
     );
+    
+    //Procesar última celda
+    indiceCelda = celdas.findIndex( e => e.nombre === celdas_barco[barco.tamanio - 1]);
+    $(idCelda).removeClass("barco_normal_medio");
+    $(idCelda).addClass("barco_normal_cola");
 }
 
 //Reiniciar la apariencia de las celdas no ocupadas para que se muestren vacías
@@ -294,7 +323,7 @@ $(document).ready(
             //Se resetean las celdas
             resetCeldas();
             //Se marca la ubicación donde estaría el barco
-            marcarBarco($(this),barco_actual.tamanio,orientacion,filas,columnas);
+            marcarBarco(barco_actual.tamanio,orientacion,filas,columnas);
             
             var pos_x = $(this).offset();
             $("#caja_ubicar_barco").show();
@@ -310,7 +339,7 @@ $(document).ready(
         function(){
             cambiarOrientacion();
             resetCeldas();
-            marcarBarco(celda_actual,barco_actual.tamanio,orientacion,filas,columnas);
+            marcarBarco(barco_actual.tamanio,orientacion,filas,columnas);
         }
     );
         
