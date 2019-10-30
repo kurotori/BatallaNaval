@@ -74,8 +74,9 @@
                 echo "</div>";
             }
         echo "<script>";
-        echo "prepararTablero('$tamanio');";
-        echo "inicializarCeldas();";
+
+        echo "var tamanio='$tamanio';";
+       
         echo "</script>";
         
     }

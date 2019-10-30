@@ -15,7 +15,10 @@
    version="1.1"
    id="svg821"
    inkscape:version="0.92.4 (5da689c313, 2019-01-14)"
-   sodipodi:docname="ubicar.svg">
+   sodipodi:docname="ubicar.svg"
+   inkscape:export-filename="C:\xampp\htdocs\BatallaNaval\imagen\ubicar.png"
+   inkscape:export-xdpi="251.65921"
+   inkscape:export-ydpi="251.65921">
   <defs
      id="defs815" />
   <sodipodi:namedview
@@ -72,7 +75,7 @@
        ry="0"
        transform="matrix(0.83612632,-0.54853695,0.83612632,0.54853695,0,0)" />
     <path
-       style="fill:#ff1200;fill-opacity:1;stroke:#000000;stroke-width:5.3745265;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       style="fill:#ff1200;fill-opacity:1;stroke:#000000;stroke-width:5.375;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        d="m 87.731804,-73.50062 c -7.454282,0 -14.202807,3.02168 -19.087823,7.906692 -4.885016,4.885012 -7.906696,11.63354 -7.906696,19.087822 0,7.454281 3.02168,14.202809 7.906696,19.087822 l 19.71536,47.33664 18.460299,-47.33664 c 4.88501,-4.885013 7.9063,-11.633543 7.9063,-19.087822 0,-14.908561 -12.08556,-26.994514 -26.994136,-26.994514 z m -4.14e-4,12.56202 c 8.256217,-5.3e-5 14.94923,6.692947 14.94918,14.949167 5e-5,8.25622 -6.692963,14.949225 -14.94918,14.949169 -8.256063,-1.68e-4 -14.948821,-6.693107 -14.948763,-14.949169 -5.6e-5,-8.256063 6.6927,-14.948999 14.948763,-14.949167 z"
        id="path1366"
        inkscape:connector-curvature="0"

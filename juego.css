@@ -376,6 +376,8 @@ li.barco_seleccionado{
   border-color: transparent transparent #87dbfa transparent;
 }
 
+/*Estilos para los barcos*/
+
 .barco_normal_frente.H{
     background-image: url(imagen/barcos/destructor_frente_h.png);
 }

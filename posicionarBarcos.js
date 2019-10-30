@@ -12,8 +12,6 @@ var barcos = [];
 //Estructura de un barco: 
 //{tipo: String, tamanio: int, asignado: bool, orientacion:String, celdas:Object}
 
-var disparos = [];
-
 var columnas = 0;
 var filas = 0;
 
@@ -61,7 +59,6 @@ function crearFlota(tamanio){
 
 //Analiza la ventana y obtiene la dimension adecuada para las celdas, 
 // luego crea la colección de barcos para el tablero
-
 function prepararTablero(tamanio){
     //Se establece la cantidad de filas y columnas de acuerdo al tamaño de tablero
     switch(tamanio){
@@ -106,7 +103,6 @@ function prepararTablero(tamanio){
     filas = num_fil;
     crearFlota(tamanio);
 }
-
 
 //Inicializa las celdas en una colección para que JS reconozca el tablero
 function inicializarCeldas(){
@@ -255,6 +251,7 @@ function colocarBarco(celda_ini, barco){
             }   
         }  
     );
+    
     
     //Procesar última celda
     indiceCelda = celdas.findIndex( e => e.nombre === celdas_barco[barco.tamanio - 1]);
