@@ -23,7 +23,7 @@ var filas = 0;
 //Listado de las celdas de la grilla. Se rellena con la función 'inicializarCeldas()'
 var celdas = [];
 //Estructura de una celda:
-//celda={nombre:String, asignada:bool, barco:Object, inicial:bool }
+//celda={nombre:String, id:String, asignada:bool, barco:Object, inicial:bool }
 
 //La celda seleccionada por el usuario. Debe actualizarse para que apunte
 //a la posición de la celda seleccionada en cada click
@@ -81,8 +81,8 @@ function prepararTablero(tamanio){
 function inicializarCeldas(){
     $(".celda").each(
         function(){
-            //{nombre:String, asignada:bool, barco:Object, inicial:bool }
             celdas[celdas.length] = {nombre:$(this).attr('id'),
+                                     id:"#"+$(this).attr('id'),
                                      asignada:false,
                                      barco:null,
                                      inicial:false
@@ -127,7 +127,7 @@ function crearFlota(tamanio){
 }
 
 //Listar los barcos generados en el panel lateral.
-//Se debe llamar cada vez que el 
+//Se debe llamar cada vez que un barco es ubicado en el tablero
 function listarBarcos(){
     //Resetear el contenido del panel
     $("#panel_lat_contenido>#lista_barcos").html("");
@@ -150,8 +150,7 @@ function listarBarcos(){
 }
 
 
-//Función que inicializa todo el tablero de juego. Esta pensada para ser ejecutada
-//desde la función 'crearTablero()' del archivo Tablero.php
+//Función que inicializa todo el tablero de juego.
 function inicializarTodo(tamanio){
     //Ajustar el tablero
     prepararTablero(tamanio);
@@ -164,23 +163,29 @@ function inicializarTodo(tamanio){
     barco_actual = 0;
 }
 
-//Define las celdas que un barco ocupa a partir de la celda inicial
+//Funciones de posicionamiento de barcos
+
+
+//Muestra en pantalla las celdas que ocuparía el barco a partir de la celda inicial.
+//También genera un array con esas celdas.
 function marcarBarco(tamanioBarco, orientacion, filas, columnas){
     var celdasBarco = [];
     //Los barcos se definen desde un extremo, o sea, la celda seleccionada
     // es uno de los extremos del barco
     var letras = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
     
-    var idCelda = "#"+celdas[celda_actual].nombre;
+    //Identificación de la celda seleccionada
+    var idCelda = celdas[celda_actual].id;
     
+    //Se chequea que la celda seleccionada no esté ocupada 
     if($(idCelda).hasClass("vacia")){
-        var indexCelda = celda_actual;//obtenerCeldaDeID(objCelda);
+        
+        var indexCelda = celda_actual;
         var celda_columna = celdas[indexCelda].nombre[0];
         var celda_columna_num = letras.findIndex(ele => ele == celda_columna);
         var celda_fila = parseInt(celdas[indexCelda].nombre.split("-")[1]);
 
-        //console.log("num_columna:"+celda_columna_num+" num_fila:"+celda_fila);
-
+        //Generación de las listas de celdas correspondientes
         //Orientación Horizontal
         if(orientacion == "H"){
             //La primer celda del barco esta en la columna A
@@ -221,16 +226,33 @@ function marcarBarco(tamanioBarco, orientacion, filas, columnas){
                 //console.log(ele);
                 var nombre_celda = "#"+ele;
                 var nombre_celda_interna = "#"+ele+" .celda_interna";
-                $(nombre_celda_interna).addClass('seleccionada');
+                
+                if($(nombre_celda).hasClass())
+                
+                    $(nombre_celda_interna).addClass('seleccionada');
             }
         );
     }
+    
+    
     return celdasBarco;
-    //console.log(celda.nombre[0]);
 }
 
+
+//Ejecución de la página
 $(document).ready(
     function(){
         inicializarTodo(tamanio);
+        
+        //Obtención del index de la celda en la lista de celdas y actualización del
+        //index de celda global
+            $(".celda").click(
+                function(){
+                    var ID = $(this).attr('id');
+                    celda_actual = celdas.findIndex(ele => ele.nombre === ID);
+                }
+            );
+        
+        
     }
 );
