@@ -141,7 +141,7 @@ function crearFlota(tamanio){
 //Se debe llamar cada vez que un barco es ubicado en el tablero
 function listarBarcos(){
     //Resetear el contenido del panel
-    $("#panel_lat_contenido>#lista_barcos").html("");
+    $("#panel_lat_contenido>#lista_barcos").html(null);
     //Anális de cada barco de la lista
     barcos.forEach(
         function(ele){            
@@ -282,6 +282,7 @@ function cambiarOrientacion(){
     }
 }
 
+
 //Ubica el barco en el tablero
 function ubicarBarco(celda_ini, barco){
     var celdas_barco = marcarBarco(barco.tamanio,orientacion,filas,columnas);
@@ -291,10 +292,9 @@ function ubicarBarco(celda_ini, barco){
     celdas[indiceCelda].inicial = true;
     
     var idCelda = celdas[indiceCelda].id;
-    $(idCelda).addClass(orientacion);
-    $(idCelda).addClass(barco.tipo);
     $(idCelda).addClass("frente celda_asignada");
     
+    //Procesar todas las celdas
     celdas_barco.forEach(
         function(ele){
             //Se ubica la ID de la celda en el array
@@ -304,28 +304,33 @@ function ubicarBarco(celda_ini, barco){
             celdas[indiceCelda].asignada=true;
             celdas[indiceCelda].barco = barco;
             
-            idCelda = "#"+celdas[indiceCelda].nombre;
+            idCelda = celdas[indiceCelda].id;
             $(idCelda).removeClass("vacia");
-            var nombre_celda_interna = idCelda+" .celda_interna";
-            $(nombre_celda_interna).removeClass('seleccionada');
+            $(idCelda).addClass(orientacion);
+            $(idCelda).addClass(barco.tipo);
             
             if(!celdas[indiceCelda].inicial){
-                $(idCelda).addClass(orientacion + " barco_normal_medio celda_asignada"); 
-            }   
+                $(idCelda).addClass(orientacion + " medio celda_asignada"); 
+            }  
+            
+            var nombre_celda_interna = idCelda + " .celda_interna";
+            $(nombre_celda_interna).removeClass('seleccionada');
+            
         }  
     );
-    
-    
+
     //Procesar última celda
     indiceCelda = celdas.findIndex( e => e.nombre === celdas_barco[barco.tamanio - 1]);
-    $(idCelda).removeClass("barco_normal_medio");
-    $(idCelda).addClass("barco_normal_cola");
+    $(idCelda).removeClass("medio");
+    $(idCelda).addClass("cola");
+    barco.asignado = true;
 }
 
 
 //Borrar marca de selección de las celdas no ocupadas
 function resetCeldas(){
     $(".celda_interna").removeClass('seleccionada');
+    $(".celda_interna").removeClass('seleccion_invalida');
 }
 
 //Ejecución de la página
@@ -341,6 +346,20 @@ $(document).ready(
                     celda_actual = celdas.findIndex(ele => ele.nombre === ID);
                 }
             );
+        
+        //Procedimiento al dar click sobre un barco no asignado en la lista de barcos
+            $(".no_asignado").click(
+                function(){
+                    $(".no_asignado").removeClass("barco_seleccionado");
+                    var numero = $(this).attr('id');
+                    barco_actual = numero;
+                    $(this).addClass("barco_seleccionado");
+                    console.log("lista_barcos:"+numero);
+                    cerrarCuadroUbicarBarcos();
+                    resetCeldas();
+                }
+            );    
+        
         
         //Activación del proceso de selección de celdas para ubicar barcos
             $(".vacia").click(
@@ -367,7 +386,18 @@ $(document).ready(
                 }
             );
         
-        
+        //Colocar barco en el tablero
+            $("#bt_colocar").click(
+                function(){
+                    ubicarBarco(celdas[celda_actual],barcos[barco_actual]);
+                    console.log("ubicarBarco");
+                    listarBarcos();
+                    console.log("listarBarcos");
+                    cerrarCuadroUbicarBarcos();
+                    console.log("cerrarCuadro");
+                    barco_actual++;
+                }
+            );
         
     }
 );

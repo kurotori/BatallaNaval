@@ -8,6 +8,7 @@ body {
     top: 0px;
     left: 0px;
     margin: 0px 0px 0px 0px;
+    background-color: #001f63;
 }
 
 
@@ -99,12 +100,14 @@ a:visited {
 #lista_barcos{
     left: -20px;
     padding-left: 20px;
-    width: 60%;
+    width: 70%;
     list-style-position: inside;
 }
 
 li.barco_seleccionado{
     background-color: white;
+    border-radius: 15px;
+    padding-left: 20px;
 }
 
 #contenedor_tablero{
