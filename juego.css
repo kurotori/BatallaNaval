@@ -132,6 +132,9 @@ li.barco_seleccionado{
 
 #tablero_punta{
     float: left;
+    background-color: blue;
+    width: 38px;
+    height: 38px;
 }
 
 .celda{
@@ -386,26 +389,99 @@ li.barco_seleccionado{
 
 /*Estilos para los barcos*/
 
-.barco_normal_frente.H{
+/*Acorazado*/
+.acorazado.frente.H{
     background-image: url(imagen/barcos/destructor_frente_h.png);
 }
 
-.barco_normal_medio.H{
+.acorazado.medio.H{
     background-image: url(imagen/barcos/destructor_medio_h.png);
 }
 
-.barco_normal_cola.H{
+.acorazado.cola.H{
     background-image: url(imagen/barcos/destructor_cola_h.png);
 }
-
-.barco_normal_frente.V{
+.acorazado.frente.V{
     background-image: url(imagen/barcos/destructor_frente_v.png);
 }
 
-.barco_normal_medio.V{
+.acorazado.medio.V{
     background-image: url(imagen/barcos/destructor_medio_v.png);
 }
 
-.barco_normal_cola.V{
+.acorazado.cola.V{
     background-image: url(imagen/barcos/destructor_cola_v.png);
+}
+
+/*Destructor*/
+
+.destructor.frente.H{
+    background-image: url(imagen/barcos/destructor_frente_h.png);
+}
+
+.destructor.medio.H{
+    background-image: url(imagen/barcos/destructor_medio_h.png);
+}
+
+.destructor.cola.H{
+    background-image: url(imagen/barcos/destructor_cola_h.png);
+}
+.destructor.frente.V{
+    background-image: url(imagen/barcos/destructor_frente_v.png);
+}
+
+.destructor.medio.V{
+    background-image: url(imagen/barcos/destructor_medio_v.png);
+}
+
+.destructor.cola.V{
+    background-image: url(imagen/barcos/destructor_cola_v.png);
+}
+
+/*Escolta*/
+.escolta.frente.H{
+    background-image: url(imagen/barcos/destructor_frente_h.png);
+}
+
+.escolta.medio.H{
+    background-image: url(imagen/barcos/destructor_medio_h.png);
+}
+
+.escolta.cola.H{
+    background-image: url(imagen/barcos/destructor_cola_h.png);
+}
+.escolta.frente.V{
+    background-image: url(imagen/barcos/destructor_frente_v.png);
+}
+
+.escolta.medio.V{
+    background-image: url(imagen/barcos/destructor_medio_v.png);
+}
+
+.escolta.cola.V{
+    background-image: url(imagen/barcos/destructor_cola_v.png);
+}
+
+/*Submarino*/
+.submarino.frente.H{
+    background-image: url(imagen/barcos/submarino-h.png);
+}
+
+.submarino.medio.H{
+    background-image: url(imagen/barcos/submarino-h.png);
+}
+
+.submarino.cola.H{
+    background-image: url(imagen/barcos/submarino-h.png);
+}
+.submarino.frente.V{
+    background-image: url(imagen/barcos/submarino_v.png);
+}
+
+.submarino.medio.V{
+    background-image: url(imagen/barcos/submarino_v.png);
+}
+
+.submarino.cola.V{
+    background-image: url(imagen/barcos/submarino_v.png);
 }

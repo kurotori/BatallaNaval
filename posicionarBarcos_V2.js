@@ -75,6 +75,8 @@ function prepararTablero(tamanio){
     var alt_tablero_final = (dim_celda * num_fil)+38;
     var ancho_tablero_final = (dim_celda * num_col)+38;
     
+    
+    
     $('.tablero').css({'height':alt_tablero_final});
     $('.tablero').css({'width':ancho_tablero_final});
     $('.tablero').css({'top':(alt_ventana - alt_tablero_final)/2});
@@ -280,6 +282,47 @@ function cambiarOrientacion(){
     }
 }
 
+//Ubica el barco en el tablero
+function ubicarBarco(celda_ini, barco){
+    var celdas_barco = marcarBarco(barco.tamanio,orientacion,filas,columnas);
+        
+    //Procesar primera celda
+    var indiceCelda = celdas.findIndex( e => e.nombre === celdas_barco[0]);
+    celdas[indiceCelda].inicial = true;
+    
+    var idCelda = celdas[indiceCelda].id;
+    $(idCelda).addClass(orientacion);
+    $(idCelda).addClass(barco.tipo);
+    $(idCelda).addClass("frente celda_asignada");
+    
+    celdas_barco.forEach(
+        function(ele){
+            //Se ubica la ID de la celda en el array
+            indiceCelda = celdas.findIndex( e => e.nombre === ele);
+            console.log(indiceCelda);
+            
+            celdas[indiceCelda].asignada=true;
+            celdas[indiceCelda].barco = barco;
+            
+            idCelda = "#"+celdas[indiceCelda].nombre;
+            $(idCelda).removeClass("vacia");
+            var nombre_celda_interna = idCelda+" .celda_interna";
+            $(nombre_celda_interna).removeClass('seleccionada');
+            
+            if(!celdas[indiceCelda].inicial){
+                $(idCelda).addClass(orientacion + " barco_normal_medio celda_asignada"); 
+            }   
+        }  
+    );
+    
+    
+    //Procesar última celda
+    indiceCelda = celdas.findIndex( e => e.nombre === celdas_barco[barco.tamanio - 1]);
+    $(idCelda).removeClass("barco_normal_medio");
+    $(idCelda).addClass("barco_normal_cola");
+}
+
+
 //Borrar marca de selección de las celdas no ocupadas
 function resetCeldas(){
     $(".celda_interna").removeClass('seleccionada');
@@ -308,7 +351,7 @@ $(document).ready(
                 }
             );
         
-            //Cerrar ventana de ubiación de barcos
+        //Cerrar ventana de ubicación de barcos
             $(".cerrar").click(
                 function(){
                     cerrarCuadroUbicarBarcos();
@@ -323,6 +366,8 @@ $(document).ready(
                     marcarBarco(barcos[barco_actual].tamanio,orientacion,filas,columnas);
                 }
             );
+        
+        
         
     }
 );
