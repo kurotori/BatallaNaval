@@ -224,7 +224,6 @@ function marcarBarco(tamanioBarco, orientacion, filas, columnas){
 function colocarBarco(celda_ini, barco){
     var celdas_barco = marcarBarco(barco.tamanio,orientacion,filas,columnas);
         
-    
     //Procesar primera celda
     var indiceCelda = celdas.findIndex( e => e.nombre === celdas_barco[0]);
     celdas[indiceCelda].inicial = true;

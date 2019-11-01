@@ -3,6 +3,10 @@
 
 //Variables 
 
+//Letras para identificación de columnas
+var letras = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
+
+
 //Listado de barcos disponibles
 var barcos = [];
 //Estructura de un barco: 
@@ -29,6 +33,12 @@ var celdas = [];
 //a la posición de la celda seleccionada en cada click
 var celda_actual=0;
 
+//Orientación actual
+var orientacion = "H"
+
+//Establece si se puede o no ubicar un barco en un tablero
+var permitirUbicar = true;
+
 //Analiza la ventana y obtiene la dimension adecuada para las celdas, 
 // luego crea la colección de barcos para el tablero
 function prepararTablero(tamanio){
@@ -48,7 +58,6 @@ function prepararTablero(tamanio){
             break;
     }
     
-    //REDUCIR ESTE CÓDIGO
     //Se obtiene el tamaño en pixeles del objeto contenedor
     var alt_ventana=$('#contenedor_tablero').height();
     var ancho_ventana = $('#contenedor_tablero').width();
@@ -169,10 +178,14 @@ function inicializarTodo(tamanio){
 //Muestra en pantalla las celdas que ocuparía el barco a partir de la celda inicial.
 //También genera un array con esas celdas.
 function marcarBarco(tamanioBarco, orientacion, filas, columnas){
+    //Se asume que las celdas pueden ser válidas y se re-establece el valor de 
+    //la variable permitirUbicar a 'true'
+    permitirUbicar = true;
+    
     var celdasBarco = [];
     //Los barcos se definen desde un extremo, o sea, la celda seleccionada
     // es uno de los extremos del barco
-    var letras = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
+    
     
     //Identificación de la celda seleccionada
     var idCelda = celdas[celda_actual].id;
@@ -217,27 +230,60 @@ function marcarBarco(tamanioBarco, orientacion, filas, columnas){
             }
 
         }
-
-        var c = celdasBarco.findIndex(ele => $("#"+ele).hasClass("celda_asignada"));
-        console.log("----"+c);
         
+        //Asignar propiedad de seleccionadas a las celdas del barco
         celdasBarco.forEach(
             function(ele){
-                //console.log(ele);
+                console.log("CeldasBarco: "+ele);
+                
                 var nombre_celda = "#"+ele;
                 var nombre_celda_interna = "#"+ele+" .celda_interna";
+                var indexCelda = celdas.findIndex(ele2 => ele2.nombre==ele);
                 
-                if($(nombre_celda).hasClass())
-                
+                if(!celdas[indexCelda].asignada){
                     $(nombre_celda_interna).addClass('seleccionada');
+                }
+                else{
+                    permitirUbicar = false;
+                    $(nombre_celda_interna).addClass('seleccion_invalida');
+                }               
             }
         );
     }
-    
-    
     return celdasBarco;
 }
 
+//Mostrar el menú de posicionamiento y rotación del barco
+function mostrarMenuBarco(){
+    var celda = celdas[celda_actual];
+    var pos_x = $(celda.id).offset();
+    
+    $("#caja_ubicar_barco").show();
+    $("#caja_ubicar_barco").css({
+        "top":(pos_x.top + $(celda.id).height() + 10),
+        "left":(pos_x.left + $(celda.id).width())
+    });
+}
+
+//Cerrar el menú de posicionamiento y rotación del barco
+function cerrarCuadroUbicarBarcos(){
+    $("#caja_ubicar_barco").hide();
+}
+
+//Cambiar orientación aplicada a los barcos
+function cambiarOrientacion(){
+    if(orientacion == "H"){
+        orientacion = "V";
+    }
+    else{
+        orientacion = "H";
+    }
+}
+
+//Borrar marca de selección de las celdas no ocupadas
+function resetCeldas(){
+    $(".celda_interna").removeClass('seleccionada');
+}
 
 //Ejecución de la página
 $(document).ready(
@@ -253,6 +299,30 @@ $(document).ready(
                 }
             );
         
+        //Activación del proceso de selección de celdas para ubicar barcos
+            $(".vacia").click(
+                function(){
+                    resetCeldas();
+                    marcarBarco(barcos[barco_actual].tamanio,orientacion,filas,columnas);
+                    mostrarMenuBarco();
+                }
+            );
+        
+            //Cerrar ventana de ubiación de barcos
+            $(".cerrar").click(
+                function(){
+                    cerrarCuadroUbicarBarcos();
+                }
+            );
+        
+        //Rotar orientación y celdas pre-seleccionadas
+            $("#bt_rotar").click(
+                function(){
+                    cambiarOrientacion();
+                    resetCeldas();
+                    marcarBarco(barcos[barco_actual].tamanio,orientacion,filas,columnas);
+                }
+            );
         
     }
 );

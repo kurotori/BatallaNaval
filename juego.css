@@ -306,6 +306,14 @@ li.barco_seleccionado{
     border-color: black;
     border-radius: 20px;
 }
+
+.seleccion_invalida{
+    border-style: solid;
+    border-width:3px;
+    border-color: red;
+    border-radius: 20px;
+}
+
 .cerrar{
     cursor: pointer;
     position: relative;
