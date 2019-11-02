@@ -1,7 +1,7 @@
 
 body {
-    font-family: 'Permanent Marker', cursive;
-    /*font-family: Helvetica;*/
+    /*font-family: 'Permanent Marker', cursive;*/
+    font-family: Helvetica;
     position: fixed;
     width: 100%;
     height: 100%;
@@ -38,15 +38,17 @@ a:visited {
 #panel_lat{
     position: fixed;
     width: 22%;
-    height: 93%;
+    height: 75%;
     left: 0px;
-    top: 10px;
-    background-color: #99F;
+    top: 15%;
+    background-color: #fcbb65;
     border-radius: 0px 20px 20px 0px;
-    
+    box-shadow: 5px 5px 5px black;
 }
 
 #panel_lat_titulo{
+    padding-top: 10px;
+    font-family: 'Acme', sans-serif;
     position: relative;
     float: left;
     width: calc(100% - 24px);
@@ -54,11 +56,13 @@ a:visited {
     z-index: 10;
     text-align: center;
     font-size: 25px;
-    color: white;
-    background-color: #33A;
+    color: #001f63;
+    background-color: #e08e09;
 }
 
 #panel_lat_contenido{
+    font-family: 'Yanone Kaffeesatz', sans-serif;
+    font-weight: bold;
     position: absolute;
     width: calc(100% - 34px);
     z-index: 10;
@@ -72,9 +76,9 @@ a:visited {
     float: left;
     width: 40px;
     height: 100%;
-    top: -40px;
+    top: -50px;
     left: calc(100% - 40px);
-    background-color: #33A;
+    background-color: #e08e09;
     border-radius: 20px;
    /*  border-style:solid;
     border-width: 1px;
@@ -89,7 +93,8 @@ a:visited {
 
 #panel_lat_contenido .asignado{
     font-style: italic;
-    color: white;
+    font-weight: 100;
+    color: #001f63;
 }
 
 #panel_lat_contenido .asignado::after{
@@ -250,6 +255,34 @@ li.barco_seleccionado{
     background-repeat: no-repeat;
 }
 
+#bt_guardar_mapa{
+    color: #edba68;
+    text-align: center;
+    font-size: 20px;
+    position: relative;
+    float: left;
+    left: 20px;
+    width: 100px;
+    padding-top: 10px;
+    width: 100px;
+    height: 30px;
+    background-color: #001f63;
+}
+
+#bt_limpiar_mapa{
+    color: #edba68;
+    text-align: center;
+    font-size: 20px;
+    position: relative;
+    float: left;
+    left: 22px;
+    margin-left: 10px;
+    padding-top: 10px;
+    width: 100px;
+    height: 30px;
+    background-color: #001f63;
+}
+
 #caja_gatillo{
     display: none;
     position: fixed;
@@ -355,23 +388,24 @@ li.barco_seleccionado{
 
 /* Tooltip text */
 .tooltip .tooltiptext {
-  visibility: hidden;
-  width: 70px;
-  background-color: #87dbfa;
-  color: #000;
+    visibility: hidden;
+    width: 90px;
+    background-color: #87dbfa;
+    color: #000;
     font-family: Helvetica;
     font-size: 12px;
-  text-align: center;
-  padding: 5px 0;
-  border-radius: 6px;
+    font-weight: bold;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px;
     box-shadow: 2px 2px 2px black;
  
   /* Position the tooltip text - see examples below! */
     top: 130%;
-  left: 50%;
-  margin-left: -35px;
-  position: absolute;
-  z-index: 1;
+    left: 50%;
+    margin-left: -45px;
+    position: absolute;
+    z-index: 1;
 }
 
 /* Show the tooltip text when you mouse over the tooltip container */
@@ -388,6 +422,58 @@ li.barco_seleccionado{
   border-width: 5px;
   border-style: solid;
   border-color: transparent transparent #87dbfa transparent;
+}
+
+/*Fondo para avisos importantes y cuadro de mensajes*/
+#cuadro_fondo{
+    position: fixed;
+    display: none;
+    width: 100%;
+    height: 100%;
+    z-index: 100;
+    background-image: url(imagen/fondo_opaco_negro_75.png);
+}
+
+.dialogo_mensaje{
+    font-family: 'Yanone Kaffeesatz', sans-serif;
+    position: relative;
+    left: calc(50% - 125px);
+    top: calc(50% - 50px);
+    width: 300px;
+    height: 120px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #e08e09;
+    border-radius: 20px;
+    background-color:#fcbb65 ;
+    z-index: 101;
+}
+
+.dialogo_mensaje_txt{
+    position: relative;
+    display: block;
+    width: 100%;
+    top: 20px;
+    font-weight: bold;
+    font-size: 22px;
+    text-align: center;
+}
+
+.dialogo_mensaje .boton{
+    position: relative;
+    font-weight: bold;
+    font-size: 22px;
+    float: left;
+    top: 30px;
+    left:80px;
+    margin-left: 10px;
+    width: 50px;
+    text-align: center;
+    padding-top: 5px;
+    border: #e08e09 1px solid;
+    border-radius: 10px;
+    color: #edba68;
+    background-color: #001f63;
 }
 
 /*Estilos para los barcos*/

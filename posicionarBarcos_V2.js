@@ -369,6 +369,29 @@ function siguienteBarco(){
     return sig_barco;
 }
 
+//Limpiar todos los barcos de la pantalla y resetear las listas de celdas y barcos
+function limpiarMapa(){
+    celdas.forEach(
+        function(celda){
+            celda.asignada=false;
+            celda.barco=null;
+            celda.inicial=false;
+            $(celda.id).removeClass();
+            $(celda.id).addClass("celda vacia");
+            
+        }
+    );
+    barcos.forEach(
+        function(barco){
+            barco.asignado=false;
+        }
+    );
+    actualizarListaBarcos();
+    siguienteBarco();
+    marcarBarcoActualEnLista();
+}
+
+
 //Borrar marca de selección de las celdas no ocupadas
 function resetCeldas(){
     $(".celda_interna").removeClass('seleccionada');
@@ -445,5 +468,23 @@ $(document).ready(
                 }
             );
         
+        //Limpiar y reiniciar el mapa
+            $("#bt_limpiar_mapa").click(
+                function(){
+                    $("#cuadro_fondo").show();
+                    $(".dialogo_mensaje_txt").html("¿Deseas quitar todos los barcos de la pantalla?");
+                    $("#bt_dialogo_si").click(
+                        function(){
+                            limpiarMapa();
+                            $("#cuadro_fondo").hide();
+                        }
+                    );
+                    $("#bt_dialogo_no").click(
+                        function(){
+                            $("#cuadro_fondo").hide();
+                        }
+                    );
+                }
+            );
     }
 );

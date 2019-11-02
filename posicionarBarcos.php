@@ -10,12 +10,25 @@
         <meta http-equiv='Content-type' content='text/html;charset=UTF-8'>
 		<link rel="stylesheet" href="juego.css">
         <link rel="stylesheet" href="jquery-ui/jquery-ui.css">
+        
         <link href="https://fonts.googleapis.com/css?family=Permanent+Marker&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Acme&display=swap" rel="stylesheet">
+
+        
 		<script type='text/javascript' src='jquery.js'></script>
 		<script type='text/javascript' src='posicionarBarcos_V2.js'></script>
         <script type="text/javascript" src="jquery-ui/jquery-ui.js"></script>
     </head>
     <body>
+        <div id="cuadro_fondo">
+            <div class="dialogo_mensaje">
+                <span class="dialogo_mensaje_txt">¿ALGO ALGO ALGO ALGO ALGO ALGO?</span>
+                <div id="bt_dialogo_si" class="boton">SI</div>
+                <div id="bt_dialogo_no" class="boton">NO</div>
+            </div>
+        </div>
+        
         <div id="contenedor_tablero">
             
             <?php
@@ -25,10 +38,17 @@
         </div>
         
         <div id="panel_lat">
-            <div id="panel_lat_titulo">Barcos Disponibles:</div>
+            <div id="panel_lat_titulo">BARCOS DISPONIBLES:</div>
             <div id="panel_lat_contenido">
                 <ol id="lista_barcos"></ol>
-                <div id="bt_guardar_barcos" class="boton inactivo"></div>
+                <div id="bt_guardar_mapa" class="boton inactivo tooltip">
+                    Guardar Mapa
+                    <span class="tooltiptext">Guardar el mapa y continuar</span>
+                </div>
+                <div id="bt_limpiar_mapa" class="boton inactivo tooltip">
+                    Limpiar Mapa
+                    <span class="tooltiptext">Limpiar el mapa de todos los barcos</span>
+                </div>
             </div>
             <div id="panel_lat_btn"></div>
         </div>

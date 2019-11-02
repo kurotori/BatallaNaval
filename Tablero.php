@@ -49,7 +49,7 @@
                     $etiq_c = $letras[($x)]; //etiquetas para las columnas
                     //Celdas comunes
                     if( $x != ($dim_x - 1) && $y != ($dim_y - 1) ){
-                        echo "<div id='$etiq_c-$etiq_f' class='celda vacia $tamanio'>";
+                        echo "<div id='$etiq_c-$etiq_f' class='celda vacia'>";
                         echo "<div class='celda_interna'></div>";
                         echo "</div>"; 
                     }
