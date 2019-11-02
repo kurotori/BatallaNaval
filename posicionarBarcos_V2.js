@@ -39,6 +39,9 @@ var orientacion = "H"
 //Establece si se puede o no ubicar un barco en un tablero
 var permitirUbicar = true;
 
+//Establece si se completo el posicionamiento y se puede continuar al siguiente paso del juego.
+var permitirSeguir = false;
+
 //Analiza la ventana y obtiene la dimension adecuada para las celdas, 
 // luego crea la colección de barcos para el tablero
 function prepararTablero(tamanio){
@@ -138,26 +141,49 @@ function crearFlota(tamanio){
 }
 
 //Listar los barcos generados en el panel lateral.
-//Se debe llamar cada vez que un barco es ubicado en el tablero
-function listarBarcos(){
+function crearListaBarcos(){
     //Resetear el contenido del panel
-    $("#panel_lat_contenido>#lista_barcos").html(null);
+    //$("#panel_lat_contenido>#lista_barcos").html(null);
     //Anális de cada barco de la lista
     barcos.forEach(
-        function(ele){            
-            var cont=$("#panel_lat_contenido>#lista_barcos").html();
-            var tipo = "<li id='"+(barcos.indexOf(ele))+"'";
-            
-            if(ele.asignado){
-                tipo = tipo + " class='asignado'>";
-            }
-            else{
-                tipo = tipo + " class='no_asignado'>";
-            }
+        function(ele){
+            var cont=$("#lista_barcos").html();
+            var tipo = "<li id='B_"+(barcos.indexOf(ele))+"' class='no_asignado'>";
             
             $("#panel_lat_contenido>#lista_barcos").html(cont + tipo +ele.tipo+"</li>");
         }
     );
+}
+
+//Actualizar la lista de barcos en el panel lateral.
+//Se debe llamar cada vez que un barco es ubicado en el tablero
+function actualizarListaBarcos(){
+    barcos.forEach(
+        function(ele){
+            
+            var item_barco_id = "#B_"+(barcos.indexOf(ele));
+            console.log(item_barco_id);
+            $(item_barco_id).removeClass("barco_seleccionado");
+            
+            if(ele.asignado){
+                $(item_barco_id).removeClass("no_asignado");
+                $(item_barco_id).addClass("asignado");
+            }
+            else{
+                $(item_barco_id).removeClass("asignado");
+                $(item_barco_id).addClass("no_asignado");
+            }
+        }
+    );
+}
+
+//Marcar el barco actual en la lista lateral
+function marcarBarcoActualEnLista(){
+    var item_barco_id = "#B_"+(barcos.indexOf(barcos[barco_actual]));
+    if(!$(item_barco_id).hasClass("asignado"))
+    {
+        $(item_barco_id).addClass("barco_seleccionado");
+    }
 }
 
 
@@ -170,8 +196,9 @@ function inicializarTodo(tamanio){
     //Creación de la flota de barcos para el tablero
     crearFlota(tamanio);
     //Listar los barcos
-    listarBarcos();
+    crearListaBarcos();
     barco_actual = 0;
+    marcarBarcoActualEnLista();
 }
 
 //Funciones de posicionamiento de barcos
@@ -236,7 +263,7 @@ function marcarBarco(tamanioBarco, orientacion, filas, columnas){
         //Asignar propiedad de seleccionadas a las celdas del barco
         celdasBarco.forEach(
             function(ele){
-                console.log("CeldasBarco: "+ele);
+                //console.log("CeldasBarco: "+ele);
                 
                 var nombre_celda = "#"+ele;
                 var nombre_celda_interna = "#"+ele+" .celda_interna";
@@ -299,7 +326,7 @@ function ubicarBarco(celda_ini, barco){
         function(ele){
             //Se ubica la ID de la celda en el array
             indiceCelda = celdas.findIndex( e => e.nombre === ele);
-            console.log(indiceCelda);
+            //console.log(indiceCelda);
             
             celdas[indiceCelda].asignada=true;
             celdas[indiceCelda].barco = barco;
@@ -326,6 +353,21 @@ function ubicarBarco(celda_ini, barco){
     barco.asignado = true;
 }
 
+//Aumenta el número del valor barco_actual de forma que no supere la cantidad de barcos
+//máxima de la flota. 
+function siguienteBarco(){
+    var sig_barco = barcos.findIndex(e => e.asignado==false);
+    
+    if(sig_barco>=0){
+        barco_actual=sig_barco;
+    }
+    else{
+        barco_actual = barcos.length;
+        permitirUbicar = false;
+        permitirSeguir = true;
+    }
+    return sig_barco;
+}
 
 //Borrar marca de selección de las celdas no ocupadas
 function resetCeldas(){
@@ -350,11 +392,15 @@ $(document).ready(
         //Procedimiento al dar click sobre un barco no asignado en la lista de barcos
             $(".no_asignado").click(
                 function(){
+                    //$(".asignado").removeClass("barco_seleccionado");
                     $(".no_asignado").removeClass("barco_seleccionado");
-                    var numero = $(this).attr('id');
-                    barco_actual = numero;
-                    $(this).addClass("barco_seleccionado");
-                    console.log("lista_barcos:"+numero);
+                    
+                    var numero = $(this).attr('id').split("_")[1];
+                    if(!$(this).hasClass("asignado")){
+                        $(this).addClass("barco_seleccionado");
+                        barco_actual = numero;
+                    }
+                    
                     cerrarCuadroUbicarBarcos();
                     resetCeldas();
                 }
@@ -389,13 +435,13 @@ $(document).ready(
         //Colocar barco en el tablero
             $("#bt_colocar").click(
                 function(){
-                    ubicarBarco(celdas[celda_actual],barcos[barco_actual]);
-                    console.log("ubicarBarco");
-                    listarBarcos();
-                    console.log("listarBarcos");
-                    cerrarCuadroUbicarBarcos();
-                    console.log("cerrarCuadro");
-                    barco_actual++;
+                    if(permitirUbicar){
+                        ubicarBarco(celdas[celda_actual],barcos[barco_actual]);
+                        actualizarListaBarcos();
+                        cerrarCuadroUbicarBarcos();
+                        barco_actual++;
+                        marcarBarcoActualEnLista();
+                    }
                 }
             );
         

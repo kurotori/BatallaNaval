@@ -98,9 +98,9 @@ a:visited {
 }
 
 #lista_barcos{
-    left: -20px;
+    left: -30px;
     padding-left: 20px;
-    width: 70%;
+    width: 80%;
     list-style-position: inside;
 }
 

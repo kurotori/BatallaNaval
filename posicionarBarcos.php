@@ -28,6 +28,7 @@
             <div id="panel_lat_titulo">Barcos Disponibles:</div>
             <div id="panel_lat_contenido">
                 <ol id="lista_barcos"></ol>
+                <div id="bt_guardar_barcos" class="boton inactivo"></div>
             </div>
             <div id="panel_lat_btn"></div>
         </div>
