@@ -386,10 +386,14 @@ function limpiarMapa(){
             barco.asignado=false;
         }
     );
+    permitirSeguir = false;
     actualizarListaBarcos();
     siguienteBarco();
     marcarBarcoActualEnLista();
 }
+
+
+//Guardar los barcos, cargar los datos en el formulario y enviarlos al servidor
 
 
 //Borrar marca de selección de las celdas no ocupadas
@@ -462,7 +466,7 @@ $(document).ready(
                         ubicarBarco(celdas[celda_actual],barcos[barco_actual]);
                         actualizarListaBarcos();
                         cerrarCuadroUbicarBarcos();
-                        barco_actual++;
+                        siguienteBarco();
                         marcarBarcoActualEnLista();
                     }
                 }

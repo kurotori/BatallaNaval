@@ -123,6 +123,7 @@ li.barco_seleccionado{
     top: 15%;
 }
 .tablero{
+    font-family: 'Acme', sans-serif;
     position: absolute;
     top:5px;
     /*margin-left: 20%;
@@ -573,4 +574,15 @@ li.barco_seleccionado{
 
 .submarino.cola.V{
     background-image: url(imagen/barcos/submarino_v.png);
+}
+
+/*Formularios de envío de datos*/
+#formulario_enviar{
+    position: fixed;
+    top: auto;
+    bottom: 0px;
+}
+
+#lista_barcos_enviar{
+    width: 400px;
 }

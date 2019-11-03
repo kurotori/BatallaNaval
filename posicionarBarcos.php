@@ -64,5 +64,13 @@
                 </div>
             </div>
         </div>
+        
+        <div id="formulario_enviar">
+            <form>
+                <input type="text" name="lista_barcos_enviar" id="lista_barcos_enviar">
+            </form>
+        </div>
+        
+        
     </body>
 </html>
