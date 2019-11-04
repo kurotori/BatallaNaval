@@ -22,17 +22,24 @@
     </head>
     <body>
         <div id="cuadro_fondo">
-            <div class="dialogo_mensaje">
+            
+            <div class="dialogo_mensaje" id="dialogo_pregunta">
                 <span class="dialogo_mensaje_txt">¿ALGO ALGO ALGO ALGO ALGO ALGO?</span>
                 <div id="bt_dialogo_si" class="boton">SI</div>
                 <div id="bt_dialogo_no" class="boton">NO</div>
             </div>
+            
+            <div class="dialogo_mensaje" id="dialogo_error">
+                <span class="dialogo_mensaje_txt">¿ALGO ALGO ALGO ALGO ALGO ALGO?</span>
+                <div id="bt_dialogo_aceptar" class="boton">ACEPTAR</div>
+            </div>
+            
         </div>
         
         <div id="contenedor_tablero">
             
             <?php
-            crearTablero("med");
+            crearTablero("max");
             ?>
             
         </div>
@@ -41,11 +48,11 @@
             <div id="panel_lat_titulo">BARCOS DISPONIBLES:</div>
             <div id="panel_lat_contenido">
                 <ol id="lista_barcos"></ol>
-                <div id="bt_guardar_mapa" class="boton inactivo tooltip">
+                <div id="bt_guardar_mapa" class="boton tooltip">
                     Guardar Mapa
                     <span class="tooltiptext">Guardar el mapa y continuar</span>
                 </div>
-                <div id="bt_limpiar_mapa" class="boton inactivo tooltip">
+                <div id="bt_limpiar_mapa" class="boton tooltip">
                     Limpiar Mapa
                     <span class="tooltiptext">Limpiar el mapa de todos los barcos</span>
                 </div>

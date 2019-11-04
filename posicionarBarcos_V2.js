@@ -10,7 +10,7 @@ var letras = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q
 //Listado de barcos disponibles
 var barcos = [];
 //Estructura de un barco: 
-//barco={tipo:String, tamanio:Int, asignado:bool}
+//barco={tipo:String, tamanio:Int, asignado:bool, celdas: Object}
 
 //El barco actual, debe apuntar a una posición de la lista de barcos.
 //Al inicializarse la lista de barcos, se debe actualizar este valor
@@ -27,7 +27,7 @@ var filas = 0;
 //Listado de las celdas de la grilla. Se rellena con la función 'inicializarCeldas()'
 var celdas = [];
 //Estructura de una celda:
-//celda={nombre:String, id:String, asignada:bool, barco:Object, inicial:bool }
+//celda={nombre:String, id:String, asignada:bool, inicial:bool }
 
 //La celda seleccionada por el usuario. Debe actualizarse para que apunte
 //a la posición de la celda seleccionada en cada click
@@ -98,7 +98,7 @@ function inicializarCeldas(){
             celdas[celdas.length] = {nombre:$(this).attr('id'),
                                      id:"#"+$(this).attr('id'),
                                      asignada:false,
-                                     barco:null,
+                                     //barco:null,
                                      inicial:false
                                     };
         }
@@ -110,31 +110,31 @@ function crearFlota(tamanio){
     switch(tamanio){
         case "min":
             barcos=[
-                {tipo:"destructor", tamanio:3, asignado:false},
-                {tipo:"escolta", tamanio:2, asignado:false},
-                {tipo:"escolta", tamanio:2, asignado:false},
-                {tipo:"submarino", tamanio:1, asignado:false}
+                {tipo:"destructor", tamanio:3, asignado:false, celdas:[]},
+                {tipo:"escolta", tamanio:2, asignado:false, celdas:[]},
+                {tipo:"escolta", tamanio:2, asignado:false, celdas:[]},
+                {tipo:"submarino", tamanio:1, asignado:false, celdas:[]}
             ];
             break;
         case "med":
             barcos=[
-                {tipo:"acorazado", tamanio:4, asignado:false},
-                {tipo:"destructor", tamanio:3, asignado:false},
-                {tipo:"escolta", tamanio:2, asignado:false},
-                {tipo:"escolta", tamanio:2, asignado:false},
-                {tipo:"submarino", tamanio:1, asignado:false},
-                {tipo:"submarino", tamanio:1, asignado:false}
+                {tipo:"acorazado", tamanio:4, asignado:false, celdas:[]},
+                {tipo:"destructor", tamanio:3, asignado:false, celdas:[]},
+                {tipo:"escolta", tamanio:2, asignado:false, celdas:[]},
+                {tipo:"escolta", tamanio:2, asignado:false, celdas:[]},
+                {tipo:"submarino", tamanio:1, asignado:false, celdas:[]},
+                {tipo:"submarino", tamanio:1, asignado:false, celdas:[]}
             ];
             break;
         case "max":
             barcos=[
-                {tipo:"acorazado", tamanio:4, asignado:false},
-                {tipo:"destructor", tamanio:3, asignado:false},
-                {tipo:"destructor", tamanio:3, asignado:false},
-                {tipo:"escolta", tamanio:2, asignado:false},
-                {tipo:"escolta", tamanio:2, asignado:false},
-                {tipo:"submarino", tamanio:1, asignado:false},
-                {tipo:"submarino", tamanio:1, asignado:false}
+                {tipo:"acorazado", tamanio:4, asignado:false, celdas:[]},
+                {tipo:"destructor", tamanio:3, asignado:false, celdas:[]},
+                {tipo:"destructor", tamanio:3, asignado:false, celdas:[]},
+                {tipo:"escolta", tamanio:2, asignado:false, celdas:[]},
+                {tipo:"escolta", tamanio:2, asignado:false, celdas:[]},
+                {tipo:"submarino", tamanio:1, asignado:false, celdas:[]},
+                {tipo:"submarino", tamanio:1, asignado:false, celdas:[]}
             ];
             break;
     }
@@ -329,7 +329,8 @@ function ubicarBarco(celda_ini, barco){
             //console.log(indiceCelda);
             
             celdas[indiceCelda].asignada=true;
-            celdas[indiceCelda].barco = barco;
+            barco.celdas.push(celdas[indiceCelda]);
+            //celdas[indiceCelda].barco = barco;
             
             idCelda = celdas[indiceCelda].id;
             $(idCelda).removeClass("vacia");
@@ -394,7 +395,26 @@ function limpiarMapa(){
 
 
 //Guardar los barcos, cargar los datos en el formulario y enviarlos al servidor
-
+function guardarBarcos(){
+    var listadoBarcos="";
+    barcos.forEach(
+        function(b){
+            var tipo_barco=b.tipo;
+            var celdas_barco=""; 
+            b.celdas.forEach(
+                function(c){
+                    celdas_barco = celdas_barco + "," + c.nombre;
+                }
+            ); //c => ","+c)).slice(1,);
+            celdas_barco=celdas_barco.slice(1,);
+            listadoBarcos = listadoBarcos + "_" + tipo_barco+":"+celdas_barco;
+        }
+        
+    );
+    listadoBarcos = listadoBarcos.slice(1,);
+    $("#lista_barcos_enviar").val(listadoBarcos);
+    //console.log(listadoBarcos);
+}
 
 //Borrar marca de selección de las celdas no ocupadas
 function resetCeldas(){
@@ -402,6 +422,7 @@ function resetCeldas(){
     $(".celda_interna").removeClass('seleccion_invalida');
 }
 
+//--------------------------INICIO DEL CÓDIGO DE EJECUCIÓN-------------------------------
 //Ejecución de la página
 $(document).ready(
     function(){
@@ -435,11 +456,13 @@ $(document).ready(
         
         
         //Activación del proceso de selección de celdas para ubicar barcos
-            $(".vacia").click(
+            $(".celda").click(
                 function(){
-                    resetCeldas();
-                    marcarBarco(barcos[barco_actual].tamanio,orientacion,filas,columnas);
-                    mostrarMenuBarco();
+                    if($(this).hasClass("vacia")){
+                        resetCeldas();
+                        marcarBarco(barcos[barco_actual].tamanio,orientacion,filas,columnas);
+                        mostrarMenuBarco();
+                    }
                 }
             );
         
@@ -476,19 +499,63 @@ $(document).ready(
             $("#bt_limpiar_mapa").click(
                 function(){
                     $("#cuadro_fondo").show();
+                    $("#dialogo_pregunta").show();
                     $(".dialogo_mensaje_txt").html("¿Deseas quitar todos los barcos de la pantalla?");
+                    
                     $("#bt_dialogo_si").click(
                         function(){
                             limpiarMapa();
                             $("#cuadro_fondo").hide();
+                            $("#dialogo_pregunta").hide();
                         }
                     );
                     $("#bt_dialogo_no").click(
                         function(){
                             $("#cuadro_fondo").hide();
+                            $("#dialogo_pregunta").hide();
                         }
                     );
                 }
             );
+        
+        //Enviar los datos del mapa
+        $("#bt_guardar_mapa").click(
+            function(){
+                if(permitirSeguir){
+                    $("#cuadro_fondo").show();
+                    $("#dialogo_pregunta").show();
+                    $(".dialogo_mensaje_txt").html("¿Guardar la posición de los barcos<br>y comenzar la partida?");
+                    
+                    $("#bt_dialogo_si").click(
+                        function(){
+                            $("#cuadro_fondo").hide();
+                            $("#dialogo_pregunta").hide();
+                            guardarBarcos();
+                        }
+                    );
+                    $("#bt_dialogo_no").click(
+                        function(){
+                            $("#cuadro_fondo").hide();
+                            $("#dialogo_pregunta").hide();
+                        }
+                    );
+                }
+                else{
+                    $("#cuadro_fondo").show();
+                    $("#dialogo_error").show();
+                    $(".dialogo_mensaje_txt").html("No se puede continuar.<br>Faltan barcos por ubicar en la pantalla");
+                    
+                    $("#bt_dialogo_aceptar").click(
+                        function(){
+                            $("#cuadro_fondo").hide();
+                            $("#dialogo_error").hide();
+                        }
+                    );
+                    
+                }
+            }
+        );
+
+//--------------------------FIN DEL CÓDIGO DE EJECUCIÓN-------------------------------
     }
 );
