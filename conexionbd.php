@@ -1,5 +1,5 @@
 <?php
-//    include_once "datosbd.php";
+include_once "datosbd.php";
 //    
 //    $conexion = mysqli_connect($servidor,$usuario,$contraseña,$bdd);
 //
@@ -17,7 +17,7 @@
             echo "Error de Conexion: ".mysqli_connect_error();
         }
         else{
-            //echo "Conexión Existosa";
+            echo "Conexión Existosa";
             return $conexion;
         }
     }

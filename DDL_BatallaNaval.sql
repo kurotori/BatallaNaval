@@ -1,3 +1,8 @@
+
+
+create user "batallanaval"@"localhost" identified by "batallanaval";
+grant insert,select,update,delete on batallanaval.* to "batallanaval"@"localhost";
+
 create schema batallanaval;
 use batallanaval;
 
@@ -26,7 +31,7 @@ create table barco(
 
 create table celda(
  ID int(9) unsigned unique not null auto_increment primary key,
- alcanzada enum("si","no") default "no";
+ alcanzada enum("si","no") default "no",
  nombre varchar(4) not null
  );
  
@@ -111,4 +116,16 @@ references celda(ID)
 on update cascade
 on delete cascade;
 
+alter table ubica
+add constraint fk_usuario_ubica
+foreign key (usuario_ID)
+references usuario(ID)
+on update cascade
+on delete cascade;
 
+alter table ubica
+add constraint fk_ubica_barco
+foreign key (barco_ID)
+references barco(ID)
+on update cascade
+on delete cascade;

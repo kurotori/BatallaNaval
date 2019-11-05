@@ -1,5 +1,5 @@
 <?php
-
+    include_once "datosbd.php";
     include_once "conexionbd.php";
     include_once "Tablero.php";
     
@@ -21,6 +21,9 @@
         <script type="text/javascript" src="jquery-ui/jquery-ui.js"></script>
     </head>
     <body>
+        <?php
+        CrearConexion($servidor,$usuario,$contraseña,$bdd);
+        ?>
         <div id="cuadro_fondo">
             
             <div class="dialogo_mensaje" id="dialogo_pregunta">

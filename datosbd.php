@@ -1,6 +1,6 @@
 <?php
     $servidor="localhost";
     $usuario="batallanaval";
-    $contraseña="batalla";
+    $contraseña="batallanaval";
     $bdd="batallanaval";
 ?>
