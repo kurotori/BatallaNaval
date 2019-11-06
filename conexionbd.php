@@ -17,7 +17,7 @@ include_once "datosbd.php";
             echo "Error de Conexion: ".mysqli_connect_error();
         }
         else{
-            echo "Conexión Existosa";
+            echo "Conexión Exitosa";
             return $conexion;
         }
     }

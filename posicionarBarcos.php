@@ -3,6 +3,8 @@
     include_once "conexionbd.php";
     include_once "Tablero.php";
     
+    $tamanio = $_POST["tamanio"];
+    
 
 ?>
 <html>
@@ -42,7 +44,7 @@
         <div id="contenedor_tablero">
             
             <?php
-            crearTablero("min");
+            crearTablero($tamanio);
             ?>
             
         </div>
