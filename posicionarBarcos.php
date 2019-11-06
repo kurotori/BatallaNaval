@@ -7,8 +7,9 @@
         $tamanio = validarDatos($_POST["tamanio"]);
         $nombre = validarDatos($_POST["nombre"]);
     }
+    //echo "$tamanio - $nombre";
     $conexion = CrearConexion($servidorBN,$usuarioBN,$contraseñaBN,$bddBN);
-    crearPartida($conexion,$nombre,$tamanio);
+    $num_partida = crearPartida($conexion,$nombre,$tamanio);
 
 ?>
 <html>
@@ -16,7 +17,9 @@
         <meta http-equiv='Content-type' content='text/html;charset=UTF-8'>
 		<link rel="stylesheet" href="juego.css">
         <link rel="stylesheet" href="jquery-ui/jquery-ui.css">
-        
+        <title>
+            <?php echo "Batalla Naval - Partida #$num_partida: '$nombre'"; ?>
+        </title>
         <link href="https://fonts.googleapis.com/css?family=Permanent+Marker&display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz&display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Acme&display=swap" rel="stylesheet">

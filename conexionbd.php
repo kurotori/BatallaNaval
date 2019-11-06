@@ -44,21 +44,26 @@ include "datosbd.php";
     }
     
     function crearPartida($conexion,$nombre,$tamanio){
+        $num_consulta=0;
         try{
-            //$conexion = CrearConexion($servidorBN,$usuarioBN,$contraseñaBN,$bddBN);
             // set the PDO error mode to exception
             $conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            $sentencia = $conexion->prepare("INSERT INTO partida(nombre,tamanio) VALUES (:nombre,:tamanio)");
+            $consulta = "CALL nueva_partida(:tamanio,:nombre)";
+            $sentencia = $conexion->prepare($consulta);
             $sentencia->bindParam(':nombre', $nombre);
             $sentencia->bindParam(':tamanio', $tamanio);
+            
             $sentencia->execute();
-            echo "Partida Creada";
+            $resultado = $sentencia->fetchAll();
+            //echo $resultado[0][0];
+            //print_r ($resultado);
+            $num_consulta = $resultado[0][0];
         }
         catch(PDOException $e){
             echo "Error: " . $e->getMessage();
         }
 
-        //$sentencia->close();
-        //$conexion->close();
+        $conexion=null;
+        return $num_consulta;
     }
 ?>
