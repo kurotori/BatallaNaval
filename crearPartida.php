@@ -10,13 +10,30 @@
 
         
 		<script type='text/javascript' src='jquery.js'></script>
-		<script type='text/javascript' src='elegirTablero.js'></script>
+		<script type='text/javascript' src='crearPartida.js'></script>
         <script type="text/javascript" src="jquery-ui/jquery-ui.js"></script>
     </head>
     <body>
         <div id="panel_elegir_tablero">
-            <span class="titulo">Elige el tamaño del tablero de juego</span>
-            <form id="elegir_tablero" name="elegir_tablero" action="posicionarBarcos.php" method="post">
+            <form id="crear_partida" name="crear_partida" action="posicionarBarcos.php" method="post">
+            
+                <span class="titulo">Crear una Partida</span>
+                
+                <table>
+                    <tr>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span class="subtitulo">Nombre de la Partida:</span>
+                        </td>
+                        <td>
+                             <input type="text" name="nombre" id="nombre" >
+                        </td>
+                    </tr>
+                </table>
+                
+                <span class="titulo">Elige el Tamaño del Tablero de Juego</span>
+            
                 
                 <label class="container">Pequeño
                     <input type="radio" name="tamanio" value="min">

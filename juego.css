@@ -608,9 +608,10 @@ li.barco_seleccionado{
 #panel_elegir_tablero{
     position: relative;
     width: 33%; 
-    height: 33%;
+    height: 40%;
     left: 33%;
-    top: 30%;
+    top: 25%;
+    padding-bottom: 10px;
     background-color: #fcbb65;
     border-radius: 20px;
     border-width: 5px;
@@ -628,6 +629,13 @@ li.barco_seleccionado{
     background-color: #e08e09;
     border-top-left-radius: 15px;
     border-top-right-radius: 15px;
+}
+
+#panel_elegir_tablero .subtitulo{
+    font-family: 'Yanone Kaffeesatz', sans-serif;
+    font-size: 28px;
+    font-weight: bold;
+    text-align: left;
 }
 
 #panel_elegir_tablero .etiqueta{
@@ -665,6 +673,18 @@ li.barco_seleccionado{
     background-color: #001f63;
 }
 
+#panel_elegir_tablero table{
+    position: relative;
+    width: 90%;
+    left: 5%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+#panel_elegir_tablero input[type=text]{
+    width: 100%;
+    height: 28px;
+}
 
 /*Tomado de W3Schools*/
 /* Customize the label (the container) */
@@ -729,10 +749,10 @@ li.barco_seleccionado{
 /* Style the indicator (dot/circle) */
 .container .checkmark:after {
     content: url(imagen/ok_rojo_24px.png);
-  top: -5px;
-  left: 5px;
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
+    top: -5px;
+    left: 5px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
   /*background: white;*/
 }

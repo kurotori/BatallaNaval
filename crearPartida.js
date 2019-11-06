@@ -5,7 +5,7 @@ $(document).ready(
     function(){
         $("#bt_dialogo_aceptar").click(
             function(){
-                $("#elegir_tablero").submit();
+                $("#crear_partida").submit();
             }
         );
         

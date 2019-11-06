@@ -3,8 +3,12 @@
     include_once "conexionbd.php";
     include_once "Tablero.php";
     
-    $tamanio = $_POST["tamanio"];
-    
+    if($_SERVER["REQUEST_METHOD"] == "POST") {
+        $tamanio = validarDatos($_POST["tamanio"]);
+        $nombre = validarDatos($_POST["nombre"]);
+    }
+    $conexion = CrearConexion($servidorBN,$usuarioBN,$contraseñaBN,$bddBN);
+    crearPartida($conexion,$nombre,$tamanio);
 
 ?>
 <html>
@@ -24,7 +28,7 @@
     </head>
     <body>
         <?php
-        CrearConexion($servidor,$usuario,$contraseña,$bdd);
+        
         ?>
         <div id="cuadro_fondo">
             
