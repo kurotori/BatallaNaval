@@ -412,7 +412,8 @@ function guardarBarcos(){
         
     );
     listadoBarcos = listadoBarcos.slice(1,);
-    $("#lista_barcos_enviar").val(listadoBarcos);
+    $("#datos_barcos").val(listadoBarcos);
+    
     //console.log(listadoBarcos);
 }
 
@@ -531,6 +532,7 @@ $(document).ready(
                             $("#cuadro_fondo").hide();
                             $("#dialogo_pregunta").hide();
                             guardarBarcos();
+                            $("#form_enviar_datos").submit();
                         }
                     );
                     $("#bt_dialogo_no").click(
