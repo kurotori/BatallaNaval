@@ -1,3 +1,7 @@
+<?php
+    $usuario=12345678;
+?>
+
 <html>
     <head>
         <meta http-equiv='Content-type' content='text/html;charset=UTF-8'>
@@ -47,6 +51,9 @@
                     <input type="radio" name="tamanio" value="max">
                     <span class="checkmark"></span>
                 </label>
+    <?php
+        echo "<input type='hidden' name='usuario' id='usuario' value='$usuario'>";    
+    ?>
                 
                 <div id="bt_dialogo_aceptar" class="boton">ACEPTAR</div> 
             </form>

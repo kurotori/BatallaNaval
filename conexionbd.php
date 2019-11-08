@@ -66,4 +66,65 @@ include "datosbd.php";
         $conexion=null;
         return $num_consulta;
     }
+
+    function crearBarco($conexion,$tipo){
+        $id_barco=0;
+        try{
+            // set the PDO error mode to exception
+            $conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $consulta = "CALL nuevo_barco(:tipo)";
+            $sentencia = $conexion->prepare($consulta);
+            $sentencia->bindParam(':tipo', $tipo);
+            
+            $sentencia->execute();
+            $resultado = $sentencia->fetchAll();
+            //echo $resultado[0][0];
+            //print_r ($resultado);
+            $id_barco = $resultado[0][0];
+        }
+        catch(PDOException $e){
+            echo "Error: " . $e->getMessage();
+        }
+
+        $conexion=null;
+        return $id_barco;
+    }
+
+
+    function asignarBarco($conexion,$idBarco,$idUsuario,$idPartida){
+        try{
+            // set the PDO error mode to exception
+            $conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $consulta = "CALL asignar_barco(:idBarco,:idUsuario,:idPartida)";
+            $sentencia = $conexion->prepare($consulta);
+            $sentencia->bindParam(':idBarco', $idBarco);
+            $sentencia->bindParam(':idUsuario', $idUsuario);
+            $sentencia->bindParam(':idPartida', $idPartida);
+            
+            $sentencia->execute();
+        }
+        catch(PDOException $e){
+            echo "Error: " . $e->getMessage();
+        }
+
+        $conexion=null;
+    }
+
+    function asignarCeldaABarco($conexion,$idBarco,$idCelda){
+        try{
+            // set the PDO error mode to exception
+            $conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $consulta = "CALL asignar_celda_a_barco(:idBarco,:idCelda)";
+            $sentencia = $conexion->prepare($consulta);
+            $sentencia->bindParam(':idBarco', $idBarco);
+            $sentencia->bindParam(':idCelda', $idCelda);
+            
+            $sentencia->execute();
+        }
+        catch(PDOException $e){
+            echo "Error: " . $e->getMessage();
+        }
+
+        $conexion=null;
+    }
 ?>

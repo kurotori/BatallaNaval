@@ -2,9 +2,10 @@
     $nombre_partida = $_POST["nombre"];
     $num_partida = $_POST["partida"];
     $datos_todos = $_POST["datos_barcos"];
+    $usuario = $_POST["usuario"];
 
     $datos_barcos = explode("_",$datos_todos);
-    echo "$nombre_partida : #$num_partida";
+    echo "$nombre_partida : #$num_partida de $usuario";
     echo "<br>";
     echo "<br>";
     //Separar los barcos
