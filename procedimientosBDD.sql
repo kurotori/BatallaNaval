@@ -13,3 +13,19 @@ BEGIN
 	SELECT LAST_INSERT_ID();
 END$$
 DELIMITER ;
+
+/*Creación de Barcos y devolución de ID*/
+
+DELIMITER $$
+CREATE DEFINER=`batallanaval`@`localhost` 
+PROCEDURE `nuevo_barco`(
+	IN `tipo` enum("acorazado","destructor","escolta","submarino")
+)
+BEGIN
+	DECLARE `tipo_` enum("acorazado","destructor","escolta","submarino")
+    SET tipo_=tipo;
+	INSERT into barco(tipo) VALUES (tipo_);
+	SELECT LAST_INSERT_ID();
+END$$
+DELIMITER ;
+

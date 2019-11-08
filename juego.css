@@ -609,6 +609,7 @@ li.barco_seleccionado{
     position: relative;
     width: 33%; 
     height: 40%;
+    min-height: 335px;
     left: 33%;
     top: 25%;
     padding-bottom: 10px;

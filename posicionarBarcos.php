@@ -86,7 +86,12 @@
         
         <div id="formulario_enviar">
             <form id="form_enviar_datos" method="post" action="prepararPartida.php">
-                <input type="text" name="datos_barcos" id="datos_barcos">
+                <input type="hidden" name="datos_barcos" id="datos_barcos">
+    <?php
+          echo "<input type='hidden' name='partida' id='partida' value='$num_partida'>";
+          echo "<input type='hidden' name='nombre' id='nombre' value='$nombre'>";    
+    ?>
+
             </form>
         </div>
         
