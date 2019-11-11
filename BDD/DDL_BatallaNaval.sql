@@ -1,5 +1,4 @@
 
-
 create user "batallanaval"@"localhost" identified by "batallanaval";
 grant insert,select,update,delete,create routine, alter routine, execute on batallanaval.* to "batallanaval"@"localhost";
 

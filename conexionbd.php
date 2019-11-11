@@ -92,33 +92,37 @@ include_once "datosbd.php";
     }
 
 
-    function asignarBarco($conexion,$idBarco,$idUsuario,$idPartida){
+    function crearYasignarBarco($conexion,$barco,$idUsuario,$idPartida){
+        $id_barco=0;
         try{
             // set the PDO error mode to exception
             $conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            $consulta = "CALL asignar_barco(:idBarco,:idUsuario,:idPartida)";
+            $consulta = "CALL crear_y_asignar_barco(:barco,:idUsuario,:idPartida)";
             $sentencia = $conexion->prepare($consulta);
-            $sentencia->bindParam(':idBarco', $idBarco);
+            $sentencia->bindParam(':barco', $barco);
             $sentencia->bindParam(':idUsuario', $idUsuario);
             $sentencia->bindParam(':idPartida', $idPartida);
             
             $sentencia->execute();
+            $resultado = $sentencia->fetchAll();
+            $id_barco = $resultado[0][0];
         }
         catch(PDOException $e){
             echo "Error: " . $e->getMessage();
         }
 
         $conexion=null;
+        return $id_barco;
     }
 
-    function asignarCeldaABarco($conexion,$idBarco,$idCelda){
+    function crearYasignarCeldaABarco($conexion,$idBarco,$celda){
         try{
             // set the PDO error mode to exception
             $conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            $consulta = "CALL asignar_celda_a_barco(:idBarco,:idCelda)";
+            $consulta = "CALL crear_y_asignar_celda_a_barco(:idBarco,:celda)";
             $sentencia = $conexion->prepare($consulta);
             $sentencia->bindParam(':idBarco', $idBarco);
-            $sentencia->bindParam(':idCelda', $idCelda);
+            $sentencia->bindParam(':celda', $celda);
             
             $sentencia->execute();
         }
