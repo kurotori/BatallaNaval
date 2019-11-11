@@ -9,8 +9,8 @@
         $nombre = validarDatos($_POST["nombre"]);
     }
     //echo "$tamanio - $nombre";
-    $conexion = CrearConexion($servidorBN,$usuarioBN,$contraseñaBN,$bddBN);
-    $num_partida = crearPartida($conexion,$nombre,$tamanio);
+    $conexion = GenerarConexion();
+    //$num_partida = crearPartida($conexion,$nombre,$tamanio);
     
 ?>
 <html>
@@ -19,7 +19,7 @@
 		<link rel="stylesheet" href="juego.css">
         <link rel="stylesheet" href="jquery-ui/jquery-ui.css">
         <title>
-            <?php echo "Batalla Naval - Partida #$num_partida: '$nombre' de $usuario"; ?>
+            <?php echo "Batalla Naval - Partida: '$nombre' de $usuario"; ?>
         </title>
         <link href="https://fonts.googleapis.com/css?family=Permanent+Marker&display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz&display=swap" rel="stylesheet">
@@ -89,7 +89,7 @@
             <form id="form_enviar_datos" method="post" action="prepararPartida.php">
                 <input type="hidden" name="datos_barcos" id="datos_barcos">
     <?php
-        echo "<input type='hidden' name='partida' id='partida' value='$num_partida'>";
+        echo "<input type='hidden' name='tamanio' id='tamanio' value='$tamanio'>";
         echo "<input type='hidden' name='nombre' id='nombre' value='$nombre'>";
         echo "<input type='hidden' name='usuario' id='usuario' value='$usuario'>";    
     ?>

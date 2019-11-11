@@ -1,5 +1,5 @@
 <?php
-include "datosbd.php";
+include_once "datosbd.php";
 //    
 //    $conexion = mysqli_connect($servidor,$usuario,$contraseña,$bdd);
 //
@@ -10,8 +10,8 @@ include "datosbd.php";
 //        echo "Conexión Existosa";
 //    }
 
-    function CrearConexion($servidor,$usuario,$contraseña,$bdd){
-        $conexion = new PDO("mysql:host=$servidor;dbname=$bdd", $usuario, $contraseña);
+    //function CrearConexion($servidor,$usuario,$contraseña,$bdd){
+       // $conexion = new PDO("mysql:host=$servidor;dbname=$bdd", $usuario, $contraseña);
             //new mysqli($servidor, $usuario, $contraseña, $bdd);
         //mysqli_connect($servidor,$usuario,$contraseña,$bdd);
         //if($conexion->connect_error){
@@ -22,13 +22,13 @@ include "datosbd.php";
             //echo "Conexión Exitosa";
             //return $conexion;
         //}
-        return $conexion;
-    }
+       // return $conexion;
+    //}
 
 
-    function consultaDB($consulta,$servidor,$usuario,$contraseña,$bdd) {
+    function consultaDB($consulta) {
         // Connect to the database
-        $conexion = CrearConexion($servidor,$usuario,$contraseña,$bdd);
+        $conexion = CrearConexion();
         // Query the database
         $result = mysqli_query($conexion,$consulta);
         mysqli_close($conexion);
@@ -43,15 +43,16 @@ include "datosbd.php";
         return $datos;
     }
     
-    function crearPartida($conexion,$nombre,$tamanio){
+    function crearPartida($conexion,$nombre,$tamanio,$usuario){
         $num_consulta=0;
         try{
             // set the PDO error mode to exception
             $conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            $consulta = "CALL nueva_partida(:tamanio,:nombre)";
+            $consulta = "CALL nueva_partida(:tamanio,:nombre,:usuario)";
             $sentencia = $conexion->prepare($consulta);
             $sentencia->bindParam(':nombre', $nombre);
             $sentencia->bindParam(':tamanio', $tamanio);
+            $sentencia->bindParam(':usuario', $usuario);
             
             $sentencia->execute();
             $resultado = $sentencia->fetchAll();

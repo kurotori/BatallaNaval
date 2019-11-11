@@ -16,6 +16,7 @@
 		<script type='text/javascript' src='jquery.js'></script>
 		<script type='text/javascript' src='crearPartida.js'></script>
         <script type="text/javascript" src="jquery-ui/jquery-ui.js"></script>
+        <title>Batalla Naval - Crear Nueva Partida</title>
     </head>
     <body>
         <div id="panel_elegir_tablero">

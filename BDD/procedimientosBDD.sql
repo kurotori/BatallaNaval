@@ -1,11 +1,3 @@
-/*Creación de partida y devolución de ID de la misma*/
-
-DELIMITER $$
-CREATE DEFINER='batallanaval'@'localhost' 
-PROCEDURE 'nueva_partida'(
-    IN tam ENUM("min","med","max"), 
-    IN nom VARCHAR(20)
-)
 BEGIN
 	DECLARE tamanio1 enum("min","med","max");
     DECLARE nombre1 varchar(20);
@@ -13,8 +5,50 @@ BEGIN
     SET nombre1=nom;
 	INSERT into partida(tamanio,nombre) VALUES (tamanio1,nombre1);
 	SELECT LAST_INSERT_ID();
+END
+
+
+/*Creación de partida,asignación a usuario y devolución de ID de la misma*/
+
+DELIMITER $$
+CREATE DEFINER='batallanaval'@'localhost' 
+PROCEDURE nueva_partida(
+    IN tam ENUM("min","med","max"), 
+    IN nom VARCHAR(20),
+	IN id_usuario int unsigned,
+	OUT id_partida int unsigned
+)
+BEGIN
+	DECLARE tamanio1 enum("min","med","max");
+    DECLARE nombre1 varchar(20);
+	DECLARE idU int unsigned;
+	DECLARE idP int unsigned;
+    SET tamanio1=tam;
+    SET nombre1=nom;
+	INSERT into partida(tamanio,nombre) VALUES (tamanio1,nombre1);
+	SET idP = SELECT LAST_INSERT_ID();
+	SET id_partida = idP;
+	INSERT into batallanaval.crea(usuario_ID,partida_ID) values (idU,idP);
 END$$
 DELIMITER ;
+
+/* Asignación de partida a Usuario */
+
+DELIMITER $$
+CREATE DEFINER='batallanaval'@'localhost' 
+PROCEDURE asignar_partida(
+    IN num_partida int unsigned, 
+    IN id_usuario int unsigned
+)
+BEGIN
+	DECLARE numP int unsigned;
+    DECLARE idU int unsigned;
+    SET numP = num_partida;
+    SET idU = id_usuario;
+	INSERT into crea(usuario_ID,partida_ID) VALUES (idU,numP);
+END$$
+DELIMITER ;
+
 
 /*Creación de Barcos y devolución de ID del mismo*/
 
