@@ -22,7 +22,10 @@ include_once "datosApp.php";
     </head>
     <body>
         
-        <div id="caja_centro" ></div>
+        <div id="caja_centro" >
+            <div id="caja_logo"></div>
+            <div id="caja_login"></div>
+        </div>
         
     </body>
 </html>
