@@ -16,8 +16,20 @@ function abrirMenuLogin(){
          //left:"20px"
         }
     );
+    $("#caja_menu_principal .boton").delay(1000).show();
 }
 
+function volverAmenu(){
+    $(".no_menu_p").animate(
+        {height:"toggle"}
+    );
+    $("#caja_menu_principal").delay(800).animate(
+        {height:"toggle"
+        },
+    );
+    $
+
+}
 
 $(document).ready(
     function(){
@@ -26,6 +38,12 @@ $(document).ready(
             function(){
                 cerrarMenuPrincipal();
                 abrirMenuLogin();
+            }
+        );
+        
+        $(".bt_volver").click(
+            function(){
+                volverAmenu();
             }
         );
         

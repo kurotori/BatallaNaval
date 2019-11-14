@@ -31,7 +31,7 @@ include_once "datosApp.php";
                     <div id="bt_entrar" class="boton">ENTRAR</div>
                     <div id="bt_registrarse" class="boton">REGISTRARSE</div>
                 </div>
-                <div id="caja_login">
+                <div class="no_menu_p" id="caja_login">
                     <span class="titulo">Ingresa al Sistema</span>
                     <table>
                         <tr>
@@ -44,7 +44,17 @@ include_once "datosApp.php";
                                 <input type="text" name="nombre" id="nombre" >
                             </td>
                         </tr>
+                        <tr>
+                            <td>
+                                <span class="subtitulo">Contraseña:</span>
+                            </td>
+                            <td>
+                                <input type="password" name="contrasenia" id="contrasenia" >
+                            </td>
+                        </tr>
                     </table>
+                    <div id="bt_login" class="boton">INICIAR SESIÓN</div>
+                    <div class="boton bt_volver">&lt;&lt;&nbsp;&nbsp;Regresar</div>
                 </div>
             </div>
         </div>
