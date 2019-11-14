@@ -9,30 +9,41 @@ body {
     left: 0px;
     margin: 0px 0px 0px 0px;
     background-color: #001f63;
+    background-image: url(imagen/mar3.png);
 }
 
 #caja_centro{
     position: relative;
     height: 100%;
-    width: 450px;
-    left: calc(50% - 225px);
+    width: 55%;
+    left: 22.5%;
+    background-color: #001f63;
+    
+}
+
+#caja_menu{
+    position: relative;
+    height: 75%;
+    top: 12.5%;
 }
 
 #caja_logo{
     position: relative;
-    width: 450px;
-    height: 190px;
+    width: 460px;
+    height: 73px;
+    left: calc(50% - 230px);
+    /*top: 60px;*/
     background-image: url("imagen/logo.png");
     background-size: contain;
     background-repeat: no-repeat;
 }
 
-#caja_login{
+#caja_menu_principal{
     position: relative;
-    width: 100%; 
-    height: 40%;
-    min-height: 335px;
-    top: 25%;
+    width: 450px; 
+    left: calc(50% - 230px);
+    height: 185px;
+    margin-top: 30px;
     padding-bottom: 10px;
     background-color: #fcbb65;
     border-radius: 20px;
@@ -41,3 +52,79 @@ body {
     border-color: #e08e09;
     font-family: 'Yanone Kaffeesatz', sans-serif;
 }
+
+#caja_login{
+    display: none;
+    position: relative;
+    width: 450px; 
+    height: 450px;
+    left: calc(50% - 230px);
+    margin-top: 30px;
+    padding-bottom: 10px;
+    background-color: #fcbb65;
+    border-radius: 20px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #e08e09;
+    font-family: 'Yanone Kaffeesatz', sans-serif;
+}
+
+.titulo{
+    display: block;
+    width: 100%;
+    font-family: 'Acme', sans-serif;
+    font-size: 25px;
+    text-align: center;
+    background-color: #e08e09;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+}
+
+.subtitulo{
+    font-family: 'Yanone Kaffeesatz', sans-serif;
+    font-size: 28px;
+    font-weight: bold;
+    text-align: left;
+}
+
+table{
+    position: relative;
+    width: 90%;
+    left: 5%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.boton{
+    border-radius: 10%;
+}
+.boton:hover{
+    box-shadow: 2px 2px 2px black;
+    cursor: pointer;
+}
+
+.boton:active{
+    box-shadow: 0px 0px 0px black;
+}
+
+.boton{
+    position: relative;
+    font-weight: bold;
+    font-size: 30px;
+    top: 30px;
+    /*float: left;
+    left: 30%;*/
+    right: auto;
+    margin-top: 20px;
+    left:calc(50% - 110px);
+    width: 200px;
+    text-align: center;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 5px;
+    border: #e08e09 2px solid;
+    border-radius: 10px;
+    color: #edba68;
+    background-color: #001f63;
+}
+

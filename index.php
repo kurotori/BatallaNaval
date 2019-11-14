@@ -1,5 +1,7 @@
 <?php
 include_once "datosApp.php";
+
+
 ?>
 
 <html>
@@ -17,14 +19,34 @@ include_once "datosApp.php";
         <link href="https://fonts.googleapis.com/css?family=Acme&display=swap" rel="stylesheet">
         
 		<script type='text/javascript' src='jquery.js'></script>
-		<script type='text/javascript' src='posicionarBarcos_V2.js'></script>
+        <script type="text/javascript" src="inicio.js"></script>
         <script type="text/javascript" src="jquery-ui/jquery-ui.js"></script>
     </head>
     <body>
         
         <div id="caja_centro" >
-            <div id="caja_logo"></div>
-            <div id="caja_login"></div>
+            <div id="caja_menu">
+                <div id="caja_logo"></div>
+                <div id="caja_menu_principal">
+                    <div id="bt_entrar" class="boton">ENTRAR</div>
+                    <div id="bt_registrarse" class="boton">REGISTRARSE</div>
+                </div>
+                <div id="caja_login">
+                    <span class="titulo">Ingresa al Sistema</span>
+                    <table>
+                        <tr>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span class="subtitulo">Nombre de Usuario:</span>
+                            </td>
+                            <td>
+                                <input type="text" name="nombre" id="nombre" >
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
         </div>
         
     </body>
