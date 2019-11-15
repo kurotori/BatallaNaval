@@ -53,9 +53,9 @@ body {
     font-family: 'Yanone Kaffeesatz', sans-serif;
 }
 
-#caja_login{
+#cont_login{
     display: none;
-    position: relative;
+    /*position: relative;
     width: 450px; 
     height: 300px;
     left: calc(50% - 230px);
@@ -66,8 +66,28 @@ body {
     border-width: 5px;
     border-style: solid;
     border-color: #e08e09;
-    font-family: 'Yanone Kaffeesatz', sans-serif;
+    font-family: 'Yanone Kaffeesatz', sans-serif;*/
 }
+
+#cont_registro{
+    display: none;
+    /*position: relative;
+    width: 450px; 
+    height: 300px;
+    left: calc(50% - 230px);
+    margin-top: 30px;
+    padding-bottom: 10px;
+    background-color: #fcbb65;
+    border-radius: 20px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #e08e09;
+    font-family: 'Yanone Kaffeesatz', sans-serif;*/
+}
+
+#cont_menu_principal{
+}
+
 
 .titulo{
     display: block;
@@ -85,6 +105,13 @@ body {
     font-size: 28px;
     font-weight: bold;
     text-align: left;
+}
+
+.seccion_tabla{
+    width: 100%;
+    display: block;
+    text-align: center;
+    text-decoration: underline;
 }
 
 input[type=text]{
@@ -110,6 +137,7 @@ input[type=password]{
 }
 
 table{
+    
     position: relative;
     width: 90%;
     left: 5%;
@@ -117,9 +145,6 @@ table{
     margin-bottom: 20px;
 }
 
-.boton{
-    border-radius: 10%;
-}
 .boton:hover{
     box-shadow: 2px 2px 2px black;
     cursor: pointer;
@@ -130,6 +155,7 @@ table{
 }
 
 .boton{
+    display: inherit;
     position: relative;
     font-weight: bold;
     font-size: 30px;
