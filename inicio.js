@@ -10,7 +10,8 @@ function cerrarMenuPrincipal(){
     );
 }
 
-function abrirMenuLogin(){    
+function abrirMenuLogin(){
+    cerrarMenuPrincipal();
     $("#caja_menu_principal").delay(600).animate(
         {height:"300px"
         },
@@ -20,9 +21,10 @@ function abrirMenuLogin(){
     );
 }
 
-function abrirRegistro(){    
+function abrirRegistro(){
+    cerrarMenuPrincipal();
     $("#caja_menu_principal").delay(600).animate(
-        {height:"600px"
+        {height:"550px"
         },
         function(){
             $("#cont_registro").show();
@@ -43,13 +45,34 @@ function volverMenuPrincipal(){
 
 }
 
+function chequearModo(modo){
+     switch(modo){
+         //modo normal: se muestra el menú inicio.
+         case 0: 
+             break;
+         //modo inicio de sesión: se pasa del menú inicio al menu de inicio de sesión
+         // para errores de inicio de sesión.
+         case 1:
+             abrirMenuLogin();
+             break;
+         //modo registro: se pasa del menú inicio al menu de registro, para errores
+         // durante el proceso de resgistro.
+         case 2:
+             abrirRegistro();
+             break;
+     }
+}
+
 
 $(document).ready(
     function(){
         
+        $("#reg_fecha_nac_p").datepicker();
+        
+        chequearModo(modo);
+        
         $("#bt_entrar").click(
             function(){
-                cerrarMenuPrincipal();
                 abrirMenuLogin();
             }
         );
@@ -62,7 +85,6 @@ $(document).ready(
         
         $("#bt_registrarse").click(
             function(){
-                cerrarMenuPrincipal();
                 abrirRegistro();
             }
         );
