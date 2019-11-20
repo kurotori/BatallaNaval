@@ -63,6 +63,47 @@ function chequearModo(modo){
      }
 }
 
+//Chequea el valor de un campo para determinar si es vacío,
+//chequeando su longitud.
+function valorEsVacio(dato){
+    var resultado = false;
+    if (dato.length<1){
+        resultado = true;
+    }
+    return resultado;
+}
+
+function chequearRegistro(){
+    var error_reg = 0;
+    
+    var regex_1 = /[0-9a-zA-Z]/g;
+    var regex_2 = /\s/g;
+    
+    var nombre_usuario = $("#reg_nombre").val();
+    var contrasenia = $("#reg_contrasenia").val();
+    var rep_contrasenia = $("#reg_rep_constrasenia").val();
+    var nombre_p = $("#reg_nombre_p").val();
+    var apellido_p = $("#reg_apellido_p").val();
+    var fecha_nac_p = $("#reg_fecha_nac_p").val();
+    //ERRORES:   
+    //nombre vacio
+    if( valorEsVacio(nombre_usuario) ){
+        error_reg = 1;
+        return error_reg;
+    }
+    //nombre menor a 8 caracteres
+    if( nombre_usuario.length < 8 ){
+        error_reg = 2;
+        return error_reg;
+    }
+    //nombre contiene espacios
+    if( nombre_usuario.match(regex_2) != null ){
+        error_reg = 3;
+        return error_reg;
+    }
+    return error_reg;
+}
+
 
 $(document).ready(
     function(){
@@ -91,5 +132,17 @@ $(document).ready(
             }
         );
         
+        $("#bt_registrar").click(
+            function(){
+                chequearRegistro();
+                console.log("click");
+            }
+        );
+        
+        $("#bt_cancelar_registro").click(
+            function(){
+                volverMenuPrincipal();
+            }
+        );
     }
 );

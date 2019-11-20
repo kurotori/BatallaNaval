@@ -48,7 +48,7 @@ echo "Modo: $modo - Error: $error";
 		<script type='text/javascript' src='jquery.js'></script>
         <script type="text/javascript" src="inicio.js"></script>
         <script type="text/javascript" src="jquery-ui/jquery-ui.js"></script>
-        <script type="text/javascript"></script>
+        <script type="text/javascript" src="jquery-ui/datepicker-es.js"></script>
     </head>
     <body>
         
@@ -174,6 +174,8 @@ echo "Modo: $modo - Error: $error";
                                     </td>
                                 </tr>
                             </table>
+                            <div id="bt_registrar" class="boton">CREAR USUARIO</div>
+                            <div id="bt_cancelar_registro" class="boton">CANCELAR</div>
                         </form>
                     </div>
                 </div>
