@@ -140,7 +140,7 @@ input[type=password]{
     background-color: #fcbb65;
 }
 
-table{
+.tabla_inicio{
     
     position: relative;
     width: 90%;
@@ -235,3 +235,8 @@ table{
     color: #edba68;
     background-color: #001f63;
 }
+
+/* Para Elementos de JQuery UI 
+
+.ui-datepicker {font-size:20px; }
+*/

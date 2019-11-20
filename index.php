@@ -29,8 +29,8 @@ echo "Modo: $modo - Error: $error";
 <html>
     <head>
         <meta http-equiv='Content-type' content='text/html;charset=UTF-8'>
-		<link rel="stylesheet" href="inicio.css">
-        <link rel="stylesheet" href="jquery-ui/jquery-ui.css">
+		<link rel="stylesheet" href="jquery-ui/jquery-ui.css">
+        <link rel="stylesheet" href="inicio.css">
         <title>
             <?php 
                 echo "$nombre_app - v $version_app";
@@ -48,6 +48,7 @@ echo "Modo: $modo - Error: $error";
 		<script type='text/javascript' src='jquery.js'></script>
         <script type="text/javascript" src="inicio.js"></script>
         <script type="text/javascript" src="jquery-ui/jquery-ui.js"></script>
+        <script type="text/javascript"></script>
     </head>
     <body>
         
@@ -78,7 +79,7 @@ echo "Modo: $modo - Error: $error";
                 
                     <div class="no_menu_p" id="cont_login">
                         <span class="titulo">Ingresa al Sistema</span>
-                        <table>
+                        <table class="tabla_inicio">
                             <tr>
                             </tr>
                             <tr>
@@ -105,7 +106,7 @@ echo "Modo: $modo - Error: $error";
                     <div class="no_menu_p" id="cont_registro">
                         <span class="titulo">Regístrate Como Usuario</span>
                         <form>
-                            <table>
+                            <table class="tabla_inicio">
                                 <tr>
                                     <td colspan="2">
                                     <span class="subtitulo seccion_tabla">Datos de Usuario</span>

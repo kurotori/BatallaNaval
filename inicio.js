@@ -67,7 +67,9 @@ function chequearModo(modo){
 $(document).ready(
     function(){
         
-        $("#reg_fecha_nac_p").datepicker();
+        $.datepicker.setDefaults( $.datepicker.regional[ "es" ] );
+       
+       $("#reg_fecha_nac_p").datepicker({dateFormat:'yy-mm-dd'});
         
         chequearModo(modo);
         
