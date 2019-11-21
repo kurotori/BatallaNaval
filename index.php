@@ -151,6 +151,14 @@ echo "Modo: $modo - Error: $error";
                                 </tr>
                                 <tr>
                                     <td>
+                                        <span class="subtitulo registro">Documento ID:</span>
+                                    </td>
+                                    <td>
+                                        <input type="text" name="reg_ci" id="reg_ci" size="20">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
                                         <span class="subtitulo registro">Nombre:</span>
                                     </td>
                                     <td>

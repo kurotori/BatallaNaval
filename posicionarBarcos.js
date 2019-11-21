@@ -347,7 +347,7 @@ $(document).ready(
     );
         
     
-    //Cerrar ventana de ubiación de barcos
+    //Cerrar ventana de ubicación de barcos
     $(".cerrar").click(
         
         function(){

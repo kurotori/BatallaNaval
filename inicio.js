@@ -81,7 +81,8 @@ function chequearRegistro(){
     
     var nombre_usuario = $("#reg_nombre").val();
     var contrasenia = $("#reg_contrasenia").val();
-    var rep_contrasenia = $("#reg_rep_constrasenia").val();
+    var rep_contrasenia = $("#reg_rep_contrasenia").val();
+    var ci = $("#reg_ci").val();
     var nombre_p = $("#reg_nombre_p").val();
     var apellido_p = $("#reg_apellido_p").val();
     var fecha_nac_p = $("#reg_fecha_nac_p").val();
@@ -101,9 +102,119 @@ function chequearRegistro(){
         error_reg = 3;
         return error_reg;
     }
+    //nombre contiene palabras prohibidas - 4 - RESERVADO
+    
+    //Contraseña vacía
+    if(valorEsVacio(contrasenia)){
+        error_reg = 5;
+        return error_reg;
+    }
+    //Contraseña menor a 8 caracteres
+    if( contrasenia.length < 8 ){
+        error_reg = 6;
+        return error_reg;
+    }
+    //Contraseña superior a 20 caracteres - mismo código de error que anterior
+    if( contrasenia.length > 20 ){
+        error_reg = 6;
+        return error_reg;
+    }
+    //Contraseña no es lo suficientemente compleja - 7 - RESERVADO
+    
+    //Contraseña no coincide con su repetición
+    if( contrasenia != rep_contrasenia ){
+        error_reg = 8;
+        return error_reg;
+    }
+    
+    //Nombre propio vacío
+    if( nombre_p.length < 1 ){
+        error_reg = 9;
+        return error_reg;
+    }
+    //Apellido propio vacío
+    if( apellido_p.length < 1 ){
+        error_reg = 10;
+        return error_reg;
+    }
+    //Fecha de nacimiento vacía
+    if( fecha_nac_p.length < 1 ){
+        error_reg = 11;
+        return error_reg;
+    }
+    //CI vacía
+    if( ci.length < 1 ){
+        error_reg = 12;
+        return error_reg;
+    }
+    //CI inferior a 8 dígitos
+    if( ci.length < 8 ){
+        error_reg = 12;
+        return error_reg;
+    }
+    
+    
     return error_reg;
 }
 
+ 
+
+//Permite establecer y mostrar el mensaje de error en el diálogo de error
+function mostrarMensajeError(mensaje){
+    $("#cuadro_fondo").show();
+    $("#dialogo_error").show();
+    $("#dialogo_mensaje_msg").html(mensaje);
+}
+
+//Permite cerrar el mensaje de error
+function cerrarMensajeError(){
+    $("#cuadro_fondo").hide();
+    $("#dialogo_error").hide();
+}
+
+//Resetea la apariencia del formulario y quita la clase error
+function resetearErrores(){
+    $("*").removeClass("error");
+}
+
+//Chequea el error, resalta el campo afectado y muestra el mensaje correspondiente
+function chequearError(var_error){
+    resetearErrores();
+    switch(var_error){
+        case 1:
+            $("#reg_nombre").addClass("error");
+            mostrarMensajeError("El nombre de usuario no puede<br>quedar en blanco.");
+            break;
+        case 2:
+            $("#reg_nombre").addClass("error");
+            mostrarMensajeError("El nombre de usuario no puede<br>tener menos de 8 caracteres.");
+            break;
+        case 3:
+            $("#reg_nombre").addClass("error");
+            mostrarMensajeError("El nombre de usuario no puede<br>tener espacios.");
+            break;
+        case 4:
+            break;
+        case 5:
+            $("#reg_contrasenia").addClass("error");
+            mostrarMensajeError("Debe ingresar una contraseña.");
+            break;
+        case 6:
+            $("#reg_contrasenia").addClass("error");
+            mostrarMensajeError("La contraseña debe tener entre<br>8 y 20 caracteres.");
+            break;
+        case 7:
+            break;
+        case 8:
+            $("#reg_contrasenia").addClass("error");
+            $("#reg_rep_contrasenia").addClass("error");
+            mostrarMensajeError("Las contraseñas no coinciden.");
+            break;
+        case 9:
+            $("#reg_nombre_p").addClass("error");
+            mostrarMensajeError("Debe ingresar su nombre.");
+    }
+}
 
 $(document).ready(
     function(){
@@ -134,14 +245,21 @@ $(document).ready(
         
         $("#bt_registrar").click(
             function(){
-                chequearRegistro();
-                console.log("click");
+                var error_reg = chequearRegistro();
+                chequearError(error_reg);
+                console.log("click - "+error_reg);
             }
         );
         
         $("#bt_cancelar_registro").click(
             function(){
                 volverMenuPrincipal();
+            }
+        );
+        
+        $("#bt_dialogo_aceptar").click(
+            function(){
+                cerrarMensajeError();
             }
         );
     }
