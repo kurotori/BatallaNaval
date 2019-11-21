@@ -92,7 +92,12 @@ function chequearRegistro(){
         error_reg = 1;
         return error_reg;
     }
-    //nombre menor a 8 caracteres
+    //nombre mayor a 8 caracteres
+    if( nombre_usuario.length < 8 ){
+        error_reg = 2;
+        return error_reg;
+    }
+    //nombre mayor a 8 caracteres
     if( nombre_usuario.length < 8 ){
         error_reg = 2;
         return error_reg;

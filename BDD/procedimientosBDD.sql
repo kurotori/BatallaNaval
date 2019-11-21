@@ -83,7 +83,11 @@ DELIMITER ;
 /* Asignación de una celda a un barco */
 
 DELIMITER $$
-CREATE DEFINER=`batallanaval`@`localhost` PROCEDURE `crear_y_asignar_celda_a_barco`(IN `id_barco` INT UNSIGNED, IN `celda` VARCHAR(4))
+CREATE DEFINER=`batallanaval`@`localhost` 
+PROCEDURE `crear_y_asignar_celda_a_barco`(
+	IN `id_barco` INT UNSIGNED, 
+	IN `celda` VARCHAR(4)
+)
 BEGIN
 DECLARE idB int unsigned;
 DECLARE idC int unsigned;
