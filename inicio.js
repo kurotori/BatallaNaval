@@ -208,7 +208,7 @@ function chequearError(var_error){
             $("#reg_contrasenia").addClass("error");
             mostrarMensajeError("La contraseña debe tener entre<br>8 y 20 caracteres.");
             break;
-        case 7:
+        case 7: //RESERVADO
             break;
         case 8:
             $("#reg_contrasenia").addClass("error");
@@ -218,6 +218,27 @@ function chequearError(var_error){
         case 9:
             $("#reg_nombre_p").addClass("error");
             mostrarMensajeError("Debe ingresar su nombre.");
+            break;
+        case 10:
+            $("#reg_apellido_p").addClass("error");
+            mostrarMensajeError("Debe ingresar su apellido.");
+            break;
+        case 11:
+            $("#reg_fecha_nac_p").addClass("error");
+            mostrarMensajeError("Debe ingresar su fecha de nacimiento.");
+            break;
+        case 12:
+            $("#reg_ci").addClass("error");
+            mostrarMensajeError("Debe ingresar su Documento de Identidad.");
+            break;
+        case 13: //Error externo: nombre de usuario repetido
+            $("#reg_nombre").addClass("error");
+            mostrarMensajeError("Este nombre de usuario<br>ya fue registrado.");
+            break;
+        case 14: //Error externo: usuario ya existe
+            $("#reg_ci").addClass("error");
+            mostrarMensajeError("Ya hay un usuario registrado<br>con este Documento.");
+            break;
     }
 }
 
