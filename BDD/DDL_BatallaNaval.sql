@@ -59,6 +59,31 @@ create table batallanaval.formado_por(
  barco_ID int(9) unsigned not null,
  celda_ID int(9) unsigned not null unique primary key
 ); 
+
+create table batallanaval.sesion(
+	ID int(9) unsigned not null auto_increment primary key,
+	estado enum('abierta','cerrada') default 'abierta',
+	marcadetiempo timestamp default current_timestamp
+);
+
+create table batallanaval.inicia(
+	usuario_ID int(8) unsigned not null,
+	sesion_ID int(9) unsigned not null primary key
+);
+
+alter table inicia
+add constraint fk_usuario_inicia
+foreign key (usuario_ID)
+references usuario(ID)
+on update cascade
+on delete cascade;
+
+alter table inicia
+add constraint fk_inicia_sesion
+foreign key (sesion_ID)
+references sesion(ID)
+on update cascade
+on delete cascade;
  
 alter table crea
 add constraint fk_usuario_crea

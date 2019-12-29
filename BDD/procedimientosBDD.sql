@@ -100,3 +100,35 @@ INSERT into batallanaval.formado_por(barco_ID,celda_ID) values (idB,idC);
 END$$
 DELIMITER ;
 
+
+
+/* Inicio de Sesión de un Usuario */
+
+DELIMITER $$
+CREATE DEFINER=`batallanaval`@`localhost` 
+PROCEDURE `iniciar_sesion`(
+	IN `id_usuario` INT UNSIGNED
+)
+BEGIN
+DECLARE id_u int unsigned;
+DECLARE idS int unsigned;
+
+SET id_u = id_usuario;
+
+update batallanaval.sesion inner join batallanaval.inicia
+set sesion.estado = 'cerrada'
+WHERE sesion.ID = inicia.sesion_ID
+AND sesion.estado = 'abierta'
+AND inicia.usuario_ID = id_u;
+
+INSERT INTO batallanaval.sesion(ID) VALUES (null);
+SET idS = LAST_INSERT_ID();
+
+INSERT INTO batallanaval.inicia(usuario_ID,sesion_ID)
+VALUES (id_u,idS);
+
+SELECT idS;
+END$$
+DELIMITER ;
+
+

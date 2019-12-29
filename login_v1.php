@@ -6,9 +6,7 @@
     $nombre = $_POST["nombre"];
     $contrasenia = $_POST["contrasenia"];
     
-    $datos_JSON->id_sesion=0;
-    $datos_JSON->id_usuario=0;
-    $datos_JSON->id_estado=0;
+    $datos_JSON = "";
 ?>
 <html>
     <head>
@@ -20,49 +18,25 @@
     <body>
 
 <?php
-    //1 - Búsqueda del usuario por su nombre
     $sqlLogin="SELECT * FROM usuario where nombre='".$nombre."'";
     
-    //1.1 - Creación de la conexión con la consulta correspondiente y obtención del resultado
-    $resultado=consultaDB($sqlLogin);
-        //consultaDB($sqlLogin,$servidor,$usuario,$contraseña,$bdd);
     
-    //1.2 - Análisis del resultado de la consulta
-    // El resultado debe contener exactamente una (1) fila para que sea el deseado
-    // si hay menos de una fila, el usuario no existe, si hay más, el usuario aparece repetido
-    // indicando un error interno de la BdD y debe ser invalidado.
-    if(mysqli_num_rows($resultado) == 1){
+    $resultado=consultaDB($sqlLogin,$servidor,$usuario,$contraseña,$bdd);
+
+    if(mysqli_num_rows($resultado) > 0){
         while($registro = mysqli_fetch_assoc($resultado)){
-            
-            //1.3 - Obtención de datos de verificación: id de usuario y el hash
             $id_usuario=$registro['id'];
             $hash=$registro['hash'];
             
-            //1.4 - Verificación de la contraseña 
+            $sqlSesion="INSERT INTO sesion(id_usuario) values (".$id_usuario.")";
+            $sqlSesionesAbiertas="UPDATE sesion SET estado='cerrada' WHERE id_usuario=".$id_usuario;
+            $sqlIDsesion="SELECT id FROM sesion WHERE id_usuario=".$id_usuario." AND estado='abierta'";
+                
             if(password_verify($contrasenia,$hash)){
+                consultaDB($sqlSesionesAbiertas,$servidor,$usuario,$contraseña,$bdd);
+                consultaDB($sqlSesion,$servidor,$usuario,$contraseña,$bdd);            
                 
-                //1.5 - Obtención del ID de sesión
-                $id_sesion=iniciarSesion($id_usuario);         
-                $id_estado = 0;
-                //1.6 - Generación de errores de estado a partir de datos de inicio de sesión
-                if($id_sesion == 0){
-                    // Caso id_sesion = 0 -> No se pudo crear la sesión por errores del servidor,
-                    // falla de conexión a MySQL o similares
-                    $id_estado = 1;
-                }
-                
-                
-                
-                
-                //1. - Pasaje de datos al objeto contenedor
-                $datos_JSON->id_sesion=$id_sesion;
-                $datos_JSON->id_usuario=$id_usuario;
-                $datos_JSON->id_estado=$id_estado;
-                
-                
-                
-                
-                
+                $resultado2=consultaDB($sqlIDsesion,$servidor,$usuario,$contraseña,$bdd);
                 
                 if(mysqli_num_rows($resultado2) > 0){
                     

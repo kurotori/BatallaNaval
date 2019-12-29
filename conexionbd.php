@@ -132,4 +132,29 @@ include_once "datosbd.php";
 
         $conexion=null;
     }
+
+    
+    function iniciarSesion($id_usuario){
+        $id_sesion = 0;
+        $conexion = GenerarConexion();
+        try{
+            // set the PDO error mode to exception
+            $conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $consulta = "CALL iniciar_sesion(:idUsuario)";
+            $sentencia = $conexion->prepare($consulta);
+            $sentencia->bindParam(':idUsuario', $id_usuario);
+            
+            $sentencia->execute();
+            $resultado = $sentencia->fetchAll();
+            $id_sesion = $resultado[0][0];
+        }
+        catch(PDOException $e){
+            echo "Error: " . $e->getMessage();
+        }
+
+        $conexion=null;
+        return $id_sesion;
+    }
+
+
 ?>
