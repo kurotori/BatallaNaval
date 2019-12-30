@@ -24,5 +24,23 @@ function GenerarConexion(){
     return $conexion;
 }
 
+function GenerarConexion_MSYQLI(){
+    $servidorBN="localhost";
+    $usuarioBN="batallanaval";
+    $contraseñaBN="batallanaval";
+    $bddBN="batallanaval";
+
+    $conexion = new mysqli($servidorBN, $usuarioBN, $contraseñaBN, $bddBN);
+        //mysqli_connect($servidor,$usuario,$contraseña,$bdd);
+        if($conexion->connect_error){
+            die("ERROR:  " . $conexion->connect_error);
+            echo "Error de Conexion: ".mysqli_connect_error();
+        }
+        else{
+            //echo "Conexión Exitosa";
+            return $conexion;
+        }
+    return $conexion;
+}
 
 ?>

@@ -12,7 +12,8 @@ create table batallanaval.usuario(
  fecha_reg timestamp not null default current_timestamp,
  fecha_nac date not null,
  nombre_p varchar(30) not null,
- apellido_p varchar(30) not null
+ apellido_p varchar(30) not null,
+ hash varchar(128) not null
  );
  
 create table batallanaval.partida(

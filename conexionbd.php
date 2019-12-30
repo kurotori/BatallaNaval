@@ -28,7 +28,7 @@ include_once "datosbd.php";
 
     function consultaDB($consulta) {
         // Connect to the database
-        $conexion = CrearConexion();
+        $conexion = GenerarConexion_MSYQLI();
         // Query the database
         $result = mysqli_query($conexion,$consulta);
         mysqli_close($conexion);
@@ -135,7 +135,9 @@ include_once "datosbd.php";
 
     
     function iniciarSesion($id_usuario){
-        $id_sesion = 0;
+        $sesion = new \stdClass();
+        $sesion->id = 0;
+        $sesion->mensaje = "";
         $conexion = GenerarConexion();
         try{
             // set the PDO error mode to exception
@@ -146,15 +148,117 @@ include_once "datosbd.php";
             
             $sentencia->execute();
             $resultado = $sentencia->fetchAll();
-            $id_sesion = $resultado[0][0];
+            $sesion->id = $resultado[0][0];
+            $sesion->mensaje = "OK";
         }
         catch(PDOException $e){
             echo "Error: " . $e->getMessage();
         }
 
         $conexion=null;
-        return $id_sesion;
+        return $sesion;
     }
 
+    function usuarioExiste($nombre_usuario){
+        $existe = false;
+        $conexion = GenerarConexion();
+        try{
+            // set the PDO error mode to exception
+            $conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $consulta = "SELECT count(*) FROM usuario where nombre_u=:nombre_u";
+            $sentencia = $conexion->prepare($consulta);
+            $sentencia->bindParam(':nombre_u', $nombre_usuario);
+            
+            $sentencia->execute();
+            $resultado = $sentencia->fetchAll();
+            if($resultado[0][0] == 1){
+                $existe = true;
+            }
+        }
+        catch(PDOException $e){
+            //echo "Error: " . $e->getMessage();
+        }
+
+        $conexion=null;
+        return $existe;
+    }
+
+    function datosDelUsuario($nombre_usario){
+        $datos_usuario = new \stdClass();
+        $datos_usuario->id_usuario=0;
+        $datos_usuario->nombre_u="";
+        $datos_usuario->nombre_p="";
+        $datos_usuario->apellido_p="";
+        $datos_usuario->fecha_reg="";
+        $datos_usuario->fecha_nac="";
+        $datos_usuario->hash="";
+        $datos_usuario->error="";
+        
+        $conexion = GenerarConexion();
+        try{
+            // set the PDO error mode to exception
+            $conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $consulta = "SELECT * FROM usuario where nombre_u=:nombre_u";
+            $sentencia = $conexion->prepare($consulta);
+            $sentencia->bindParam(':nombre_u', $nombre_usuario);
+            
+            $sentencia->execute();
+            $resultado = $sentencia->fetchAll();
+            
+            $datos_usuario->id_usuario=resultado['id'];
+            $datos_usuario->nombre_u=resultado['nombre_u'];
+            $datos_usuario->nombre_p=resultado['nombre_p'];
+            $datos_usuario->apellido_p=resultado['apellido_p'];
+            $datos_usuario->fecha_reg=resultado['fecha_reg'];
+            $datos_usuario->fecha_nac=resultado['fecha_nac'];
+            $datos_usuario->hash=resultado['hash'];
+            $datos_usuario->error="OK";
+        }
+        catch(PDOException $e){
+            $datos_usuario->error="Error: ". $e->getMessage();
+            
+        }
+
+        $conexion=null;
+        return $datos_usuario;
+    }
+
+    
+    function registrarUsuario($id_usuario, 
+                              $nombre_u, 
+                              $nombre_p, 
+                              $apellido_p,
+                              $fecha_nac,
+                              $hash
+                             ){
+        $resultado = new \stdClass();
+        $resultado->error=0;
+        $resultado->mensaje="";
+        
+        $conexion = GenerarConexion();
+        try{
+            // set the PDO error mode to exception
+            $conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $consulta = "INSERT INTO usuario(ID, nombre_u, nombre_p, apellido_p, fecha_nac, hash) values (:id, :nombre_u, :nombre_p, :apellido_p, :fecha_nac, :hash)";
+            $sentencia = $conexion->prepare($consulta);
+            $sentencia->bindParam(':id', $id_usuario);
+            $sentencia->bindParam(':nombre_u', $nombre_u);
+            $sentencia->bindParam(':nombre_p', $nombre_p);
+            $sentencia->bindParam(':apellido_p', $apellido_p);
+            $sentencia->bindParam(':fecha_nac', $fecha_nac);
+            $sentencia->bindParam(':hash', $hash);
+            
+            $sentencia->execute();
+            $resultado->error=0;
+            $resultado->mensaje="OK";
+        }
+        catch(PDOException $e){
+            $resultado->error=1;
+            $resultado->mensaje="Error: ". $e->getMessage();
+        }
+
+        $conexion=null;
+        return $resultado;
+    }
 
 ?>
