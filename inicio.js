@@ -1,6 +1,7 @@
 /*globals $:false */
 /* jshint browser: true */
-
+var dato="vacio";
+var error_reg = 0;
 function cerrarMenuPrincipal(){
     $("#cont_menu_principal").hide();
     //$("#caja_menu_principal .boton").hide();
@@ -74,7 +75,7 @@ function valorEsVacio(dato){
 }
 
 function chequearRegistro(){
-    var error_reg = 0;
+    error_reg = 0;
     
     var regex_1 = /[0-9a-zA-Z]/g;
     var regex_2 = /\s/g;
@@ -83,79 +84,116 @@ function chequearRegistro(){
     var contrasenia = $("#reg_contrasenia").val();
     var rep_contrasenia = $("#reg_rep_contrasenia").val();
     var ci = $("#reg_ci").val();
-    var nombre_p = $("#reg_nombre_p").val();
-    var apellido_p = $("#reg_apellido_p").val();
-    var fecha_nac_p = $("#reg_fecha_nac_p").val();
+    var nombre_per = $("#reg_nombre_p").val();
+    var apellido_per = $("#reg_apellido_p").val();
+    var fecha_nac_per = $("#reg_fecha_nac_p").val();
     //ERRORES:   
     //nombre vacio
     if( valorEsVacio(nombre_usuario) ){
         error_reg = 1;
         return error_reg;
+        chequearError(error_reg);
     }
     //nombre mayor a 8 caracteres
-    if( nombre_usuario.length < 8 ){
+    else if( nombre_usuario.length < 8 ){
         error_reg = 2;
         return error_reg;
+        chequearError(error_reg);
     }
     //nombre mayor a 8 caracteres
-    if( nombre_usuario.length < 8 ){
+    else if( nombre_usuario.length < 8 ){
         error_reg = 2;
         return error_reg;
+        chequearError(error_reg);
     }
     //nombre contiene espacios
-    if( nombre_usuario.match(regex_2) != null ){
+    else if( nombre_usuario.match(regex_2) != null ){
         error_reg = 3;
         return error_reg;
+        chequearError(error_reg);
     }
     //nombre contiene palabras prohibidas - 4 - RESERVADO
     
     //Contraseña vacía
-    if(valorEsVacio(contrasenia)){
+    else if(valorEsVacio(contrasenia)){
         error_reg = 5;
         return error_reg;
+        chequearError(error_reg);
     }
     //Contraseña menor a 8 caracteres
-    if( contrasenia.length < 8 ){
+    else if( contrasenia.length < 8 ){
         error_reg = 6;
         return error_reg;
+        chequearError(error_reg);
     }
     //Contraseña superior a 20 caracteres - mismo código de error que anterior
-    if( contrasenia.length > 20 ){
+    else if( contrasenia.length > 20 ){
         error_reg = 6;
         return error_reg;
+        chequearError(error_reg);
     }
     //Contraseña no es lo suficientemente compleja - 7 - RESERVADO
     
     //Contraseña no coincide con su repetición
-    if( contrasenia != rep_contrasenia ){
+    else if( contrasenia != rep_contrasenia ){
         error_reg = 8;
         return error_reg;
+        chequearError(error_reg);
     }
     
     //Nombre propio vacío
-    if( nombre_p.length < 1 ){
+    else if( nombre_per.length < 1 ){
         error_reg = 9;
         return error_reg;
+        chequearError(error_reg);
     }
     //Apellido propio vacío
-    if( apellido_p.length < 1 ){
+    else if( apellido_per.length < 1 ){
         error_reg = 10;
         return error_reg;
+        chequearError(error_reg);
     }
     //Fecha de nacimiento vacía
-    if( fecha_nac_p.length < 1 ){
+    else if( fecha_nac_per.length < 1 ){
         error_reg = 11;
         return error_reg;
+        chequearError(error_reg);
     }
     //CI vacía
-    if( ci.length < 1 ){
+    else if( ci.length < 1 ){
         error_reg = 12;
         return error_reg;
+        chequearError(error_reg);
     }
     //CI inferior a 8 dígitos
-    if( ci.length < 8 ){
+    else if( ci.length < 8 ){
         error_reg = 12;
         return error_reg;
+        chequearError(error_reg);
+    }
+    else{
+        
+        var resultado = $.ajax(
+            {
+                url: "registro.php",
+                method: "POST",
+                data:{
+                    id_usuario: ci, 
+                    nombre_u: nombre_usuario,
+                    nombre_p: nombre_per,
+                    apellido_p: apellido_per,
+                    fecha_nac: fecha_nac_per,
+                    contrasenia: contrasenia
+                    },
+                dataType: "json",
+                success:function(data){
+                    console.log(data.estado);
+                    error_reg = data.estado;
+                    chequearError(error_reg);
+                }
+            }
+            );
+
     }
     
     
@@ -184,8 +222,12 @@ function resetearErrores(){
 
 //Chequea el error, resalta el campo afectado y muestra el mensaje correspondiente
 function chequearError(var_error){
+    console.log("Error: "+var_error);
     resetearErrores();
     switch(var_error){
+        case 0: 
+            mostrarMensajeError("Usuario registrado con éxito.");
+            break;
         case 1:
             $("#reg_nombre").addClass("error");
             mostrarMensajeError("El nombre de usuario no puede<br>quedar en blanco.");
@@ -229,7 +271,7 @@ function chequearError(var_error){
             break;
         case 12:
             $("#reg_ci").addClass("error");
-            mostrarMensajeError("Debe ingresar su Documento de Identidad.");
+            mostrarMensajeError("Debe ingresar corréctamente su Documento de Identidad.");
             break;
         case 13: //Error externo: nombre de usuario repetido
             $("#reg_nombre").addClass("error");
@@ -271,8 +313,9 @@ $(document).ready(
         
         $("#bt_registrar").click(
             function(){
-                var error_reg = chequearRegistro();
-                chequearError(error_reg);
+                //var error_reg = 
+                chequearRegistro();
+                //chequearError(error_reg);
                 console.log("click - "+error_reg);
             }
         );

@@ -3,10 +3,10 @@
     include_once "conexionbd.php";
     include_once "funcionesVarias.php";
     //var_dump($_POST);
-    //$nombre = $_POST["nombre"];
-    //$contrasenia = $_POST["contrasenia"];
-    $nombre_u = "fulano";
-    $contrasenia = "22222";
+    $nombre = $_POST["nombre"];
+    $contrasenia = $_POST["contrasenia"];
+    //$nombre_u = "fulano";
+    //$contrasenia = "22222";
 
     $datos_JSON = new \stdClass();
     $datos_JSON->id_sesion=0;

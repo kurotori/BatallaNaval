@@ -159,7 +159,7 @@ include_once "datosbd.php";
         return $sesion;
     }
 
-    function usuarioExiste($nombre_usuario){
+    function nombreUsuarioExiste($nombre_usuario){
         $existe = false;
         $conexion = GenerarConexion();
         try{
@@ -171,7 +171,31 @@ include_once "datosbd.php";
             
             $sentencia->execute();
             $resultado = $sentencia->fetchAll();
-            if($resultado[0][0] == 1){
+            if($resultado[0][0] > 0){
+                $existe = true;
+            }
+        }
+        catch(PDOException $e){
+            //echo "Error: " . $e->getMessage();
+        }
+
+        $conexion=null;
+        return $existe;
+    }
+
+    function idUsuarioExiste($id_usuario){
+        $existe = false;
+        $conexion = GenerarConexion();
+        try{
+            // set the PDO error mode to exception
+            $conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $consulta = "SELECT count(*) FROM usuario where ID=:id_u";
+            $sentencia = $conexion->prepare($consulta);
+            $sentencia->bindParam(':id_u', $id_usuario);
+            
+            $sentencia->execute();
+            $resultado = $sentencia->fetchAll();
+            if($resultado[0][0] > 0){
                 $existe = true;
             }
         }
@@ -231,33 +255,46 @@ include_once "datosbd.php";
                               $fecha_nac,
                               $hash
                              ){
+        
         $resultado = new \stdClass();
         $resultado->error=0;
         $resultado->mensaje="";
         
-        $conexion = GenerarConexion();
-        try{
-            // set the PDO error mode to exception
-            $conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            $consulta = "INSERT INTO usuario(ID, nombre_u, nombre_p, apellido_p, fecha_nac, hash) values (:id, :nombre_u, :nombre_p, :apellido_p, :fecha_nac, :hash)";
-            $sentencia = $conexion->prepare($consulta);
-            $sentencia->bindParam(':id', $id_usuario);
-            $sentencia->bindParam(':nombre_u', $nombre_u);
-            $sentencia->bindParam(':nombre_p', $nombre_p);
-            $sentencia->bindParam(':apellido_p', $apellido_p);
-            $sentencia->bindParam(':fecha_nac', $fecha_nac);
-            $sentencia->bindParam(':hash', $hash);
+        if(idUsuarioExiste($id_usuario)){
+            $resultado->error=14;
+            $resultado->mensaje="CI de usuario ya registrado";
+        }
+        elseif(nombreUsuarioExiste($nombre_u)){
+            $resultado->error=13;
+            $resultado->mensaje="Nombre de usuario ya registrado";
+        }
+        else{
             
-            $sentencia->execute();
-            $resultado->error=0;
-            $resultado->mensaje="OK";
-        }
-        catch(PDOException $e){
-            $resultado->error=1;
-            $resultado->mensaje="Error: ". $e->getMessage();
-        }
+            $conexion = GenerarConexion();
+            try{
+                // set the PDO error mode to exception
+                $conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                $consulta = "INSERT INTO usuario(ID, nombre_u, nombre_p, apellido_p, fecha_nac, hash) values (:id, :nombre_u, :nombre_p, :apellido_p, :fecha_nac, :hash)";
+                $sentencia = $conexion->prepare($consulta);
+                $sentencia->bindParam(':id', $id_usuario);
+                $sentencia->bindParam(':nombre_u', $nombre_u);
+                $sentencia->bindParam(':nombre_p', $nombre_p);
+                $sentencia->bindParam(':apellido_p', $apellido_p);
+                $sentencia->bindParam(':fecha_nac', $fecha_nac);
+                $sentencia->bindParam(':hash', $hash);
 
-        $conexion=null;
+                $sentencia->execute();
+                $resultado->error=0;
+                $resultado->mensaje="OK, Usuario ".$nombre_u."(".$id_usuario.") Registrado";
+            }
+            catch(PDOException $e){
+                $resultado->error=1;
+                $resultado->mensaje="Error: ". $e->getMessage();
+            }
+
+            $conexion=null;
+        }
+        
         return $resultado;
     }
 
