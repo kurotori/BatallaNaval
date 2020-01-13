@@ -24,6 +24,7 @@ function abrirMenuLogin(){
 
 function abrirRegistro(){
     cerrarMenuPrincipal();
+    resetearCampos();
     $("#caja_menu_principal").delay(600).animate(
         {height:"550px"
         },
@@ -46,6 +47,8 @@ function volverMenuPrincipal(){
 
 }
 
+
+//Chequea el modo de la página 
 function chequearModo(modo){
      switch(modo){
          //modo normal: se muestra el menú inicio.
@@ -62,6 +65,11 @@ function chequearModo(modo){
              abrirRegistro();
              break;
      }
+}
+
+//Resetea los valores de todos los campos de ingreso de datos en la página
+function resetearCampos(){
+    $("input").val("");
 }
 
 //Chequea el valor de un campo para determinar si es vacío,
