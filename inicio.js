@@ -91,88 +91,88 @@ function chequearRegistro(){
     //nombre vacio
     if( valorEsVacio(nombre_usuario) ){
         error_reg = 1;
-        return error_reg;
         chequearError(error_reg);
+        return error_reg;
     }
     //nombre mayor a 8 caracteres
     else if( nombre_usuario.length < 8 ){
         error_reg = 2;
-        return error_reg;
         chequearError(error_reg);
+        return error_reg;
     }
     //nombre mayor a 8 caracteres
     else if( nombre_usuario.length < 8 ){
         error_reg = 2;
-        return error_reg;
         chequearError(error_reg);
+        return error_reg;
     }
     //nombre contiene espacios
     else if( nombre_usuario.match(regex_2) != null ){
         error_reg = 3;
-        return error_reg;
         chequearError(error_reg);
+        return error_reg;
     }
     //nombre contiene palabras prohibidas - 4 - RESERVADO
     
     //Contraseña vacía
     else if(valorEsVacio(contrasenia)){
         error_reg = 5;
-        return error_reg;
         chequearError(error_reg);
+        return error_reg;
     }
     //Contraseña menor a 8 caracteres
     else if( contrasenia.length < 8 ){
         error_reg = 6;
-        return error_reg;
         chequearError(error_reg);
+        return error_reg;
     }
     //Contraseña superior a 20 caracteres - mismo código de error que anterior
     else if( contrasenia.length > 20 ){
         error_reg = 6;
-        return error_reg;
         chequearError(error_reg);
+        return error_reg;
     }
     //Contraseña no es lo suficientemente compleja - 7 - RESERVADO
     
     //Contraseña no coincide con su repetición
     else if( contrasenia != rep_contrasenia ){
         error_reg = 8;
-        return error_reg;
         chequearError(error_reg);
+        return error_reg;
     }
     
     //Nombre propio vacío
     else if( nombre_per.length < 1 ){
         error_reg = 9;
-        return error_reg;
         chequearError(error_reg);
+        return error_reg;
     }
     //Apellido propio vacío
     else if( apellido_per.length < 1 ){
         error_reg = 10;
-        return error_reg;
         chequearError(error_reg);
+        return error_reg;
     }
     //Fecha de nacimiento vacía
     else if( fecha_nac_per.length < 1 ){
         error_reg = 11;
-        return error_reg;
         chequearError(error_reg);
+        return error_reg;
     }
     //CI vacía
     else if( ci.length < 1 ){
         error_reg = 12;
-        return error_reg;
         chequearError(error_reg);
+        return error_reg;
     }
     //CI inferior a 8 dígitos
     else if( ci.length < 8 ){
         error_reg = 12;
-        return error_reg;
         chequearError(error_reg);
+        return error_reg;
     }
     else{
-        
+        mostrarDialogoEspera();
         var resultado = $.ajax(
             {
                 url: "registro.php",
@@ -187,6 +187,7 @@ function chequearRegistro(){
                     },
                 dataType: "json",
                 success:function(data){
+                    ocultarDialogoEspera();
                     console.log(data.estado);
                     error_reg = data.estado;
                     chequearError(error_reg);
@@ -200,7 +201,17 @@ function chequearRegistro(){
     return error_reg;
 }
 
- 
+//Permite mostrar el diálogo de espera
+function mostrarDialogoEspera(){
+    $("#cuadro_fondo").show();
+    $("#dialogo_espera").show();
+}
+
+//Permite ocultar el diálogo de espera
+function ocultarDialogoEspera(){
+    $("#cuadro_fondo").hide();
+    $("#dialogo_espera").hide();
+}
 
 //Permite establecer y mostrar el mensaje de error en el diálogo de error
 function mostrarMensajeError(mensaje){
@@ -286,13 +297,14 @@ function chequearError(var_error){
 
 $(document).ready(
     function(){
-        
+        // Configurar el datepicker
         $.datepicker.setDefaults( $.datepicker.regional[ "es" ] );
-       
-       $("#reg_fecha_nac_p").datepicker({dateFormat:'yy-mm-dd'});
+        $("#reg_fecha_nac_p").datepicker({dateFormat:'yy-mm-dd'});
         
+        //Chequear el modo de la página
         chequearModo(modo);
         
+        //Eventos de GUI
         $("#bt_entrar").click(
             function(){
                 abrirMenuLogin();
@@ -328,7 +340,13 @@ $(document).ready(
         
         $("#bt_dialogo_aceptar").click(
             function(){
-                cerrarMensajeError();
+                 if(error_reg == 0){
+                        cerrarMensajeError();
+                        volverMenuPrincipal();
+                    }
+                else{
+                     cerrarMensajeError();
+                    }
             }
         );
     }

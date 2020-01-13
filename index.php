@@ -65,6 +65,22 @@ echo "Modo: $modo - Error: $error";
                 <div id="bt_dialogo_aceptar" class="boton">ACEPTAR</div>
             </div>
             
+            <div class="dialogo_mensaje" id="dialogo_espera">
+                <div id="contenedor_icono_espera">
+                    <div class="loadingio-spinner-double-ring-f0x0maatzdg">
+                        <div class="ldio-axtye24iahr">
+                            <div></div>
+                            <div></div>
+                            <div>
+                                <div></div>
+                            </div>
+                            <div>
+                                <div></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
         
         <div id="caja_centro" >
