@@ -20,7 +20,7 @@ else{
 
 
 
-echo "Modo: $modo - Error: $error";
+//echo "Modo: $modo - Error: $error";
 
 
 
@@ -80,6 +80,9 @@ echo "Modo: $modo - Error: $error";
                         </div>
                     </div>
                 </div>
+                <span class="atribucion">
+                    Ícono de espera diseñado en <a href="https://loading.io/" target="_blank">loading.io</a>
+                </span>
             </div>
         </div>
         
@@ -100,7 +103,7 @@ echo "Modo: $modo - Error: $error";
                             </tr>
                             <tr>
                                 <td>
-                                    <span class="subtitulo registro">Nombre de Usuario:</span>
+                                    <span class="subtitulo">Nombre de Usuario:</span>
                                 </td>
                                 <td>
                                     <input type="text" name="nombre" id="nombre" >
@@ -205,5 +208,15 @@ echo "Modo: $modo - Error: $error";
                 </div>
             </div>
         </div>
+        
+        <form id="form_login" name="form_login" action="pagina_usuario.php" method="post">
+            
+            <input id="sesion_id_usuario" name="sesion_id_usuario" type="hidden" /> <br />
+            
+            <input id="sesion_nombre_u" name="sesion_nombre_u" type="hidden" /> <br />
+            
+            <input id="sesion_id_sesion" name="sesion_id_sesion" type="hidden" /> <br />
+        </form>
+        
     </body>
 </html>

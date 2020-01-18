@@ -3,7 +3,7 @@
     include_once "conexionbd.php";
     include_once "funcionesVarias.php";
     //var_dump($_POST);
-    $nombre = $_POST["nombre"];
+    $nombre_u = $_POST["nombre_u"];
     $contrasenia = $_POST["contrasenia"];
     //$nombre_u = "fulano";
     //$contrasenia = "22222";
@@ -28,7 +28,7 @@
     // si hay menos de una fila, el usuario no existe, si hay más, el usuario aparece repetido
     // indicando un error interno de la BdD y debe ser invalidado.
     
-    if(usuarioExiste($nombre_u)){
+    if(nombreUsuarioExiste($nombre_u)){
             
             $registro = datosDelUsuario($nombre_u);
             //1.3 - Obtención de datos de verificación: id de usuario y el hash
@@ -51,12 +51,12 @@
                     $mensaje= $id_sesion->mensaje;
                 }
                 else{
-                    $id_estado = 10;
+                    $id_estado = 17;
                     $mensaje= "OK";
                 }
                 
                 //1. - Pasaje de datos al objeto contenedor
-                $datos_JSON->id_sesion=$id_sesion;
+                $datos_JSON->id_sesion=$id_sesion->id;
                 $datos_JSON->id_usuario=$id_usuario;
                 $datos_JSON->id_estado=$id_estado;
                 $datos_JSON->mensaje=$mensaje;
@@ -66,8 +66,8 @@
             else{
                 $datos_JSON->id_sesion=0;
                 $datos_JSON->id_usuario=0;
-                $datos_JSON->id_estado=3;
-                $datos_JSON->mensaje="Contrase&ntilde;a incorrecta";
+                $datos_JSON->id_estado=18;
+                $datos_JSON->mensaje="Nombre de Usuario o Contrase&ntilde;a incorrectos";
             }
             
             
@@ -77,8 +77,8 @@
     else{
          $datos_JSON->id_sesion=0;
          $datos_JSON->id_usuario=0;
-         $datos_JSON->id_estado=2;
-         $datos_JSON->mensaje="Usuario no existe";
+         $datos_JSON->id_estado=18;
+         $datos_JSON->mensaje="Nombre de Usuario o Contrase&ntilde;a incorrectos";
     }
     
     $JSON_final = json_encode($datos_JSON);

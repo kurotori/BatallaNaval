@@ -24,7 +24,7 @@ function abrirMenuLogin(){
 
 function abrirRegistro(){
     cerrarMenuPrincipal();
-    resetearCampos();
+    resetearCampos();  
     $("#caja_menu_principal").delay(600).animate(
         {height:"550px"
         },
@@ -34,6 +34,7 @@ function abrirRegistro(){
     );
 }
 
+//Regresa al menú principal desde cualquiera de los otros modos
 function volverMenuPrincipal(){
     $(".no_menu_p").hide();
     cerrarMenuPrincipal();
@@ -46,7 +47,6 @@ function volverMenuPrincipal(){
     );
 
 }
-
 
 //Chequea el modo de la página 
 function chequearModo(modo){
@@ -209,6 +209,67 @@ function chequearRegistro(){
     return error_reg;
 }
 
+//Permite tomar los datos de inicio de sesión, chequearlos y generar el login del usuario
+function loginUsuario(){
+    var nombre_usuario = $("#nombre").val();
+    var contrasenia = $("#contrasenia").val();
+    console.log(nombre_usuario+"-"+contrasenia);
+    
+    if(valorEsVacio(nombre_usuario)){
+        error_reg = 15;
+    }
+    else if(valorEsVacio(contrasenia)){
+        error_reg = 16;
+    }
+    else{
+        error_reg = 17;
+        mostrarDialogoEspera();
+        var resultado = $.ajax(
+            {
+                url: "login.php",
+                method: "POST",
+                data:{
+                    nombre_u: nombre_usuario,
+                    contrasenia: contrasenia
+                    },
+                dataType: "json",
+                success:function(data){
+                    ocultarDialogoEspera();
+                    console.log(data.id_estado);
+                    error_reg = data.id_estado;
+                    if(error_reg != 17){
+                      chequearError(error_reg);  
+                    }
+                    else{
+                        mostrarMensajeError("ID Sesión: "+data.id_sesion+"<br>"+"Usuario: "+data.id_usuario);
+                        resetearCampos();
+                        $("#bt_dialogo_aceptar").click(
+                            function(){
+                                //window.location.href='probando.html';
+                                $("#sesion_id_usuario").val(data.id_usuario);
+                                $("#sesion_id_sesion").val(data.id_sesion);
+                                $("#sesion_nombre_u").val(nombre_usuario);
+                                $("#form_login").submit();
+                            }
+                        );
+                    }
+                    
+                },
+                error:function(errorThrown){
+                    ocultarDialogoEspera();
+                    mostrarMensajeError("ERROR");
+                    //mostrarMensajeError(errorThrown.responseText);
+                }
+            }
+            );
+        
+    }
+    
+    
+    //chequearError(error_reg);
+}
+
+
 //Permite mostrar el diálogo de espera
 function mostrarDialogoEspera(){
     $("#cuadro_fondo").show();
@@ -244,6 +305,7 @@ function chequearError(var_error){
     console.log("Error: "+var_error);
     resetearErrores();
     switch(var_error){
+        //Errores de inicio de sesión
         case 0: 
             mostrarMensajeError("Usuario registrado con éxito.");
             break;
@@ -300,6 +362,22 @@ function chequearError(var_error){
             $("#reg_ci").addClass("error");
             mostrarMensajeError("Ya hay un usuario registrado<br>con este Documento.");
             break;
+        //Errores de inicio de sesión
+        case 15: //No se ingresó un nombre de usuario para iniciar sesión.
+            $("#nombre").addClass("error");
+            mostrarMensajeError("El nombre de usuario no puede<br>quedar en blanco.");
+            break;
+        case 16: //No se ingresó la contrasenia para iniciar sesión.
+            $("#contrasenia").addClass("error");
+            mostrarMensajeError("Debe ingresar una contraseña<br>para continuar.");
+            break;
+        case 17: //Datos de inicio de sesión completos
+            
+            break;
+        case 18: //Nombre de Usuario o contraseña escritos de forma incorrecta o no existe
+            resetearCampos();
+            mostrarMensajeError("Nombre de Usuario o<br>Contrase&ntilde;a incorrectos");
+            break;
     }
 }
 
@@ -355,6 +433,12 @@ $(document).ready(
                 else{
                      cerrarMensajeError();
                     }
+            }
+        );
+        
+        $("#bt_login").click(
+            function(){
+                loginUsuario();
             }
         );
     }

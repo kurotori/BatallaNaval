@@ -207,7 +207,7 @@ include_once "datosbd.php";
         return $existe;
     }
 
-    function datosDelUsuario($nombre_usario){
+    function datosDelUsuario($nombre_usuario){
         $datos_usuario = new \stdClass();
         $datos_usuario->id_usuario=0;
         $datos_usuario->nombre_u="";
@@ -222,20 +222,23 @@ include_once "datosbd.php";
         try{
             // set the PDO error mode to exception
             $conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            $consulta = "SELECT * FROM usuario where nombre_u=:nombre_u";
+            $consulta = "SELECT id,nombre_u,nombre_p,apellido_p,fecha_reg,fecha_nac,hash FROM usuario where nombre_u = :nombre_u";
             $sentencia = $conexion->prepare($consulta);
             $sentencia->bindParam(':nombre_u', $nombre_usuario);
             
             $sentencia->execute();
             $resultado = $sentencia->fetchAll();
             
-            $datos_usuario->id_usuario=resultado['id'];
-            $datos_usuario->nombre_u=resultado['nombre_u'];
-            $datos_usuario->nombre_p=resultado['nombre_p'];
-            $datos_usuario->apellido_p=resultado['apellido_p'];
-            $datos_usuario->fecha_reg=resultado['fecha_reg'];
-            $datos_usuario->fecha_nac=resultado['fecha_nac'];
-            $datos_usuario->hash=resultado['hash'];
+           //print_r($resultado);
+            
+            //echo ":::===>> ".($resultado[0]['nombre_u']);
+            $datos_usuario->id_usuario=$resultado[0]['id'];
+            $datos_usuario->nombre_u=$resultado[0]['nombre_u'];
+            $datos_usuario->nombre_p=$resultado[0]['nombre_p'];
+            $datos_usuario->apellido_p=$resultado[0]['apellido_p'];
+            $datos_usuario->fecha_reg=$resultado[0]['fecha_reg'];
+            $datos_usuario->fecha_nac=$resultado[0]['fecha_nac'];
+            $datos_usuario->hash=$resultado[0]['hash'];
             $datos_usuario->error="OK";
         }
         catch(PDOException $e){
