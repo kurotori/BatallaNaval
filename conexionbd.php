@@ -159,6 +159,24 @@ include_once "datosbd.php";
         return $sesion;
     }
 
+    function cerrarSesion($id_sesion){
+        $conexion = GenerarConexion();
+        try{
+            // set the PDO error mode to exception
+            $conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $consulta = "UPDATE sesion SET estado = 'cerrada' WHERE ID = :id_sesion";
+            $sentencia = $conexion->prepare($consulta);
+            $sentencia->bindParam(':id_sesion', $id_sesion);
+            
+            $sentencia->execute();
+        }
+        catch(PDOException $e){
+            echo "Error: " . $e->getMessage();
+        }
+
+        $conexion=null;
+    }
+
     function nombreUsuarioExiste($nombre_usuario){
         $existe = false;
         $conexion = GenerarConexion();

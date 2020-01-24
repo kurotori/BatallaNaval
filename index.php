@@ -1,5 +1,14 @@
 <?php
+session_start();
+
 include_once "datosApp.php";
+include_once "funcionesVarias.php";
+
+if(sesionExiste()){
+    header("Location: pagina_usuario.php");
+}
+    
+
 
 if(empty($_GET["modo"])){
     $modo = 0;
@@ -15,14 +24,7 @@ else{
     $error = $_GET["error"];
 }
 
-
-
-
-
-
 //echo "Modo: $modo - Error: $error";
-
-
 
 ?>
 

@@ -21,6 +21,23 @@
         return $hashC;
     }
     
+//Funciones de manejo de sesión a nivel servidor
+
+    function sesionExiste(){
+        $resultado = false;
+        if(isset($_SESSION['id_usuario'])){
+            if(isset($_SESSION['id_sesion'])){
+                if(isset($_SESSION['nombre_u'])){
+                    $resultado = true;
+                }
+            }
+        }
+        return $resultado;
+    }
     
+    function refrescarSesion(){
+        $_SESSION['start'] = time();
+        $_SESSION['expire'] = $_SESSION['start'] + (1 * 60) ;
+    }
 
 ?>
