@@ -105,21 +105,41 @@ else{
         <div id="caja_centro" >
             <div id="caja_logo"></div>
             <div id="caja_datos_usuario">
+                
+                    <div id="datos_usuario" >
+                        <?php
+                            echo "Hola, $nombre_u";
+                        ?>
+                    </div>
+            </div>
+            <div id="caja_avatar_controles_usuario">
                 <div id="avatar_usuario"></div>
-                <div id="datos_usuario" >
-                    <?php
-                        echo "<p>Hola, $nombre_u</p>";
-                    ?>
-                    <div id="controles_usuario">
-                        <div id="boton_logout" class="caja_boton_control_usuario tooltip">
-                            <span class="tooltiptext izquierda">Cerrar Sesión</span>
-                        </div>
-                        <div id="boton_ajustes" class="caja_boton_control_usuario tooltip">
-                            <span class="tooltiptext izquierda">Ajustes</span>
-                        </div>
+                <div id="controles_usuario">
+                    <div id="boton_logout" class="caja_boton_control_usuario tooltip">
+                        <span class="tooltiptext izquierda">Cerrar Sesión</span>
+                    </div>
+                    <div id="boton_ajustes" class="caja_boton_control_usuario tooltip">
+                        <span class="tooltiptext izquierda">Perfil y Ajustes</span>
                     </div>
                 </div>
-            </div>  
+            </div> 
+            
+            
+            <div id="caja_pestanias" class="bordes_fondo_naranja">
+                <div id="cabecera_pestanias" >
+                    <p class="pestania">Crear Partida</p>
+                    <p class="pestania">Unirse A Una Partida</p>
+                </div>
+                <div class="contenido_pestania"></div>
+                
+                <!--
+                <div class="solapa_pestania borde_simple_fondo_naranja solapa_activa"></div>
+                <div class="solapa_pestania borde_simple_fondo_naranja solapa_inactiva"></div>
+                <div id="caja_cuerpo_pestania" class="borde_simple_fondo_naranja">
+                </div>
+                -->
+            </div>
+            
             <?php
             echo "ID USUARIO: $id_usuario <br>";
             echo "NOM USUARIO: $nombre_u <br>";

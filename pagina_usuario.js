@@ -43,6 +43,7 @@ function cerrarMensajePregunta(){
 //Eventos de la interfáz de usuario
 $(document).ready(
     function(){
+        //$("#caja_pestanias").tabs();
         
         //Logout del usuario
         $("#boton_logout").click(
