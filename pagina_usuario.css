@@ -183,7 +183,7 @@ body {
     position: relative;
     left: 10px;
     height: 15%;
-    border: 1px solid black;
+    border: 1px none black;
 }
 
 #caja_pestanias p{
@@ -194,15 +194,27 @@ body {
     padding-right: 2em;
     padding-top: 1em;
     padding-bottom: 1em;
-    border: 1px solid black;
+    /*border: 1px solid black;*/
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
-    border-width: 5px;
+    border-width: 5px 5px 0px 5px;
     border-style: solid;
     border-color: #e08e09;
 }
 
+.contenido_pestania {
+    position: relative;
+    height: calc(85% - 15px);
+    top: -10px;
+    z-index: 5;
+}
 
+.pestania{
+    z-index: 6;
+}
+.pestania_activa{
+    top: 10px;
+}
 
 /*-------   */
 .boton:hover{
