@@ -128,7 +128,7 @@ else{
             <div id="caja_pestanias" class="bordes_fondo_naranja">
                 <div id="cabecera_pestanias" >
                     <p class="pestania pestania_activa">Crear Partida</p>
-                    <p class="pestania">Unirse A Una Partida</p>
+                    <p class="pestania pestania_inactiva">Unirse A Una Partida</p>
                 </div>
                 <div class="contenido_pestania bordes_fondo_naranja"></div>
                 

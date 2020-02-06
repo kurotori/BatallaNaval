@@ -61,5 +61,15 @@ $(document).ready(
                 );
             }
         );
+        
+        $(".pestania_inactiva").click(
+            function(){
+                console.log("pestania");
+                $(".pestania_activa").removeClass("pestania_activa");
+                $(".pestania").addClass("pestania_inactiva");
+                $(this).removeClass("pestania_inactiva");
+                $(this).addClass("pestania_activa");
+            }
+        );
     }
 );

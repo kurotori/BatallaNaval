@@ -204,16 +204,22 @@ body {
 
 .contenido_pestania {
     position: relative;
-    height: calc(85% - 15px);
+    height: 85%;/*calc(85% - 15px);*/
     top: -10px;
     z-index: 5;
 }
 
 .pestania{
     z-index: 6;
+    background-color: #fcbb65;
 }
 .pestania_activa{
-    top: 10px;
+    bottom: -6.5px;
+    top: auto;/*6.5px;*/
+}
+.pestania_inactiva{
+    top: 1.5px;
+    z-index: 7;
 }
 
 /*-------   */
