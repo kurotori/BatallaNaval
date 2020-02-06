@@ -153,7 +153,7 @@ body {
 #caja_pestanias{
     position: absolute;
     width: calc(100% - 30px);
-    height: 80%;/*calc(100% - 150px);*/
+    height: calc(80% - 10px);/*calc(100% - 150px);*/
     right: 10px;
     left: auto;
     bottom: 10px;
@@ -207,6 +207,9 @@ body {
     height: 85%;/*calc(85% - 15px);*/
     top: -10px;
     z-index: 5;
+    border-left: none;
+    border-right: none;
+    border-bottom: none;
 }
 
 .pestania{

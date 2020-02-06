@@ -1,7 +1,7 @@
 /*globals $:false */
 /* jshint browser: true */
 
-
+var cosa;
 //Permite mostrar el diálogo de espera
 function mostrarDialogoEspera(){
     $("#cuadro_fondo").show();
@@ -62,13 +62,29 @@ $(document).ready(
             }
         );
         
-        $(".pestania_inactiva").click(
-            function(){
+        $(".pestania").click(
+            function(e){
                 console.log("pestania");
-                $(".pestania_activa").removeClass("pestania_activa");
-                $(".pestania").addClass("pestania_inactiva");
-                $(this).removeClass("pestania_inactiva");
-                $(this).addClass("pestania_activa");
+                
+                //console.log(e.target);
+                
+                var objeto = e.target;
+                var posobj = objeto.baseURI.search("#");
+                //console.log(posobj);
+                var nombreobj = objeto.baseURI.slice(posobj);
+                console.log(nombreobj);
+                $(nombreobj).show();
+                
+                if($(this).hasClass("pestania_inactiva")){
+                    $(".pestania").addClass("pestania_inactiva");
+                    $(".pestania").removeClass("pestania_activa");
+                    $(this).addClass("pestania_activa");
+                    $(this).removeClass("pestania_inactiva");                    
+                }
+//                $(".pestania_activa").removeClass("pestania_activa");
+//                $(".pestania").addClass("pestania_inactiva");
+//                $(this).removeClass("pestania_inactiva");
+//                $(this).addClass("pestania_activa");
             }
         );
     }
