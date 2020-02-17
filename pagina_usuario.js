@@ -40,6 +40,28 @@ function cerrarMensajePregunta(){
     $("#dialogo_pregunta").hide();
 }
 
+//Permite cambiar de pestaña activa al dar click sobre una pestaña inactiva
+function activarPestania(pestania){
+    
+    var datosPestania = pestania.html();
+    var posObj = datosPestania.search("#");
+    var posFinObj = datosPestania.search(">") - 1;
+    var nombreObj = datosPestania.slice(posObj,posFinObj);
+
+    console.log("pestania: "+nombreObj);
+
+    $(".contenido_pestania").hide();
+    $(nombreObj).show();
+
+    if($(this).hasClass("pestania_inactiva")){
+        $(".pestania").addClass("pestania_inactiva");
+        $(".pestania").removeClass("pestania_activa");
+        $(this).addClass("pestania_activa");
+        $(this).removeClass("pestania_inactiva");                    
+    }
+}
+
+
 //Eventos de la interfáz de usuario
 $(document).ready(
     function(){
@@ -63,28 +85,9 @@ $(document).ready(
         );
         
         $(".pestania").click(
-            function(e){
-                console.log("pestania");
+            function(){
+                activarPestania($(this));
                 
-                //console.log(e.target);
-                
-                var objeto = e.target;
-                var posobj = objeto.baseURI.search("#");
-                //console.log(posobj);
-                var nombreobj = objeto.baseURI.slice(posobj);
-                console.log(nombreobj);
-                $(nombreobj).show();
-                
-                if($(this).hasClass("pestania_inactiva")){
-                    $(".pestania").addClass("pestania_inactiva");
-                    $(".pestania").removeClass("pestania_activa");
-                    $(this).addClass("pestania_activa");
-                    $(this).removeClass("pestania_inactiva");                    
-                }
-//                $(".pestania_activa").removeClass("pestania_activa");
-//                $(".pestania").addClass("pestania_inactiva");
-//                $(this).removeClass("pestania_inactiva");
-//                $(this).addClass("pestania_activa");
             }
         );
     }

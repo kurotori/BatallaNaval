@@ -128,13 +128,17 @@ else{
             <div id="caja_pestanias" class="bordes_fondo_naranja">
                 <div id="cabecera_pestanias" >
                     <p class="pestania pestania_activa" >
-                        <a href="#algo">Crear Partida</a>
+                        <a href="#crear_partida">Crear Partida</a>
                     </p>
-                    <p class="pestania pestania_inactiva">Unirse A Una Partida</p>
+                    <p class="pestania pestania_inactiva">
+                        <a href="#buscar_partida">Unirse A Una Partida</a>
+                    </p>
                 </div>
-                <div class="contenido_pestania bordes_fondo_naranja">
-                
-                    <div id="algo" style="display:none">cosa</div>
+                <div id="crear_partida" class="contenido_pestania bordes_fondo_naranja">
+                    algo algo algo algo
+                </div>
+                <div id="buscar_partida" class="contenido_pestania bordes_fondo_naranja">
+                    otro otro otro
                 </div>
                 
                 <!--
